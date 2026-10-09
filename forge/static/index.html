@@ -213,7 +213,7 @@ function levelRow(name, lv, extra){
   return `<div class="lvl"><span class="dot ${cls}">${lv.passed?'✓':(cls==='u'?'?':'✕')}</span><div><b>${name}</b><small>${extra}</small></div></div>`;
 }
 function aiCard(g){ const a=g.ai; if(!a) return "";
-  if(a.mode==="off") return `<div class="card"><h2>AI trace</h2><p class="hint" style="margin:0">Language model is off (no key in .env): this run used the keyword parser and the constraint planner.</p></div>`;
+  if(a.mode==="off") return `<div class="card"><h2>AI trace</h2><p class="hint" style="margin:0">Test version: the language model is off (no key in .env), so this run used the keyword reader and the planner.</p></div>`;
   const u=a.usage||{}, kw=a.keyword_parser_would_have_said, pr=g.presentation;
   return `<div class="card"><h2>AI trace · ${esc((u.models||[]).join(", ")||a.intent_source)}${a.mode==="replay"?" · replayed from cache":""}</h2>
    ${pr&&pr.title?`<p style="margin:0 0 6px"><b style="font-size:16px">“${esc(pr.title)}”</b><br><span class="hint">${esc(pr.designer_note||"")}</span><br><span class="hint"><b>Hint for players:</b> ${esc(pr.player_hint||"")}</span></p>`:""}

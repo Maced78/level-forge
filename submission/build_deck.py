@@ -126,7 +126,7 @@ slide("Prototype and use of AI · 30 points", "It refuses impossible requests", 
 
 # 7 how it works
 gem_line = (f"A language model ({e(model)}) reads the request." if L else
-            "A language model (Google Gemini) is written for step 1. It has not run yet because our key was rejected, so a keyword reader did step 1 in every result shown.")
+            "A language model (Google Gemini) can do step 1 and it works, but on a free key each call takes 7 to 10 seconds. To stay fast, the demo and every test number use the test version, where a keyword reader does step 1.")
 slide("Prototype and use of AI · 30 points", "How it works", f"""
 <div class="flowrow"><div class="fb"><em>{{ }}</em><b>The game's code</b><span>and the levels that ship with it</span></div><u>→</u>
 <div class="fb acc"><em>Part 1 · done once per game</em><b>Learn the rules</b><span>An AI coding assistant reads the code, writes down each rule with the line it came from, and tests each rule in the real game. Words the game ignores are marked.</span></div><u>→</u>
@@ -166,7 +166,7 @@ slide("Quality testing · 20 points", "What went wrong", f"""
 {tick("We said pushing was required. A shortcut existed. <b>Fixed:</b> our own search found it.", "ok")}
 {tick(f"On the second game only 68% passed at first. <b>Fixed:</b> now {SB['fully_validated_pct']:g}%.", "ok")}
 {tick(f"About 1 in 10 hard requests still misses a check. <b>Open:</b> the level is delivered with a warning.", "open")}
-{tick("The language model never ran. <b>Open.</b>", "open")}</div>
+{tick("Gemini works but is slow on a free key (7 to 10 s per call). <b>Open:</b> results use the faster test version.", "open")}</div>
 <div class="card"><h3>Compared with today</h3><table class="cmp">
 <tr><th></th><th>By hand</th><th>Level-Forge</th></tr>
 <tr><td>Can it be won?</td><td>play it</td><td>proven</td></tr>
@@ -180,7 +180,7 @@ slide("Feasibility · 15 points", "Cost and next steps", f"""
 <div class="card"><b class="huge">0</b><p>data to collect. It only needs the game's own code.</p></div>
 <div class="card"><b class="huge">1</b><p>ordinary computer. No graphics card, works offline.</p></div>
 <div class="card"><b class="huge">1 hour</b><p>to add the second game.</p></div></div>
-<div class="card hl next"><h3>Next</h3><div class="nums row"><div><i>1</i><span>Get the language model running.</span></div><div><i>2</i><span>Add a third game with no human help.</span></div><div><i>3</i><span>Try it with a real puzzle studio.</span></div></div></div>
+<div class="card hl next"><h3>Next</h3><div class="nums row"><div><i>1</i><span>Measure the language model on a paid key.</span></div><div><i>2</i><span>Add a third game with no human help.</span></div><div><i>3</i><span>Try it with a real puzzle studio.</span></div></div></div>
 <p class="small dim">Tested on two turn-based 2D puzzle games. Other 2D puzzle games follow the same steps. 3D puzzle games need extra work. Very large levels cannot be fully searched.</p>""")
 
 # 12 originality
@@ -193,7 +193,7 @@ slide("Originality · 10 points", "What is new", f"""
 <div class="strip">AI chatbots can also write a level from a sentence. They work from memory and do not check the result.</div>""")
 
 # 13 disclosure
-gem = (f"<b>Google {e(model)}</b>: reads requests, proposes and repairs levels." if L else "<b>Google Gemini</b>: the code is included, but it never ran. No result comes from it.")
+gem = (f"<b>Google {e(model)}</b>: reads requests, proposes and repairs levels." if L else "<b>Google Gemini</b> (free key): reads requests and names levels. It works, but it is slow, so the demo and all test numbers use the test version without it.")
 slide("Mandatory disclosure", "Models, data and components", f"""
 <div class="cols3">
 <div class="card"><h3>Models</h3><ul><li><b>Anthropic Claude</b>, as a coding assistant: read the game code and wrote the program, tests, demo and this deck with us.</li><li>{gem}</li><li>Nothing was trained.</li></ul></div>
@@ -255,7 +255,7 @@ slide("Appendix C · every failure we found", "Failures found while building it,
 <tr><td>The game's bundled viewer: tiny fixed window, scripted, no sprite for boxes or hedges.</td><td>Wrote a resizable keyboard player on the same engine.</td></tr>
 <tr><td>Hard requests: {100 - bd['hard']['fully_validated_pct']:.1f}% not fully validated.</td><td>Delivered with the lower label and the unmet requirement listed.</td></tr>
 <tr><td>Second game, first run: only 68% fully validated.</td><td>Boxes were placed in dead corners; constructor fixed and bands calibrated; now {SB['fully_validated_pct']:g}%.</td></tr>
-<tr><td>Keyword parser misses paraphrased requests.</td><td>Not fixed. The LLM reader that should replace it is written but never ran (invalid API key), so this weakness is still in every result.</td></tr></table></div>
+<tr><td>Keyword parser misses paraphrased requests.</td><td>Gemini reads such requests correctly but takes 7 to 10 s per call on a free key, so the benchmark and demo still use the keyword parser.</td></tr></table></div>
 <div><div class="card"><h3>Compared with how the task is done today</h3><table class="cmp">
 <tr><th></th><th>By hand</th><th>Ask an LLM</th><th>Level-Forge</th></tr>
 <tr><td>Loads in the game</td><td>yes</td><td>{f"{raw['loader_accepts']}/{raw['n']} (measured)" if raw else "unchecked"}</td><td>checked by the real loader</td></tr>

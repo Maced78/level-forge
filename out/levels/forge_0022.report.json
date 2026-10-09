@@ -1,0 +1,290 @@
+{
+ "request": "Create a difficult level that tests the player's ability to manipulate rules, use object pushing strategically, and reason about changing win conditions. Make it solvable, use only mechanics supported by the game, and export it as a new native level file.",
+ "game": "baba_is_auto",
+ "seed": 504938,
+ "spec": {
+  "raw": "Create a difficult level that tests the player's ability to manipulate rules, use object pushing strategically, and reason about changing win conditions. Make it solvable, use only mechanics supported by the game, and export it as a new native level file.",
+  "difficulty": "hard",
+  "skills_required": [
+   "rule_manipulation",
+   "object_pushing",
+   "win_condition_change"
+  ],
+  "skills_forbidden": [],
+  "unsupported_requested": [],
+  "foreign_requested": [],
+  "outside_vocabulary": [],
+  "dependencies": [],
+  "defaults_applied": [],
+  "constraints": {}
+ },
+ "attempts": [
+  {
+   "attempt": 1,
+   "proposer": "hardest remaining of 84 scored candidates (pre-score 29.1)",
+   "plan": "3 zone(s), gate0:sink(LAVA, key in zone 0), gate1:defeat(SKULL, key in zone 0), goal=form_win",
+   "status": "FULLY_VALIDATED",
+   "reasons": [],
+   "size": "14x6",
+   "difficulty_score": 29.1,
+   "verify_seconds": 0.12
+  }
+ ],
+ "ai": {
+  "mode": "off",
+  "intent_source": "keyword parser",
+  "errors": [],
+  "proposals": [],
+  "usage": {
+   "calls": 0,
+   "live_calls": 0,
+   "models": [],
+   "seconds": 0,
+   "prompt_tokens": 0,
+   "output_tokens": 0,
+   "total_tokens": 0,
+   "replayed_from_cache": false,
+   "by_step": []
+  }
+ },
+ "blueprint_version": "0.1.0",
+ "game_commit": "24cefb48d47ae6a6f5c0d936310d8bceb9c4279d",
+ "search": {
+  "candidates_built": 113,
+  "candidates_scored": 84,
+  "seconds": 15.2,
+  "best_scores": [
+   29.1,
+   25.9,
+   25.0,
+   24.0,
+   23.6
+  ],
+  "median_score": 15.4
+ },
+ "status": "FULLY_VALIDATED",
+ "width": 14,
+ "height": 6,
+ "dsl": "BABA   ROCK   wall   .      .      lava   lava   .      .      skull  .      .      WALL   LAVA\nIS     IS     .      .      .      lava   lava   .      .      skull  WIN    .      IS     IS\nYOU    PUSH   .      rock   .      lava   lava   .      .      skull  .      flag   STOP   SINK\nSKULL  IS     DEFEAT .      baba   lava   lava   .      .      skull  .      .      .      FLAG\n.      .      .      .      .      lava   lava   .      .      skull  .      wall   .      IS\n.      .      .      .      .      lava   lava   .      .      skull  wall   .      .      .",
+ "native": "14 6\n4    51   174  132  132  150  150  132  132  165  132  132  64   40\n67   67   132  132  132  150  150  132  132  165  86   132  67   67\n77   79   132  161  132  150  150  132  132  165  132  135  78   88\n55   67   87   132  114  150  150  132  132  165  132  132  132  25\n132  132  132  132  132  150  150  132  132  165  132  174  132  67\n132  132  132  132  132  150  150  132  132  165  174  132  132  132\n",
+ "design_notes": {
+  "plan": "3 zone(s), gate0:sink(LAVA, key in zone 0), gate1:defeat(SKULL, key in zone 0), goal=form_win",
+  "protected_rules": [
+   "BABA IS YOU",
+   "ROCK IS PUSH",
+   "LAVA IS SINK",
+   "WALL IS STOP"
+  ],
+  "breakable_rules": [
+   "SKULL IS DEFEAT"
+  ],
+  "notes": []
+ },
+ "verification": {
+  "status": "FULLY_VALIDATED",
+  "levels": {
+   "structural": {
+    "passed": true,
+    "checks": [
+     {
+      "check": "syntax.tokens",
+      "passed": true,
+      "detail": "84 integer tile tokens"
+     },
+     {
+      "check": "schema.dimensions",
+      "passed": true,
+      "detail": "14x6"
+     },
+     {
+      "check": "schema.layers",
+      "passed": true,
+      "detail": "84 tiles = 1 layer(s) of 84; allowed 1..3"
+     },
+     {
+      "check": "schema.tile_ids",
+      "passed": true,
+      "detail": "all IDs name an engine ObjectType"
+     },
+     {
+      "check": "schema.directions",
+      "passed": true,
+      "detail": "no DIRECTIONS block"
+     },
+     {
+      "check": "entities.no_unsupported_words",
+      "passed": true,
+      "detail": "every word has runtime behaviour in this engine"
+     },
+     {
+      "check": "policy.size",
+      "passed": true,
+      "detail": "14x6 = 84 cells; limit 20x20, 250 cells"
+     },
+     {
+      "check": "loader.engine_accepts",
+      "passed": true,
+      "detail": "Game(filename) constructed by the original engine"
+     },
+     {
+      "check": "loader.python_binding_accepts",
+      "passed": true,
+      "detail": "pyBaba.Game(filename)"
+     },
+     {
+      "check": "playable.you_instance",
+      "passed": true,
+      "detail": "controlled: ICON_BABA via ['BABA IS YOU']"
+     },
+     {
+      "check": "playable.not_won_immediately",
+      "passed": true,
+      "detail": "not won by an idle first turn"
+     }
+    ],
+    "warnings": []
+   },
+   "solvable": {
+    "passed": true,
+    "established": true,
+    "detail": "47-move witness found by the model search and replayed to WON in the original engine; pyBaba binding independently reports WON",
+    "witness": "UULDLDRDDLLURDRULURRRRRUUURRRDDRDLLLLLLLLRRRRRR",
+    "engine_replay_won": true,
+    "python_binding_final_state": "WON"
+   },
+   "solution_quality": {
+    "passed": true,
+    "shortest_length": 47,
+    "optimal": true,
+    "shortest_solution_count": 10,
+    "shortest_count_exact": true,
+    "difficulty_score": 29.1,
+    "difficulty_established": true,
+    "difficulty_components": {
+     "trap_bits": 9.66,
+     "trap_states": 14,
+     "decision_points": 47,
+     "dead_ratio": 0.707,
+     "rule_changes": 2,
+     "sacrifices": 1
+    },
+    "difficulty_band": [
+     15,
+     1000
+    ],
+    "in_band": true
+   },
+   "robustness": {
+    "passed": true,
+    "analysis_complete": true,
+    "reachable_states": 37163,
+    "dead_states": 26283,
+    "lost_states": 6114,
+    "dead_state_ratio": 0.7072,
+    "detail": "all 37163 reachable states enumerated; 26283 are dead (no winning continuation)"
+   },
+   "mechanic_coverage": {
+    "passed": true,
+    "covered": 3,
+    "requested": 3
+   }
+  },
+  "reasons": [],
+  "skills": {
+   "rule_manipulation": {
+    "required": true,
+    "exercised_in_witness": true,
+    "necessity": "proven",
+    "proof": "static",
+    "detail": "no WIN rule is active initially, so at least one rule must be formed before any win",
+    "passed": true
+   },
+   "object_pushing": {
+    "required": true,
+    "exercised_in_witness": true,
+    "proof": "ablation",
+    "ablation": {
+     "forbid": "push",
+     "result": "unsolvable",
+     "states": 569
+    },
+    "necessity": "proven",
+    "detail": "with 'push' moves forbidden the level is unsolvable (exhaustive, 569 states): every solution uses this skill",
+    "passed": true
+   },
+   "win_condition_change": {
+    "required": true,
+    "exercised_in_witness": true,
+    "necessity": "proven",
+    "proof": "static",
+    "detail": "no 'X IS WIN' rule is active in the initial state, and Game::CheckPlayState only reports WON for a YOU instance sharing a cell with a WIN instance: every winning play must first create a WIN rule",
+    "passed": true
+   }
+  },
+  "initial_rules": [
+   "BABA IS YOU",
+   "LAVA IS SINK",
+   "ROCK IS PUSH",
+   "SKULL IS DEFEAT",
+   "WALL IS STOP"
+  ],
+  "search": {
+   "status": "solved",
+   "proof": "witness",
+   "backend": "model",
+   "length": 47,
+   "states_explored": 37163,
+   "elapsed_ms": 90.6301,
+   "wait_allowed": false
+  },
+  "solution": "UULDLDRDDLLURDRULURRRRRUUURRRDDRDLLLLLLLLRRRRRR",
+  "trace_events": {
+   "rule_changes": 2,
+   "win_rule_changes": 1,
+   "you_changes": 0,
+   "object_pushes": 5,
+   "text_pushes": 16,
+   "destroyed": 4,
+   "transformed": 0
+  },
+  "rule_timeline": [
+   {
+    "step": 6,
+    "added": [],
+    "removed": [
+     "SKULL IS DEFEAT"
+    ]
+   },
+   {
+    "step": 41,
+    "added": [
+     "SKULL IS WIN"
+    ],
+    "removed": []
+   }
+  ],
+  "difficulty": {
+   "established": true,
+   "score": 29.1,
+   "components": {
+    "trap_bits": 9.66,
+    "trap_states": 14,
+    "decision_points": 47,
+    "dead_ratio": 0.707,
+    "rule_changes": 2,
+    "sacrifices": 1
+   },
+   "weights": {
+    "trap_bits": 2.0,
+    "dead_ratio": 4.0,
+    "rule_changes": 2.0,
+    "sacrifices": 3.0
+   }
+  },
+  "verify_seconds": 0.12
+ },
+ "solution": "UULDLDRDDLLURDRULURRRRRUUURRRDDRDLLLLLLLLRRRRRR",
+ "unmet_requirements": [],
+ "elapsed_seconds": 15.31,
+ "delivered_from": "hardest remaining of 84 scored candidates (pre-score 29.1)"
+}

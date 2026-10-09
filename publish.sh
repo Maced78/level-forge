@@ -13,7 +13,10 @@ git checkout -q -B main
 git config user.name  >/dev/null || git config user.name  "$GH_USER"
 git config user.email >/dev/null || git config user.email "$GH_USER@users.noreply.github.com"
 git rm -q --cached .env 2>/dev/null || true
+chmod +x build_engine.sh run_demo.sh publish.sh set_key.sh 2>/dev/null || true
 git add -A
+# record the scripts as executable in the repository, so "./run_demo.sh" works after a fresh clone
+for f in build_engine.sh run_demo.sh publish.sh set_key.sh; do [ -f "$f" ] && git update-index --chmod=+x "$f"; done
 if git ls-files | grep -qx ".env"; then echo "Stopping: .env would be published."; exit 1; fi
 git diff --cached --quiet || git commit -q -m "Level-Forge: NeuroBridge.SI Baku submission"
 git remote remove origin 2>/dev/null || true

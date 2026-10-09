@@ -1,0 +1,232 @@
+{
+ "request": "Create a hard level that needs careful planning with several boxes.",
+ "game": "sokoban_sg",
+ "seed": 654954,
+ "spec": {
+  "raw": "Create a hard level that needs careful planning with several boxes.",
+  "difficulty": "hard",
+  "skills_required": [
+   "box_pushing",
+   "multi_box"
+  ],
+  "skills_forbidden": [],
+  "unsupported_requested": [],
+  "foreign_requested": [],
+  "outside_vocabulary": [],
+  "dependencies": [],
+  "defaults_applied": [],
+  "constraints": {}
+ },
+ "attempts": [
+  {
+   "attempt": 1,
+   "proposer": "hardest remaining of 70 scored candidates (pre-score 23.8)",
+   "plan": "8x7 room, 3 box(es), 3 goal(s), 6 inner wall(s)",
+   "status": "FULLY_VALIDATED",
+   "reasons": [],
+   "size": "8x7",
+   "difficulty_score": 23.8,
+   "verify_seconds": 0.29
+  }
+ ],
+ "ai": {
+  "mode": "off",
+  "intent_source": "keyword parser",
+  "errors": [],
+  "proposals": [],
+  "usage": {
+   "calls": 0,
+   "live_calls": 0,
+   "models": [],
+   "seconds": 0,
+   "prompt_tokens": 0,
+   "output_tokens": 0,
+   "total_tokens": 0,
+   "replayed_from_cache": false,
+   "by_step": []
+  }
+ },
+ "blueprint_version": "0.1.0",
+ "game_commit": "69c7b5c8f8a8190a7e9c8bdaaa1771d13dfa9274",
+ "search": {
+  "candidates_built": 392,
+  "candidates_scored": 70,
+  "seconds": 15.0,
+  "best_scores": [
+   23.8,
+   19.4,
+   16.6,
+   16.2,
+   15.3
+  ],
+  "median_score": 10.0
+ },
+ "status": "FULLY_VALIDATED",
+ "width": 8,
+ "height": 7,
+ "dsl": "+ + + + + + + +\n+ + - + X - - +\n+ + - @ X - + +\n+ * - @ - - - +\n+ - - + - @ X +\n+ - - - + - - +\n+ + + + + + + +",
+ "native": "+ + + + + + + +\n+ + - + X - - +\n+ + - @ X - + +\n+ * - @ - - - +\n+ - - + - @ X +\n+ - - - + - - +\n+ + + + + + + +\n",
+ "design_notes": {
+  "plan": "8x7 room, 3 box(es), 3 goal(s), 6 inner wall(s)",
+  "notes": []
+ },
+ "verification": {
+  "status": "FULLY_VALIDATED",
+  "levels": {
+   "structural": {
+    "passed": true,
+    "checks": [
+     {
+      "check": "syntax.rectangular",
+      "passed": true,
+      "detail": "7 rows"
+     },
+     {
+      "check": "syntax.tokens",
+      "passed": true,
+      "detail": "all tokens are in the engine's alphabet + - @ X * $ %"
+     },
+     {
+      "check": "schema.size",
+      "passed": true,
+      "detail": "8x7; the engine's 1216x640 window holds 17x10 cells of puzzle"
+     },
+     {
+      "check": "playable.one_player",
+      "passed": true,
+      "detail": "1 player token(s)"
+     },
+     {
+      "check": "invariant.closed_border",
+      "passed": true,
+      "detail": "outer ring is all walls"
+     },
+     {
+      "check": "invariant.boxes_not_more_than_goals",
+      "passed": true,
+      "detail": "3 boxes, 3 goals; the engine wins only when no box is off a goal"
+     },
+     {
+      "check": "playable.not_solved_at_start",
+      "passed": true,
+      "detail": "at least one box starts off a goal"
+     },
+     {
+      "check": "loader.engine_accepts",
+      "passed": true,
+      "detail": "Game(path=...) built by the original engine, headless"
+     }
+    ],
+    "warnings": []
+   },
+   "solvable": {
+    "passed": true,
+    "established": true,
+    "detail": "59-move witness found by the model search and replayed to WON in the original engine",
+    "witness": "RURRDLRRRDDLURULLUURDDLDRUULLLDRURRDDLUUDLLLDDRULURRURRDDLU",
+    "engine_replay_won": true,
+    "python_binding_final_state": null
+   },
+   "solution_quality": {
+    "passed": true,
+    "shortest_length": 59,
+    "optimal": true,
+    "shortest_solution_count": 9.0,
+    "shortest_count_exact": true,
+    "difficulty_score": 23.8,
+    "difficulty_established": true,
+    "difficulty_components": {
+     "trap_bits": 7.0,
+     "trap_states": 13,
+     "decision_points": 59,
+     "dead_ratio": 0.955,
+     "rule_changes": 0,
+     "sacrifices": 0,
+     "boxes": 4
+    },
+    "difficulty_band": [
+     11,
+     1000
+    ],
+    "in_band": true
+   },
+   "robustness": {
+    "passed": true,
+    "analysis_complete": true,
+    "reachable_states": 30020,
+    "dead_states": 28665,
+    "lost_states": 0,
+    "dead_state_ratio": 0.9549,
+    "detail": "all 30020 reachable states enumerated; 28665 are dead (no winning continuation)"
+   },
+   "mechanic_coverage": {
+    "passed": true,
+    "covered": 2,
+    "requested": 2
+   }
+  },
+  "reasons": [],
+  "skills": {
+   "box_pushing": {
+    "required": true,
+    "exercised_in_witness": true,
+    "necessity": "proven",
+    "proof": "static",
+    "detail": "3 box(es) start off a goal, and utils.is_solved / Game.is_level_complete only report a win when no box is off a goal; boxes move only when pushed",
+    "passed": true
+   },
+   "multi_box": {
+    "required": true,
+    "exercised_in_witness": true,
+    "necessity": "proven",
+    "proof": "static",
+    "detail": "3 boxes start off a goal, so at least two different boxes must be pushed",
+    "passed": true
+   }
+  },
+  "initial_rules": [
+   "3 boxes",
+   "3 goals"
+  ],
+  "search": {
+   "status": "solved",
+   "proof": "witness",
+   "backend": "model",
+   "length": 59,
+   "states_explored": 30020,
+   "elapsed_ms": 48.9,
+   "wait_allowed": false
+  },
+  "solution": "RURRDLRRRDDLURULLUURDDLDRUULLLDRURRDDLUUDLLLDDRULURRURRDDLU",
+  "trace_events": {
+   "box_pushes": 17,
+   "boxes_delivered": 4,
+   "rule_changes": 0,
+   "destroyed": 0
+  },
+  "rule_timeline": [],
+  "difficulty": {
+   "established": true,
+   "score": 23.8,
+   "components": {
+    "trap_bits": 7.0,
+    "trap_states": 13,
+    "decision_points": 59,
+    "dead_ratio": 0.955,
+    "rule_changes": 0,
+    "sacrifices": 0,
+    "boxes": 4
+   },
+   "weights": {
+    "trap_bits": 2.0,
+    "dead_ratio": 4.0,
+    "boxes": 1.5
+   }
+  },
+  "verify_seconds": 0.29
+ },
+ "solution": "RURRDLRRRDDLURULLUURDDLDRUULLLDRURRDDLUUDLLLDDRULURRURRDDLU",
+ "unmet_requirements": [],
+ "elapsed_seconds": 15.3,
+ "delivered_from": "hardest remaining of 70 scored candidates (pre-score 23.8)"
+}

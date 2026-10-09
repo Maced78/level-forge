@@ -117,7 +117,7 @@ kbd{font:600 11px var(--mono);background:var(--mute-bg);border:1px solid var(--l
 </head>
 <body>
 
-<div class="testbar"><div class="wrap"><b>Test version</b>No API key is set up, so the language model is switched off. Requests are read by a built-in keyword reader and levels are built by the planner. Every level on this page was still built and checked by the real program.</div></div>
+<div class="testbar"><div class="wrap"><b>Test version</b>No API key is set up on this site, so the language model is switched off. We do this on purpose: Gemini works, but on a free key each call takes 7 to 10 seconds. Requests are read by a built-in keyword reader instead. Every level on this page was still built and checked by the real program.</div></div>
 
 <header class="top"><div class="wrap">
   <div class="logo"><b>Level</b>-Forge</div>
@@ -207,7 +207,7 @@ kbd{font:600 11px var(--mono);background:var(--mute-bg);border:1px solid var(--l
   <div class="grid3">
     <div class="card"><h3>Coding assistant (Claude)</h3>Read the 4,000-line game engine and wrote the rule book: 30 rules, each with the line of code it came from and a test in the real game.</div>
     <div class="card"><h3>Search program</h3>Tries every possible move to decide whether a level can be won, what the shortest solution is, whether a skill is really needed, and how many traps there are.</div>
-    <div class="card"><h3>Language model (Google Gemini)</h3>Written to read free-form requests in step 1. <b>It is not running in this test version</b> because no working API key is set up. A keyword reader does step 1 in every result on this page.</div>
+    <div class="card"><h3>Language model (Google Gemini)</h3>Reads free-form requests in step 1 and names the finished level. It works, but on a free key each call takes 7 to 10 seconds, so <b>this test version runs without it</b> and a keyword reader does step 1 in every result on this page.</div>
   </div>
   <div id="llm-evidence" style="margin-top:16px"></div>
 </div></section>
@@ -238,15 +238,15 @@ kbd{font:600 11px var(--mono);background:var(--mute-bg);border:1px solid var(--l
   <div class="grid3">
     <div class="card"><h3>On Linux or macOS</h3><pre>git clone <span id="clone-url">REPO_URL</span>
 cd level-forge
-./build_engine.sh      # once, about 2 minutes
-./run_demo.sh          # http://localhost:8765</pre><p class="hint">Without an API key the program runs in this same test version and says so at the top of the page.</p></div>
-    <div class="card"><h3>What it costs</h3><ul class="tight"><li><b>Data:</b> none to collect. It only needs the game's own code.</li><li><b>Computer:</b> one ordinary computer, no graphics card. Most levels take under a second. Hard ones take about 15 seconds.</li><li id="cost-llm"><b>Language model:</b> optional.</li><li><b>New game:</b> one rule book. The second game took about an hour.</li></ul></div>
-    <div class="card"><h3>Next</h3><ul class="tight"><li>Get the language model running and measure it.</li><li>Add a third game with no human help.</li><li>A plug-in for level editors.</li><li>A trial with a real puzzle studio.</li></ul></div>
+bash build_engine.sh   # once, about 2 minutes
+bash run_demo.sh       # http://localhost:8765</pre><p class="hint">Without an API key the program runs in this same test version and says so at the top of the page. On Windows, run these commands inside WSL (Ubuntu).</p></div>
+    <div class="card"><h3>What it costs</h3><ul class="tight"><li><b>Data:</b> none to collect. It only needs the game's own code.</li><li><b>Computer:</b> one ordinary computer, no graphics card. Most levels take under a second. Hard ones take 7 to 20 seconds.</li><li id="cost-llm"><b>Language model:</b> optional.</li><li><b>New game:</b> one rule book. The second game took about an hour.</li></ul></div>
+    <div class="card"><h3>Next</h3><ul class="tight"><li>Measure the language model on a paid key.</li><li>Add a third game with no human help.</li><li>A plug-in for level editors.</li><li>A trial with a real puzzle studio.</li></ul></div>
   </div>
 </div></section>
 
 <footer><div class="wrap">
-  <b>Disclosure.</b> Games: <a href="https://github.com/utilForever/baba-is-auto">utilForever/baba-is-auto</a> and <a href="https://github.com/xbandrade/sokoban-solver-generator">xbandrade/sokoban-solver-generator</a> (both MIT licence), unmodified. Models: Anthropic Claude as a coding assistant, which wrote the rule books and this prototype with us during the hackathon. Google Gemini code is included but was never run successfully, so no result here comes from it. Components: Python, C++, pybind11, pygame, numpy, Playwright. No external datasets. Built on 9 October 2026 at NeuroBridge.SI Baku. <span id="team"></span>
+  <b>Disclosure.</b> Games: <a href="https://github.com/utilForever/baba-is-auto">utilForever/baba-is-auto</a> and <a href="https://github.com/xbandrade/sokoban-solver-generator">xbandrade/sokoban-solver-generator</a> (both MIT licence), unmodified. Models: Anthropic Claude as a coding assistant, which wrote the rule books and this prototype with us during the hackathon. Google Gemini (free key) reads requests and names levels; it works but is slow, so this site and all test numbers use the test version without it. Components: Python, C++, pybind11, pygame, numpy, Playwright. No external datasets. Built on 9 October 2026 at NeuroBridge.SI Baku. <span id="team"></span>
 </div></footer>
 
 <script src="data.js"></script>

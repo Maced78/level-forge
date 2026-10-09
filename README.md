@@ -1,4 +1,4 @@
-# Level-Forge — verified puzzle levels from a sentence
+# Level-Forge: verified puzzle levels from a sentence
 
 **Live demo:** https://maced78.github.io/level-forge/  ·  **Deck:** `submission/Level-Forge_pitch_deck.pdf`  ·  NeuroBridge.SI Baku, AI Gaming track  ·  Team Azərçay — Nural Shukurlu · Alfaddin Hamidov · Chingiz Aslanov
 
@@ -14,13 +14,15 @@ It runs on two open-source games through one unchanged generation loop:
 ## Run it
 
 ```bash
-./build_engine.sh          # once, ~2 min: needs g++ (C++17), python3 + python3-dev, pip
-./run_demo.sh              # http://localhost:8765
+bash build_engine.sh          # once, ~2 min: needs g++ (C++17), python3 + python3-dev, pip
+bash run_demo.sh              # http://localhost:8765
 ```
 
-- **Language model (optional):** put `GEMINI_API_KEY=...` in `.env` (or run `./set_key.sh`). Without a key the system
-  uses a keyword parser and the constraint planner, and every result says so.
-- **Second game:** `pip install pygame pygame-widgets numpy`, then pick "Sokoban" in the UI or
+- **Language model (optional):** put `GEMINI_API_KEY=...` in `.env` (or run `bash set_key.sh`). Without a key the system
+  runs its test version (keyword reader + constraint planner) and says so at the top of the page. Gemini works but takes
+  7-10 s per call on a free key, which is why the demo uses the test version.
+- **Windows:** run the same commands inside WSL (Ubuntu): `wsl --install`, then `sudo apt install -y git g++ python3 python3-dev python3-pip` (not tested by us).
+- **Second game:** pick "Sokoban" in the UI (`run_demo.sh` installs pygame and numpy if missing) or
   `python3 -m forge.cli "A medium level with two boxes" --game sokoban_sg`.
 - **Play a level in the original engine:** the "Play in the original engine" button (`forge/play.py`, needs pygame).
 
@@ -76,7 +78,7 @@ computed from the fully enumerated state space. Hard requests build dozens of ca
 - Impossible requests refused: 19/19; valid controls wrongly refused: 0/10.
 - **Second game (Sokoban), same loop:** 60 requests, 96.7% solvable, 96.7% fully validated, 0/58 false acceptances.
 
-**Language model: implemented, not measured.** `forge/llm.py` and `bench/llm_evidence.py` are complete, but no run succeeded during the hackathon (invalid API key), so no result in this repository comes from an LLM.
+**Language model: works, not benchmarked.** Gemini parsed requests and named levels through `forge/llm.py` on a free key (7-10 s per call; sample answers in `out/llm_cache.json`). The comparison benchmark `bench/llm_evidence.py` has not been completed, so no number in this repository comes from an LLM.
 
 How to read this: the benchmark requests come from templates inside the generator's vocabulary; the two left columns
 are not language models; the contradiction set was tuned against the detector; the difficulty score is our
@@ -95,7 +97,7 @@ definition and has not been compared with human ratings.
 
 ## Disclosure
 
-Models: Google Gemini (optional seat for request parsing/proposals/repair: implemented but never run successfully, no result comes from it); Anthropic Claude (coding agent that wrote the blueprints
+Models: Google Gemini, free key (reads requests, names levels; works but slow, so the demo and all reported numbers use the test version without it); Anthropic Claude (coding agent that wrote the blueprints
 and prototype with the team during the hackathon). Data: none collected; two MIT-licensed games vendored unmodified.
 Components: Python standard library, g++, pybind11, pygame, pygame-widgets, numpy, Playwright. Built on 9 October 2026.
 

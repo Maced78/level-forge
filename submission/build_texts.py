@@ -16,10 +16,10 @@ fp, bo, rt = B["arms"]["full_pipeline"], B["arms"]["blueprint_only"], B["arms"][
 bd, ch, mv = fp["by_difficulty"], B["contradiction_handling"], B["model_vs_engine_on_sabotaged_levels"]
 model = L["model"] if L else "Google Gemini"
 model_disc = (f"{model} (request parsing, level proposals, repair, naming)" if L else
-  "Google Gemini (optional seat for request parsing/proposals/repair: implemented but never run successfully, no result comes from it)")
+  "Google Gemini, free key (reads requests, names levels; works but slow, so the demo and all reported numbers use the test version without it)")
 f = lambda x: f"{x['correct']}/{x['of']}"
-llm_q = "NOT TESTED: the Gemini seat (request parsing, proposals, repair). The client and the comparison script are in the repo, but we had no working API key, so every number here was produced with it switched off (keyword parser + constraint planner)."
-llm_r = "\n**Language model: implemented, not measured.** `forge/llm.py` and `bench/llm_evidence.py` are complete, but no run succeeded during the hackathon (invalid API key), so no result in this repository comes from an LLM.\n"
+llm_q = "NOT BENCHMARKED: Gemini. It works in the app (it parsed requests and named levels on a free key, 7-10 s per call), but the free tier is too slow and limited for a 200-request benchmark, so every number here comes from the test version (keyword reader + planner)."
+llm_r = "\n**Language model: works, not benchmarked.** Gemini parsed requests and named levels through `forge/llm.py` on a free key (7-10 s per call; sample answers in `out/llm_cache.json`). The comparison benchmark `bench/llm_evidence.py` has not been completed, so no number in this repository comes from an LLM.\n"
 MODELS = None
 if L:
     I, G = L["intent_summary"], L["generation_summary"]
@@ -43,7 +43,7 @@ quality = (
     f"{llm_q}\n\n"
     f"WHAT BROKE. The real engine explores only ~2,000 states/s, so we wrote a fast model and replay every solution in the real engine. The ablation search showed our early claim 'pushing is required' was false (a rule word can be drowned instead of a rock); we changed the construction. "
     f"Early 'hard' levels were long but easy (0-1 trap points), so difficulty is now computed from the full state space, not length. The first Sokoban run was only 68% fully validated (boxes placed in dead corners); fixed. "
-    f"Hard requests are still not fully validated {100 - bd['hard']['fully_validated_pct']:.1f}% of the time; those are delivered with the lower label and the unmet requirement listed. Our LLM run failed (invalid API key) and the script silently recorded keyword-parser results as LLM results; we caught it, threw the numbers away, and the script now refuses to record a fallback.\n\n"
+    f"Hard requests are still not fully validated {100 - bd['hard']['fully_validated_pct']:.1f}% of the time; those are delivered with the lower label and the unmet requirement listed. Our first Gemini run failed on an invalid key and the script silently saved keyword-parser results as LLM results; we caught it, deleted the numbers, and the script now refuses to record a fallback. Gemini now works, but at 7-10 s per call on a free key it is too slow for the benchmark.\n\n"
     f"COMPARISON WITH TODAY. By hand, a designer learns whether a level is solvable or bypassable only by play-testing. A general LLM asked for a level file does not know the engine's tile IDs or which rules it implements"
     + (f" (measured: {L['generation_summary']['raw_llm']['solvable']}/{L['generation_summary']['raw_llm']['n']} solvable)" if L else "") +
     f". Level-Forge returns a native level in a median of {fp['latency_seconds']['median']} s (hard: ~{bd['hard']['median_latency_s']} s) with a replayable solution and proofs.\n\n"
@@ -56,7 +56,7 @@ sub = f"""# Submission texts — copy each block into the platform form
 **Title**
 
 ```
-Level-Forge — verified puzzle levels from a sentence
+Level-Forge: verified puzzle levels from a sentence
 ```
 
 **The user and the problem**
@@ -86,7 +86,7 @@ For level designers at small puzzle-game studios and solo developers who must sh
 **Setup instructions**
 
 ```
-The demo link opens in any browser with no login or setup: pick a recorded request, press Play solution, press "Play it yourself" (arrow keys), or type your own level into "Verify your own level" - the solver runs live in the tab. The gallery replays runs recorded from the real pipeline. To run live generation locally (Linux/macOS, ~2 min): git clone {CFG['repo']}.git && cd level-forge && ./build_engine.sh && ./run_demo.sh, then open http://localhost:8765. Needs g++, python3 and python3-dev. Optional: put GEMINI_API_KEY=... in .env to switch the language model on; without it the system uses a keyword parser and says so in every result. Second game: pip install pygame pygame-widgets numpy, then choose "Sokoban" in the game selector. Known limitation: hard requests take about 15-20 s because the system searches for the hardest level that passes every check.
+The demo link opens in any browser with no login or setup: pick a recorded request, press Play solution, press "Play it yourself" (arrow keys), or type your own level into "Verify your own level" - the solver runs live in the tab. The gallery replays runs recorded from the real pipeline. To run live generation locally (Linux/macOS, ~2 min): git clone {CFG['repo']}.git && cd level-forge && bash build_engine.sh && bash run_demo.sh, then open http://localhost:8765. Needs g++, python3 and python3-dev. On Windows, run the same commands inside WSL (Ubuntu). Without an API key the app runs its test version (a keyword reader instead of the language model) and says so at the top of the page; this is the version the demo uses, because Gemini takes 7-10 s per call on a free key. Optional: put GEMINI_API_KEY=... in .env to switch Gemini on. Second game: choose "Sokoban" in the game selector. Known limitation: hard requests take 7-20 s because the system searches for the hardest level that passes every check.
 ```
 
 **Disclosure — Models**
@@ -117,7 +117,7 @@ Python stdlib, C++17/g++, pybind11, pygame, pygame-widgets, numpy, Playwright/Ch
 """
 (ROOT / "submission" / "SUBMISSION.md").write_text(sub)
 
-readme = f"""# Level-Forge — verified puzzle levels from a sentence
+readme = f"""# Level-Forge: verified puzzle levels from a sentence
 
 **Live demo:** {CFG['demo']}  ·  **Deck:** `submission/Level-Forge_pitch_deck.pdf`  ·  NeuroBridge.SI Baku, AI Gaming track  ·  {CFG['team']}
 
@@ -133,13 +133,15 @@ It runs on two open-source games through one unchanged generation loop:
 ## Run it
 
 ```bash
-./build_engine.sh          # once, ~2 min: needs g++ (C++17), python3 + python3-dev, pip
-./run_demo.sh              # http://localhost:8765
+bash build_engine.sh          # once, ~2 min: needs g++ (C++17), python3 + python3-dev, pip
+bash run_demo.sh              # http://localhost:8765
 ```
 
-- **Language model (optional):** put `GEMINI_API_KEY=...` in `.env` (or run `./set_key.sh`). Without a key the system
-  uses a keyword parser and the constraint planner, and every result says so.
-- **Second game:** `pip install pygame pygame-widgets numpy`, then pick "Sokoban" in the UI or
+- **Language model (optional):** put `GEMINI_API_KEY=...` in `.env` (or run `bash set_key.sh`). Without a key the system
+  runs its test version (keyword reader + constraint planner) and says so at the top of the page. Gemini works but takes
+  7-10 s per call on a free key, which is why the demo uses the test version.
+- **Windows:** run the same commands inside WSL (Ubuntu): `wsl --install`, then `sudo apt install -y git g++ python3 python3-dev python3-pip` (not tested by us).
+- **Second game:** pick "Sokoban" in the UI (`run_demo.sh` installs pygame and numpy if missing) or
   `python3 -m forge.cli "A medium level with two boxes" --game sokoban_sg`.
 - **Play a level in the original engine:** the "Play in the original engine" button (`forge/play.py`, needs pygame).
 

@@ -125,7 +125,7 @@ img.orig{width:100%;border-radius:8px;display:block;image-rendering:pixelated}.g
 <div><em>5</em><b>Fix or label</b><span>Repair what failed. Say what was proven.</span></div></div>
 <div class="io"><span>In: your sentence</span><span>Part 2 · runs for every request</span><span>Out: level file, solution, proof</span></div>
 <div class="shots"><div><img class="orig" src="img/baba_2_start.png"><span>Step 3: a level it built</span></div><div><img class="orig" src="img/baba_2_end.png"><span>Step 4: the real game has won it</span></div>
-<p class="small dim ainote"><b>Who does what.</b> Coding assistant (Claude): part 1. Search program: steps 2 to 5. A language model (Google Gemini) is written for step 1. It has not run yet because our key was rejected, so a keyword reader did step 1 in every result shown.</p></div><div class="foot"><span>Level-Forge · NeuroBridge.SI Baku · AI Gaming track</span><span>8</span></div></section><section class="s e"><div class="k">Prototype and use of AI · 30 points</div><h1>It works on two different games</h1>
+<p class="small dim ainote"><b>Who does what.</b> Coding assistant (Claude): part 1. Search program: steps 2 to 5. A language model (Google Gemini) can do step 1 and it works, but on a free key each call takes 7 to 10 seconds. To stay fast, the demo and every test number use the test version, where a keyword reader does step 1.</p></div><div class="foot"><span>Level-Forge · NeuroBridge.SI Baku · AI Gaming track</span><span>8</span></div></section><section class="s e"><div class="k">Prototype and use of AI · 30 points</div><h1>It works on two different games</h1>
 <div class="cols2 games"><div class="card"><img class="orig g1" src="img/baba_2_start.png"><h2>Baba Is You</h2><p>A puzzle where the player changes the rules.</p>
 <p class="stat"><b>100%</b> of 200 requests gave a winnable level</p></div>
 <div class="card"><img class="orig g2" src="img/sokoban_start.png"><h2>Sokoban</h2><p>A puzzle about pushing boxes onto targets.</p>
@@ -142,7 +142,7 @@ img.orig{width:100%;border-radius:8px;display:block;image-rendering:pixelated}.g
 <div class="tick ok"><i>✓</i><span>We said pushing was required. A shortcut existed. <b>Fixed:</b> our own search found it.</span></div>
 <div class="tick ok"><i>✓</i><span>On the second game only 68% passed at first. <b>Fixed:</b> now 96.7%.</span></div>
 <div class="tick open"><i>!</i><span>About 1 in 10 hard requests still misses a check. <b>Open:</b> the level is delivered with a warning.</span></div>
-<div class="tick open"><i>!</i><span>The language model never ran. <b>Open.</b></span></div></div>
+<div class="tick open"><i>!</i><span>Gemini works but is slow on a free key (7 to 10 s per call). <b>Open:</b> results use the faster test version.</span></div></div>
 <div class="card"><h3>Compared with today</h3><table class="cmp">
 <tr><th></th><th>By hand</th><th>Level-Forge</th></tr>
 <tr><td>Can it be won?</td><td>play it</td><td>proven</td></tr>
@@ -153,7 +153,7 @@ img.orig{width:100%;border-radius:8px;display:block;image-rendering:pixelated}.g
 <div class="card"><b class="huge">0</b><p>data to collect. It only needs the game's own code.</p></div>
 <div class="card"><b class="huge">1</b><p>ordinary computer. No graphics card, works offline.</p></div>
 <div class="card"><b class="huge">1 hour</b><p>to add the second game.</p></div></div>
-<div class="card hl next"><h3>Next</h3><div class="nums row"><div><i>1</i><span>Get the language model running.</span></div><div><i>2</i><span>Add a third game with no human help.</span></div><div><i>3</i><span>Try it with a real puzzle studio.</span></div></div></div>
+<div class="card hl next"><h3>Next</h3><div class="nums row"><div><i>1</i><span>Measure the language model on a paid key.</span></div><div><i>2</i><span>Add a third game with no human help.</span></div><div><i>3</i><span>Try it with a real puzzle studio.</span></div></div></div>
 <p class="small dim">Tested on two turn-based 2D puzzle games. Other 2D puzzle games follow the same steps. 3D puzzle games need extra work. Very large levels cannot be fully searched.</p><div class="foot"><span>Level-Forge · NeuroBridge.SI Baku · AI Gaming track</span><span>12</span></div></section><section class="s e"><div class="k">Originality · 10 points</div><h1>What is new</h1>
 <div class="cols2 four">
 <div class="card"><em>{ }</em><p>The rules come from the game's own code, and each rule is tested.</p></div>
@@ -162,7 +162,7 @@ img.orig{width:100%;border-radius:8px;display:block;image-rendering:pixelated}.g
 <div class="card"><em>✕</em><p>It refuses impossible requests and says why.</p></div></div>
 <div class="strip">AI chatbots can also write a level from a sentence. They work from memory and do not check the result.</div><div class="foot"><span>Level-Forge · NeuroBridge.SI Baku · AI Gaming track</span><span>13</span></div></section><section class="s e"><div class="k">Mandatory disclosure</div><h1>Models, data and components</h1>
 <div class="cols3">
-<div class="card"><h3>Models</h3><ul><li><b>Anthropic Claude</b>, as a coding assistant: read the game code and wrote the program, tests, demo and this deck with us.</li><li><b>Google Gemini</b>: the code is included, but it never ran. No result comes from it.</li><li>Nothing was trained.</li></ul></div>
+<div class="card"><h3>Models</h3><ul><li><b>Anthropic Claude</b>, as a coding assistant: read the game code and wrote the program, tests, demo and this deck with us.</li><li><b>Google Gemini</b> (free key): reads requests and names levels. It works, but it is slow, so the demo and all test numbers use the test version without it.</li><li>Nothing was trained.</li></ul></div>
 <div class="card"><h3>Data</h3><ul><li>Two open-source games, unmodified: <b>utilForever/baba-is-auto</b> and <b>xbandrade/sokoban-solver-generator</b> (MIT licence).</li><li>Test requests made by our own script.</li><li>No other data.</li></ul></div>
 <div class="card"><h3>Components</h3><ul><li>Python 3, C++, pybind11</li><li>pygame, pygame-widgets, numpy</li><li>Playwright and Chromium</li><li>GitHub Pages</li></ul></div></div>
 <div class="strip"><b>Built after the hackathon started.</b> Everything was made on 9 October 2026. Before the event we had only the idea and a written specification. Pages 16 to 18 hold the detailed numbers.</div><div class="foot"><span>Level-Forge · NeuroBridge.SI Baku · AI Gaming track</span><span>14</span></div></section><section class="s e title ty"><div class="k">NeuroBridge.SI Baku · AI Gaming track</div>
@@ -205,7 +205,7 @@ img.orig{width:100%;border-radius:8px;display:block;image-rendering:pixelated}.g
 <tr><td>The game's bundled viewer: tiny fixed window, scripted, no sprite for boxes or hedges.</td><td>Wrote a resizable keyboard player on the same engine.</td></tr>
 <tr><td>Hard requests: 10.6% not fully validated.</td><td>Delivered with the lower label and the unmet requirement listed.</td></tr>
 <tr><td>Second game, first run: only 68% fully validated.</td><td>Boxes were placed in dead corners; constructor fixed and bands calibrated; now 96.7%.</td></tr>
-<tr><td>Keyword parser misses paraphrased requests.</td><td>Not fixed. The LLM reader that should replace it is written but never ran (invalid API key), so this weakness is still in every result.</td></tr></table></div>
+<tr><td>Keyword parser misses paraphrased requests.</td><td>Gemini reads such requests correctly but takes 7 to 10 s per call on a free key, so the benchmark and demo still use the keyword parser.</td></tr></table></div>
 <div><div class="card"><h3>Compared with how the task is done today</h3><table class="cmp">
 <tr><th></th><th>By hand</th><th>Ask an LLM</th><th>Level-Forge</th></tr>
 <tr><td>Loads in the game</td><td>yes</td><td>unchecked</td><td>checked by the real loader</td></tr>
