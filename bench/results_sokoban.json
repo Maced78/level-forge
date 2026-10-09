@@ -1,0 +1,649 @@
+{
+ "summary": {
+  "game": {
+   "name": "sokoban-solver-generator",
+   "upstream": "https://github.com/xbandrade/sokoban-solver-generator",
+   "commit": "69c7b5c8f8a8190a7e9c8bdaaa1771d13dfa9274",
+   "license": "MIT",
+   "description": "Open-source pygame Sokoban with text level files (levels/*.dat)"
+  },
+  "trials": 60,
+  "solvable_pct": 96.7,
+  "fully_validated_pct": 96.7,
+  "labelled_solvable": 58,
+  "false_acceptances": 0,
+  "by_difficulty": {
+   "easy": {
+    "n": 20,
+    "fully_validated_pct": 100.0,
+    "solvable_pct": 100.0,
+    "median_score": 4.35,
+    "median_solution_length": 6.5,
+    "median_seconds": 0.9199999999999999
+   },
+   "medium": {
+    "n": 20,
+    "fully_validated_pct": 90.0,
+    "solvable_pct": 90.0,
+    "median_score": 7.1,
+    "median_solution_length": 13.5,
+    "median_seconds": 1.04
+   },
+   "hard": {
+    "n": 20,
+    "fully_validated_pct": 100.0,
+    "solvable_pct": 100.0,
+    "median_score": 13.649999999999999,
+    "median_solution_length": 29.0,
+    "median_seconds": 6.135
+   }
+  },
+  "contradictory_rejected": "5/5",
+  "valid_controls_wrongly_rejected": "0/4",
+  "median_seconds": 1.29,
+  "wall_clock_seconds": 169.6,
+  "pipeline_lines_changed_for_this_game": 0
+ },
+ "trials": [
+  {
+   "difficulty": "easy",
+   "prompt": "Make an easy sokoban level.",
+   "status": "FULLY_VALIDATED",
+   "seconds": 1.13,
+   "attempts": 3,
+   "solution_length": 9,
+   "score": 4.5,
+   "engine_replay_won": true
+  },
+  {
+   "difficulty": "medium",
+   "prompt": "A medium level with two boxes.",
+   "status": "STRUCTURALLY_VALID",
+   "seconds": 2.94,
+   "attempts": 12,
+   "solution_length": 0,
+   "score": null,
+   "engine_replay_won": null
+  },
+  {
+   "difficulty": "hard",
+   "prompt": "Create a hard level that needs careful planning with several boxes.",
+   "status": "FULLY_VALIDATED",
+   "seconds": 6.16,
+   "attempts": 1,
+   "solution_length": 29,
+   "score": 13.9,
+   "engine_replay_won": true
+  },
+  {
+   "difficulty": "easy",
+   "prompt": "A simple level about pushing one box.",
+   "status": "FULLY_VALIDATED",
+   "seconds": 1.49,
+   "attempts": 4,
+   "solution_length": 15,
+   "score": 3.9,
+   "engine_replay_won": true
+  },
+  {
+   "difficulty": "medium",
+   "prompt": "Create a moderate level about pushing several boxes.",
+   "status": "FULLY_VALIDATED",
+   "seconds": 1.03,
+   "attempts": 2,
+   "solution_length": 23,
+   "score": 9.8,
+   "engine_replay_won": true
+  },
+  {
+   "difficulty": "hard",
+   "prompt": "A difficult level with three boxes.",
+   "status": "FULLY_VALIDATED",
+   "seconds": 6.04,
+   "attempts": 1,
+   "solution_length": 15,
+   "score": 12.7,
+   "engine_replay_won": true
+  },
+  {
+   "difficulty": "easy",
+   "prompt": "Beginner level with a crate.",
+   "status": "FULLY_VALIDATED",
+   "seconds": 0.67,
+   "attempts": 1,
+   "solution_length": 5,
+   "score": 4.5,
+   "engine_replay_won": true
+  },
+  {
+   "difficulty": "medium",
+   "prompt": "Medium sokoban level.",
+   "status": "FULLY_VALIDATED",
+   "seconds": 0.69,
+   "attempts": 1,
+   "solution_length": 20,
+   "score": 8.0,
+   "engine_replay_won": true
+  },
+  {
+   "difficulty": "hard",
+   "prompt": "Hard sokoban puzzle.",
+   "status": "FULLY_VALIDATED",
+   "seconds": 6.36,
+   "attempts": 1,
+   "solution_length": 17,
+   "score": 12.5,
+   "engine_replay_won": true
+  },
+  {
+   "difficulty": "easy",
+   "prompt": "Make an easy sokoban level.",
+   "status": "FULLY_VALIDATED",
+   "seconds": 0.74,
+   "attempts": 1,
+   "solution_length": 5,
+   "score": 4.3,
+   "engine_replay_won": true
+  },
+  {
+   "difficulty": "medium",
+   "prompt": "A medium level with two boxes.",
+   "status": "FULLY_VALIDATED",
+   "seconds": 0.98,
+   "attempts": 2,
+   "solution_length": 30,
+   "score": 9.6,
+   "engine_replay_won": true
+  },
+  {
+   "difficulty": "hard",
+   "prompt": "Create a hard level that needs careful planning with several boxes.",
+   "status": "FULLY_VALIDATED",
+   "seconds": 6.36,
+   "attempts": 1,
+   "solution_length": 27,
+   "score": 14.2,
+   "engine_replay_won": true
+  },
+  {
+   "difficulty": "easy",
+   "prompt": "A simple level about pushing one box.",
+   "status": "FULLY_VALIDATED",
+   "seconds": 0.64,
+   "attempts": 1,
+   "solution_length": 14,
+   "score": 5.8,
+   "engine_replay_won": true
+  },
+  {
+   "difficulty": "medium",
+   "prompt": "Create a moderate level about pushing several boxes.",
+   "status": "FULLY_VALIDATED",
+   "seconds": 1.6,
+   "attempts": 5,
+   "solution_length": 9,
+   "score": 9.1,
+   "engine_replay_won": true
+  },
+  {
+   "difficulty": "hard",
+   "prompt": "A difficult level with three boxes.",
+   "status": "FULLY_VALIDATED",
+   "seconds": 5.92,
+   "attempts": 1,
+   "solution_length": 29,
+   "score": 13.4,
+   "engine_replay_won": true
+  },
+  {
+   "difficulty": "easy",
+   "prompt": "Beginner level with a crate.",
+   "status": "FULLY_VALIDATED",
+   "seconds": 0.74,
+   "attempts": 1,
+   "solution_length": 3,
+   "score": 3.4,
+   "engine_replay_won": true
+  },
+  {
+   "difficulty": "medium",
+   "prompt": "Medium sokoban level.",
+   "status": "FULLY_VALIDATED",
+   "seconds": 1.26,
+   "attempts": 3,
+   "solution_length": 16,
+   "score": 7.4,
+   "engine_replay_won": true
+  },
+  {
+   "difficulty": "hard",
+   "prompt": "Hard sokoban puzzle.",
+   "status": "FULLY_VALIDATED",
+   "seconds": 6.3,
+   "attempts": 1,
+   "solution_length": 23,
+   "score": 13.3,
+   "engine_replay_won": true
+  },
+  {
+   "difficulty": "easy",
+   "prompt": "Make an easy sokoban level.",
+   "status": "FULLY_VALIDATED",
+   "seconds": 0.75,
+   "attempts": 1,
+   "solution_length": 2,
+   "score": 2.8,
+   "engine_replay_won": true
+  },
+  {
+   "difficulty": "medium",
+   "prompt": "A medium level with two boxes.",
+   "status": "FULLY_VALIDATED",
+   "seconds": 0.71,
+   "attempts": 1,
+   "solution_length": 15,
+   "score": 9.3,
+   "engine_replay_won": true
+  },
+  {
+   "difficulty": "hard",
+   "prompt": "Create a hard level that needs careful planning with several boxes.",
+   "status": "FULLY_VALIDATED",
+   "seconds": 6.21,
+   "attempts": 1,
+   "solution_length": 33,
+   "score": 15.0,
+   "engine_replay_won": true
+  },
+  {
+   "difficulty": "easy",
+   "prompt": "A simple level about pushing one box.",
+   "status": "FULLY_VALIDATED",
+   "seconds": 0.69,
+   "attempts": 1,
+   "solution_length": 11,
+   "score": 5.9,
+   "engine_replay_won": true
+  },
+  {
+   "difficulty": "medium",
+   "prompt": "Create a moderate level about pushing several boxes.",
+   "status": "FULLY_VALIDATED",
+   "seconds": 1.01,
+   "attempts": 2,
+   "solution_length": 16,
+   "score": 6.8,
+   "engine_replay_won": true
+  },
+  {
+   "difficulty": "hard",
+   "prompt": "A difficult level with three boxes.",
+   "status": "FULLY_VALIDATED",
+   "seconds": 6.1,
+   "attempts": 1,
+   "solution_length": 31,
+   "score": 13.5,
+   "engine_replay_won": true
+  },
+  {
+   "difficulty": "easy",
+   "prompt": "Beginner level with a crate.",
+   "status": "FULLY_VALIDATED",
+   "seconds": 1.41,
+   "attempts": 4,
+   "solution_length": 5,
+   "score": 3.7,
+   "engine_replay_won": true
+  },
+  {
+   "difficulty": "medium",
+   "prompt": "Medium sokoban level.",
+   "status": "FULLY_VALIDATED",
+   "seconds": 2.5,
+   "attempts": 8,
+   "solution_length": 22,
+   "score": 8.4,
+   "engine_replay_won": true
+  },
+  {
+   "difficulty": "hard",
+   "prompt": "Hard sokoban puzzle.",
+   "status": "FULLY_VALIDATED",
+   "seconds": 6.37,
+   "attempts": 1,
+   "solution_length": 45,
+   "score": 20.8,
+   "engine_replay_won": true
+  },
+  {
+   "difficulty": "easy",
+   "prompt": "Make an easy sokoban level.",
+   "status": "FULLY_VALIDATED",
+   "seconds": 1.05,
+   "attempts": 2,
+   "solution_length": 2,
+   "score": 4.4,
+   "engine_replay_won": true
+  },
+  {
+   "difficulty": "medium",
+   "prompt": "A medium level with two boxes.",
+   "status": "FULLY_VALIDATED",
+   "seconds": 1.05,
+   "attempts": 2,
+   "solution_length": 9,
+   "score": 5.8,
+   "engine_replay_won": true
+  },
+  {
+   "difficulty": "hard",
+   "prompt": "Create a hard level that needs careful planning with several boxes.",
+   "status": "FULLY_VALIDATED",
+   "seconds": 5.98,
+   "attempts": 1,
+   "solution_length": 15,
+   "score": 12.2,
+   "engine_replay_won": true
+  },
+  {
+   "difficulty": "easy",
+   "prompt": "A simple level about pushing one box.",
+   "status": "FULLY_VALIDATED",
+   "seconds": 0.97,
+   "attempts": 2,
+   "solution_length": 6,
+   "score": 5.1,
+   "engine_replay_won": true
+  },
+  {
+   "difficulty": "medium",
+   "prompt": "Create a moderate level about pushing several boxes.",
+   "status": "STRUCTURALLY_VALID",
+   "seconds": 3.01,
+   "attempts": 12,
+   "solution_length": 0,
+   "score": null,
+   "engine_replay_won": null
+  },
+  {
+   "difficulty": "hard",
+   "prompt": "A difficult level with three boxes.",
+   "status": "FULLY_VALIDATED",
+   "seconds": 6.05,
+   "attempts": 1,
+   "solution_length": 30,
+   "score": 13.7,
+   "engine_replay_won": true
+  },
+  {
+   "difficulty": "easy",
+   "prompt": "Beginner level with a crate.",
+   "status": "FULLY_VALIDATED",
+   "seconds": 1.16,
+   "attempts": 3,
+   "solution_length": 7,
+   "score": 3.7,
+   "engine_replay_won": true
+  },
+  {
+   "difficulty": "medium",
+   "prompt": "Medium sokoban level.",
+   "status": "FULLY_VALIDATED",
+   "seconds": 0.76,
+   "attempts": 1,
+   "solution_length": 11,
+   "score": 7.4,
+   "engine_replay_won": true
+  },
+  {
+   "difficulty": "hard",
+   "prompt": "Hard sokoban puzzle.",
+   "status": "FULLY_VALIDATED",
+   "seconds": 6.24,
+   "attempts": 1,
+   "solution_length": 36,
+   "score": 13.1,
+   "engine_replay_won": true
+  },
+  {
+   "difficulty": "easy",
+   "prompt": "Make an easy sokoban level.",
+   "status": "FULLY_VALIDATED",
+   "seconds": 1.34,
+   "attempts": 3,
+   "solution_length": 11,
+   "score": 2.5,
+   "engine_replay_won": true
+  },
+  {
+   "difficulty": "medium",
+   "prompt": "A medium level with two boxes.",
+   "status": "FULLY_VALIDATED",
+   "seconds": 0.72,
+   "attempts": 1,
+   "solution_length": 5,
+   "score": 5.4,
+   "engine_replay_won": true
+  },
+  {
+   "difficulty": "hard",
+   "prompt": "Create a hard level that needs careful planning with several boxes.",
+   "status": "FULLY_VALIDATED",
+   "seconds": 6.1,
+   "attempts": 1,
+   "solution_length": 21,
+   "score": 12.6,
+   "engine_replay_won": true
+  },
+  {
+   "difficulty": "easy",
+   "prompt": "A simple level about pushing one box.",
+   "status": "FULLY_VALIDATED",
+   "seconds": 1.04,
+   "attempts": 2,
+   "solution_length": 5,
+   "score": 2.5,
+   "engine_replay_won": true
+  },
+  {
+   "difficulty": "medium",
+   "prompt": "Create a moderate level about pushing several boxes.",
+   "status": "FULLY_VALIDATED",
+   "seconds": 2.29,
+   "attempts": 7,
+   "solution_length": 7,
+   "score": 6.0,
+   "engine_replay_won": true
+  },
+  {
+   "difficulty": "hard",
+   "prompt": "A difficult level with three boxes.",
+   "status": "FULLY_VALIDATED",
+   "seconds": 6.17,
+   "attempts": 1,
+   "solution_length": 30,
+   "score": 13.4,
+   "engine_replay_won": true
+  },
+  {
+   "difficulty": "easy",
+   "prompt": "Beginner level with a crate.",
+   "status": "FULLY_VALIDATED",
+   "seconds": 0.96,
+   "attempts": 2,
+   "solution_length": 7,
+   "score": 5.4,
+   "engine_replay_won": true
+  },
+  {
+   "difficulty": "medium",
+   "prompt": "Medium sokoban level.",
+   "status": "FULLY_VALIDATED",
+   "seconds": 2.27,
+   "attempts": 8,
+   "solution_length": 12,
+   "score": 5.7,
+   "engine_replay_won": true
+  },
+  {
+   "difficulty": "hard",
+   "prompt": "Hard sokoban puzzle.",
+   "status": "FULLY_VALIDATED",
+   "seconds": 6.11,
+   "attempts": 1,
+   "solution_length": 41,
+   "score": 22.5,
+   "engine_replay_won": true
+  },
+  {
+   "difficulty": "easy",
+   "prompt": "Make an easy sokoban level.",
+   "status": "FULLY_VALIDATED",
+   "seconds": 0.95,
+   "attempts": 2,
+   "solution_length": 9,
+   "score": 5.2,
+   "engine_replay_won": true
+  },
+  {
+   "difficulty": "medium",
+   "prompt": "A medium level with two boxes.",
+   "status": "FULLY_VALIDATED",
+   "seconds": 0.8,
+   "attempts": 1,
+   "solution_length": 23,
+   "score": 6.5,
+   "engine_replay_won": true
+  },
+  {
+   "difficulty": "hard",
+   "prompt": "Create a hard level that needs careful planning with several boxes.",
+   "status": "FULLY_VALIDATED",
+   "seconds": 5.96,
+   "attempts": 1,
+   "solution_length": 34,
+   "score": 19.2,
+   "engine_replay_won": true
+  },
+  {
+   "difficulty": "easy",
+   "prompt": "A simple level about pushing one box.",
+   "status": "FULLY_VALIDATED",
+   "seconds": 0.73,
+   "attempts": 1,
+   "solution_length": 6,
+   "score": 3.8,
+   "engine_replay_won": true
+  },
+  {
+   "difficulty": "medium",
+   "prompt": "Create a moderate level about pushing several boxes.",
+   "status": "FULLY_VALIDATED",
+   "seconds": 0.76,
+   "attempts": 1,
+   "solution_length": 18,
+   "score": 8.3,
+   "engine_replay_won": true
+  },
+  {
+   "difficulty": "hard",
+   "prompt": "A difficult level with three boxes.",
+   "status": "FULLY_VALIDATED",
+   "seconds": 6.37,
+   "attempts": 1,
+   "solution_length": 19,
+   "score": 13.8,
+   "engine_replay_won": true
+  },
+  {
+   "difficulty": "easy",
+   "prompt": "Beginner level with a crate.",
+   "status": "FULLY_VALIDATED",
+   "seconds": 0.89,
+   "attempts": 2,
+   "solution_length": 9,
+   "score": 3.5,
+   "engine_replay_won": true
+  },
+  {
+   "difficulty": "medium",
+   "prompt": "Medium sokoban level.",
+   "status": "FULLY_VALIDATED",
+   "seconds": 1.12,
+   "attempts": 3,
+   "solution_length": 5,
+   "score": 5.8,
+   "engine_replay_won": true
+  },
+  {
+   "difficulty": "hard",
+   "prompt": "Hard sokoban puzzle.",
+   "status": "FULLY_VALIDATED",
+   "seconds": 6.03,
+   "attempts": 1,
+   "solution_length": 27,
+   "score": 13.6,
+   "engine_replay_won": true
+  },
+  {
+   "difficulty": "easy",
+   "prompt": "Make an easy sokoban level.",
+   "status": "FULLY_VALIDATED",
+   "seconds": 0.7,
+   "attempts": 1,
+   "solution_length": 8,
+   "score": 5.6,
+   "engine_replay_won": true
+  },
+  {
+   "difficulty": "medium",
+   "prompt": "A medium level with two boxes.",
+   "status": "FULLY_VALIDATED",
+   "seconds": 0.99,
+   "attempts": 2,
+   "solution_length": 8,
+   "score": 6.1,
+   "engine_replay_won": true
+  },
+  {
+   "difficulty": "hard",
+   "prompt": "Create a hard level that needs careful planning with several boxes.",
+   "status": "FULLY_VALIDATED",
+   "seconds": 5.99,
+   "attempts": 1,
+   "solution_length": 25,
+   "score": 14.0,
+   "engine_replay_won": true
+  },
+  {
+   "difficulty": "easy",
+   "prompt": "A simple level about pushing one box.",
+   "status": "FULLY_VALIDATED",
+   "seconds": 0.71,
+   "attempts": 1,
+   "solution_length": 4,
+   "score": 5.2,
+   "engine_replay_won": true
+  },
+  {
+   "difficulty": "medium",
+   "prompt": "Create a moderate level about pushing several boxes.",
+   "status": "FULLY_VALIDATED",
+   "seconds": 1.32,
+   "attempts": 3,
+   "solution_length": 17,
+   "score": 5.4,
+   "engine_replay_won": true
+  },
+  {
+   "difficulty": "hard",
+   "prompt": "A difficult level with three boxes.",
+   "status": "FULLY_VALIDATED",
+   "seconds": 6.25,
+   "attempts": 1,
+   "solution_length": 47,
+   "score": 13.7,
+   "engine_replay_won": true
+  }
+ ]
+}

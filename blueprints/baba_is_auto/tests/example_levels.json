@@ -1,0 +1,464 @@
+{
+ "note": "The game's shipped maps, most of which are unit-test fixtures rather than puzzles. 'unknown' = search bound (1.5 s) reached, not a failure.",
+ "levels": [
+  {
+   "level": "affection.txt",
+   "loader_accepts": true,
+   "schema_valid": true,
+   "solver": "unknown",
+   "proof": "bounded",
+   "solution_length": 0,
+   "states_explored": 1024
+  },
+  {
+   "level": "and_chains.txt",
+   "loader_accepts": true,
+   "schema_valid": true,
+   "solver": "unsolvable",
+   "proof": "exhaustive",
+   "solution_length": 0,
+   "states_explored": 1
+  },
+  {
+   "level": "baba_is_you.txt",
+   "loader_accepts": true,
+   "schema_valid": true,
+   "solver": "solved",
+   "proof": "witness",
+   "solution_length": 8,
+   "states_explored": 106
+  },
+  {
+   "level": "brick_wall.txt",
+   "loader_accepts": true,
+   "schema_valid": true,
+   "solver": "solved",
+   "proof": "witness",
+   "solution_length": 16,
+   "states_explored": 91744
+  },
+  {
+   "level": "conditional_defeat_snapshot.txt",
+   "loader_accepts": true,
+   "schema_valid": true,
+   "solver": "unknown",
+   "proof": "bounded",
+   "solution_length": 0,
+   "states_explored": 3328
+  },
+  {
+   "level": "conditional_empty_assigned_facing.txt",
+   "loader_accepts": true,
+   "schema_valid": true,
+   "solver": "unsolvable",
+   "proof": "exhaustive",
+   "solution_length": 0,
+   "states_explored": 1
+  },
+  {
+   "level": "conditional_empty_facing.txt",
+   "loader_accepts": true,
+   "schema_valid": true,
+   "solver": "unsolvable",
+   "proof": "exhaustive",
+   "solution_length": 0,
+   "states_explored": 1
+  },
+  {
+   "level": "conditional_empty_transformation.txt",
+   "loader_accepts": true,
+   "schema_valid": true,
+   "solver": "unsolvable",
+   "proof": "exhaustive",
+   "solution_length": 0,
+   "states_explored": 1
+  },
+  {
+   "level": "conditional_hot_melt_snapshot.txt",
+   "loader_accepts": true,
+   "schema_valid": true,
+   "solver": "unsolvable",
+   "proof": "exhaustive",
+   "solution_length": 0,
+   "states_explored": 1
+  },
+  {
+   "level": "conditional_push_scope.txt",
+   "loader_accepts": true,
+   "schema_valid": true,
+   "solver": "unsolvable",
+   "proof": "exhaustive",
+   "solution_length": 0,
+   "states_explored": 6
+  },
+  {
+   "level": "conditional_push_stop.txt",
+   "loader_accepts": true,
+   "schema_valid": true,
+   "solver": "unsolvable",
+   "proof": "exhaustive",
+   "solution_length": 0,
+   "states_explored": 34
+  },
+  {
+   "level": "conditional_sink.txt",
+   "loader_accepts": true,
+   "schema_valid": true,
+   "solver": "unsolvable",
+   "proof": "exhaustive",
+   "solution_length": 0,
+   "states_explored": 1
+  },
+  {
+   "level": "conditional_sink_snapshot.txt",
+   "loader_accepts": true,
+   "schema_valid": true,
+   "solver": "unsolvable",
+   "proof": "exhaustive",
+   "solution_length": 0,
+   "states_explored": 1
+  },
+  {
+   "level": "conditional_transformation.txt",
+   "loader_accepts": true,
+   "schema_valid": true,
+   "solver": "unsolvable",
+   "proof": "exhaustive",
+   "solution_length": 0,
+   "states_explored": 1
+  },
+  {
+   "level": "conditional_transformation_snapshot.txt",
+   "loader_accepts": true,
+   "schema_valid": true,
+   "solver": "unsolvable",
+   "proof": "exhaustive",
+   "solution_length": 0,
+   "states_explored": 1
+  },
+  {
+   "level": "conditional_you.txt",
+   "loader_accepts": true,
+   "schema_valid": true,
+   "solver": "unsolvable",
+   "proof": "exhaustive",
+   "solution_length": 0,
+   "states_explored": 3
+  },
+  {
+   "level": "defeat_push.txt",
+   "loader_accepts": true,
+   "schema_valid": true,
+   "solver": "unsolvable",
+   "proof": "exhaustive",
+   "solution_length": 0,
+   "states_explored": 3
+  },
+  {
+   "level": "directions.txt",
+   "loader_accepts": true,
+   "schema_valid": true,
+   "solver": "unsolvable",
+   "proof": "exhaustive",
+   "solution_length": 0,
+   "states_explored": 1
+  },
+  {
+   "level": "editor_smoke.txt",
+   "loader_accepts": true,
+   "schema_valid": true,
+   "solver": "solved",
+   "proof": "witness",
+   "solution_length": 6,
+   "states_explored": 38
+  },
+  {
+   "level": "empty_move_recalculation.txt",
+   "loader_accepts": true,
+   "schema_valid": true,
+   "solver": "unsolvable",
+   "proof": "exhaustive",
+   "solution_length": 0,
+   "states_explored": 1
+  },
+  {
+   "level": "empty_sink.txt",
+   "loader_accepts": true,
+   "schema_valid": true,
+   "solver": "unsolvable",
+   "proof": "exhaustive",
+   "solution_length": 0,
+   "states_explored": 18
+  },
+  {
+   "level": "grass_yard.txt",
+   "loader_accepts": true,
+   "schema_valid": true,
+   "solver": "unknown",
+   "proof": "bounded",
+   "solution_length": 0,
+   "states_explored": 512
+  },
+  {
+   "level": "has_property.txt",
+   "loader_accepts": true,
+   "schema_valid": true,
+   "solver": "unsolvable",
+   "proof": "exhaustive",
+   "solution_length": 0,
+   "states_explored": 1
+  },
+  {
+   "level": "icy_waters.txt",
+   "loader_accepts": true,
+   "schema_valid": true,
+   "solver": "unknown",
+   "proof": "bounded",
+   "solution_length": 0,
+   "states_explored": 768
+  },
+  {
+   "level": "invalid_directions.txt",
+   "loader_accepts": false,
+   "schema_valid": false,
+   "solver": "n/a",
+   "proof": null,
+   "solution_length": null,
+   "states_explored": null
+  },
+  {
+   "level": "layered_map.txt",
+   "loader_accepts": true,
+   "schema_valid": true,
+   "solver": "unsolvable",
+   "proof": "exhaustive",
+   "solution_length": 0,
+   "states_explored": 12
+  },
+  {
+   "level": "layered_movement.txt",
+   "loader_accepts": true,
+   "schema_valid": true,
+   "solver": "unsolvable",
+   "proof": "exhaustive",
+   "solution_length": 0,
+   "states_explored": 1390
+  },
+  {
+   "level": "lock.txt",
+   "loader_accepts": true,
+   "schema_valid": true,
+   "solver": "unknown",
+   "proof": "bounded",
+   "solution_length": 0,
+   "states_explored": 768
+  },
+  {
+   "level": "locked_you.txt",
+   "loader_accepts": true,
+   "schema_valid": true,
+   "solver": "unsolvable",
+   "proof": "exhaustive",
+   "solution_length": 0,
+   "states_explored": 7
+  },
+  {
+   "level": "move_all_condition.txt",
+   "loader_accepts": true,
+   "schema_valid": true,
+   "solver": "unsolvable",
+   "proof": "exhaustive",
+   "solution_length": 0,
+   "states_explored": 1
+  },
+  {
+   "level": "move_conditions.txt",
+   "loader_accepts": true,
+   "schema_valid": true,
+   "solver": "unsolvable",
+   "proof": "exhaustive",
+   "solution_length": 0,
+   "states_explored": 1
+  },
+  {
+   "level": "move_order.txt",
+   "loader_accepts": true,
+   "schema_valid": true,
+   "solver": "unknown",
+   "proof": "bounded",
+   "solution_length": 0,
+   "states_explored": 2560
+  },
+  {
+   "level": "move_priority.txt",
+   "loader_accepts": true,
+   "schema_valid": true,
+   "solver": "unsolvable",
+   "proof": "exhaustive",
+   "solution_length": 0,
+   "states_explored": 1
+  },
+  {
+   "level": "move_rule_priority.txt",
+   "loader_accepts": true,
+   "schema_valid": true,
+   "solver": "unsolvable",
+   "proof": "exhaustive",
+   "solution_length": 0,
+   "states_explored": 1
+  },
+  {
+   "level": "move_rules.txt",
+   "loader_accepts": true,
+   "schema_valid": true,
+   "solver": "unknown",
+   "proof": "bounded",
+   "solution_length": 0,
+   "states_explored": 512
+  },
+  {
+   "level": "move_special_conditions.txt",
+   "loader_accepts": true,
+   "schema_valid": true,
+   "solver": "unsolvable",
+   "proof": "exhaustive",
+   "solution_length": 0,
+   "states_explored": 1
+  },
+  {
+   "level": "novice_locksmith.txt",
+   "loader_accepts": true,
+   "schema_valid": true,
+   "solver": "unknown",
+   "proof": "bounded",
+   "solution_length": 0,
+   "states_explored": 512
+  },
+  {
+   "level": "off_limits.txt",
+   "loader_accepts": true,
+   "schema_valid": true,
+   "solver": "unknown",
+   "proof": "bounded",
+   "solution_length": 0,
+   "states_explored": 512
+  },
+  {
+   "level": "off_limits_bug.txt",
+   "loader_accepts": true,
+   "schema_valid": true,
+   "solver": "solved",
+   "proof": "witness",
+   "solution_length": 2,
+   "states_explored": 9
+  },
+  {
+   "level": "out_of_reach.txt",
+   "loader_accepts": true,
+   "schema_valid": true,
+   "solver": "unknown",
+   "proof": "bounded",
+   "solution_length": 0,
+   "states_explored": 512
+  },
+  {
+   "level": "pillar_yard.txt",
+   "loader_accepts": true,
+   "schema_valid": true,
+   "solver": "unknown",
+   "proof": "bounded",
+   "solution_length": 0,
+   "states_explored": 256
+  },
+  {
+   "level": "rule_language_examples.txt",
+   "loader_accepts": true,
+   "schema_valid": true,
+   "solver": "unsolvable",
+   "proof": "exhaustive",
+   "solution_length": 0,
+   "states_explored": 5
+  },
+  {
+   "level": "simple_map.txt",
+   "loader_accepts": true,
+   "schema_valid": true,
+   "solver": "unsolvable",
+   "proof": "exhaustive",
+   "solution_length": 0,
+   "states_explored": 9
+  },
+  {
+   "level": "sink_rule_reparse.txt",
+   "loader_accepts": true,
+   "schema_valid": true,
+   "solver": "unsolvable",
+   "proof": "exhaustive",
+   "solution_length": 0,
+   "states_explored": 27
+  },
+  {
+   "level": "sink_rule_timing.txt",
+   "loader_accepts": true,
+   "schema_valid": true,
+   "solver": "unsolvable",
+   "proof": "exhaustive",
+   "solution_length": 0,
+   "states_explored": 210
+  },
+  {
+   "level": "special_transformations.txt",
+   "loader_accepts": true,
+   "schema_valid": true,
+   "solver": "unsolvable",
+   "proof": "exhaustive",
+   "solution_length": 0,
+   "states_explored": 1
+  },
+  {
+   "level": "stacked_push.txt",
+   "loader_accepts": true,
+   "schema_valid": true,
+   "solver": "unsolvable",
+   "proof": "exhaustive",
+   "solution_length": 0,
+   "states_explored": 15357
+  },
+  {
+   "level": "transformation_timing.txt",
+   "loader_accepts": true,
+   "schema_valid": true,
+   "solver": "unsolvable",
+   "proof": "exhaustive",
+   "solution_length": 0,
+   "states_explored": 8
+  },
+  {
+   "level": "transformations.txt",
+   "loader_accepts": true,
+   "schema_valid": true,
+   "solver": "unknown",
+   "proof": "bounded",
+   "solution_length": 0,
+   "states_explored": 512
+  },
+  {
+   "level": "turns.txt",
+   "loader_accepts": true,
+   "schema_valid": true,
+   "solver": "unknown",
+   "proof": "bounded",
+   "solution_length": 0,
+   "states_explored": 256
+  },
+  {
+   "level": "volcano.txt",
+   "loader_accepts": true,
+   "schema_valid": true,
+   "solver": "unknown",
+   "proof": "bounded",
+   "solution_length": 0,
+   "states_explored": 256
+  }
+ ]
+}

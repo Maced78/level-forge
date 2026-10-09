@@ -1,0 +1,239 @@
+{
+ "request": "Make an easy sokoban level.",
+ "game": "sokoban_sg",
+ "seed": 617060,
+ "spec": {
+  "raw": "Make an easy sokoban level.",
+  "difficulty": "easy",
+  "skills_required": [
+   "box_pushing"
+  ],
+  "skills_forbidden": [],
+  "unsupported_requested": [],
+  "foreign_requested": [],
+  "outside_vocabulary": [],
+  "dependencies": [],
+  "defaults_applied": [],
+  "constraints": {}
+ },
+ "attempts": [
+  {
+   "attempt": 1,
+   "proposer": "constraint-based planner",
+   "plan": "7x6 room, 1 box(es), 1 goal(s), 2 inner wall(s)",
+   "status": "UNVERIFIED",
+   "reasons": [
+    "structural: loader.engine_accepts"
+   ],
+   "size": "7x6",
+   "difficulty_score": null,
+   "verify_seconds": 0.16
+  },
+  {
+   "attempt": 2,
+   "proposer": "constraint-based planner",
+   "plan": "7x6 room, 1 box(es), 1 goal(s), 1 inner wall(s)",
+   "status": "UNVERIFIED",
+   "reasons": [
+    "structural: loader.engine_accepts"
+   ],
+   "size": "7x6",
+   "difficulty_score": null,
+   "verify_seconds": 0.11
+  },
+  {
+   "attempt": 3,
+   "proposer": "constraint-based planner",
+   "plan": "7x6 room, 1 box(es), 1 goal(s), 1 inner wall(s)",
+   "status": "UNVERIFIED",
+   "reasons": [
+    "structural: loader.engine_accepts"
+   ],
+   "size": "7x6",
+   "difficulty_score": null,
+   "verify_seconds": 0.12
+  },
+  {
+   "attempt": 4,
+   "proposer": "constraint-based planner",
+   "plan": "7x6 room, 1 box(es), 1 goal(s), 1 inner wall(s)",
+   "status": "UNVERIFIED",
+   "reasons": [
+    "structural: loader.engine_accepts"
+   ],
+   "size": "7x6",
+   "difficulty_score": null,
+   "verify_seconds": 0.11
+  },
+  {
+   "attempt": 5,
+   "proposer": "constraint-based planner",
+   "plan": "7x6 room, 1 box(es), 1 goal(s), 2 inner wall(s)",
+   "status": "UNVERIFIED",
+   "reasons": [
+    "structural: loader.engine_accepts"
+   ],
+   "size": "7x6",
+   "difficulty_score": null,
+   "verify_seconds": 0.16
+  },
+  {
+   "attempt": 6,
+   "proposer": "constraint-based planner",
+   "plan": "7x6 room, 1 box(es), 1 goal(s), 3 inner wall(s)",
+   "status": "UNVERIFIED",
+   "reasons": [
+    "structural: loader.engine_accepts"
+   ],
+   "size": "7x6",
+   "difficulty_score": null,
+   "verify_seconds": 0.11
+  },
+  {
+   "attempt": 7,
+   "proposer": "constraint-based planner",
+   "plan": "7x6 room, 1 box(es), 1 goal(s), 2 inner wall(s)",
+   "status": "UNVERIFIED",
+   "reasons": [
+    "structural: loader.engine_accepts"
+   ],
+   "size": "7x6",
+   "difficulty_score": null,
+   "verify_seconds": 0.14
+  },
+  {
+   "attempt": 8,
+   "proposer": "constraint-based planner",
+   "plan": "7x6 room, 1 box(es), 1 goal(s), 3 inner wall(s)",
+   "status": "UNVERIFIED",
+   "reasons": [
+    "structural: loader.engine_accepts"
+   ],
+   "size": "7x6",
+   "difficulty_score": null,
+   "verify_seconds": 0.11
+  },
+  {
+   "attempt": 9,
+   "proposer": "constraint-based planner",
+   "plan": "7x6 room, 1 box(es), 1 goal(s), 3 inner wall(s)",
+   "status": "UNVERIFIED",
+   "reasons": [
+    "structural: loader.engine_accepts"
+   ],
+   "size": "7x6",
+   "difficulty_score": null,
+   "verify_seconds": 0.11
+  },
+  {
+   "attempt": 10,
+   "proposer": "constraint-based planner",
+   "plan": "7x6 room, 1 box(es), 1 goal(s), 3 inner wall(s)",
+   "status": "UNVERIFIED",
+   "reasons": [
+    "structural: loader.engine_accepts"
+   ],
+   "size": "6x7",
+   "difficulty_score": null,
+   "verify_seconds": 0.12
+  }
+ ],
+ "ai": {
+  "mode": "replay",
+  "intent_source": "keyword parser",
+  "errors": [
+   "intent: no LLM key configured and no cached answer for this prompt",
+   "proposals: no LLM key configured and no cached answer for this prompt"
+  ],
+  "proposals": [],
+  "proposals_fully_validated": 0,
+  "usage": {
+   "calls": 0,
+   "live_calls": 0,
+   "models": [],
+   "seconds": 0,
+   "prompt_tokens": 0,
+   "output_tokens": 0,
+   "total_tokens": 0,
+   "replayed_from_cache": false,
+   "by_step": []
+  }
+ },
+ "blueprint_version": "0.1.0",
+ "game_commit": "69c7b5c8f8a8190a7e9c8bdaaa1771d13dfa9274",
+ "status": "UNVERIFIED",
+ "width": 7,
+ "height": 6,
+ "dsl": "+ + + + + + +\n+ - - - X - +\n+ - - + @ - +\n+ - - - - + +\n+ - - - * - +\n+ + + + + + +",
+ "native": "+ + + + + + +\n+ - - - X - +\n+ - - + @ - +\n+ - - - - + +\n+ - - - * - +\n+ + + + + + +\n",
+ "design_notes": {
+  "plan": "7x6 room, 1 box(es), 1 goal(s), 2 inner wall(s)",
+  "notes": []
+ },
+ "verification": {
+  "status": "UNVERIFIED",
+  "levels": {
+   "structural": {
+    "passed": false,
+    "checks": [
+     {
+      "check": "syntax.rectangular",
+      "passed": true,
+      "detail": "6 rows"
+     },
+     {
+      "check": "syntax.tokens",
+      "passed": true,
+      "detail": "all tokens are in the engine's alphabet + - @ X * $ %"
+     },
+     {
+      "check": "schema.size",
+      "passed": true,
+      "detail": "7x6; the engine's 1216x640 window holds 17x10 cells of puzzle"
+     },
+     {
+      "check": "playable.one_player",
+      "passed": true,
+      "detail": "1 player token(s)"
+     },
+     {
+      "check": "invariant.closed_border",
+      "passed": true,
+      "detail": "outer ring is all walls"
+     },
+     {
+      "check": "invariant.boxes_not_more_than_goals",
+      "passed": true,
+      "detail": "1 boxes, 1 goals; the engine wins only when no box is off a goal"
+     },
+     {
+      "check": "playable.not_solved_at_start",
+      "passed": true,
+      "detail": "at least one box starts off a goal"
+     },
+     {
+      "check": "loader.engine_accepts",
+      "passed": false,
+      "detail": "engine: ModuleNotFoundError: No module named 'pygame_widgets'"
+     }
+    ],
+    "warnings": []
+   }
+  },
+  "reasons": [
+   "structural: loader.engine_accepts"
+  ],
+  "skills": {},
+  "initial_rules": [
+   "1 boxes",
+   "1 goals"
+  ],
+  "verify_seconds": 0.16
+ },
+ "solution": null,
+ "unmet_requirements": [
+  "structural: loader.engine_accepts"
+ ],
+ "elapsed_seconds": 1.25,
+ "delivered_from": "constraint-based planner"
+}

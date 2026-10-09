@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Level-Forge</title>
+<style>
+:root{
+  --bg:#0f1117; --panel:#171a23; --panel2:#1e222e; --line:#2b3040; --ink:#e7e9ef; --dim:#8f96a8;
+  --accent:#f2c14e; --ok:#57c785; --bad:#ef6f6c; --warn:#f2a65a; --info:#6cb6ff; --pink:#e5609c;
+  --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+header{display:flex;align-items:center;gap:14px;padding:14px 22px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+h1{font:700 17px var(--mono);margin:0;letter-spacing:.02em}
+h1 b{color:var(--accent)}
+.chip{font:12px var(--mono);padding:3px 9px;border:1px solid var(--line);border-radius:99px;color:var(--dim);white-space:nowrap}
+.chip.ok{color:var(--ok);border-color:#2c5a43}.chip.bad{color:var(--bad);border-color:#6b3534}
+nav{margin-left:auto;display:flex;gap:4px}
+nav button{background:none;border:0;color:var(--dim);font:600 13px system-ui;padding:7px 13px;border-radius:7px;cursor:pointer}
+nav button.on{background:var(--panel2);color:var(--ink)}
+main{padding:20px 22px;max-width:1400px;margin:0 auto}
+.tab{display:none}.tab.on{display:block}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px;margin-bottom:16px}
+.card h2{font:600 12px var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--dim);margin:0 0 10px}
+textarea,input[type=text]{width:100%;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font:14px/1.45 system-ui;resize:vertical}
+textarea:focus,input:focus{outline:2px solid #3b4a72;border-color:#3b4a72}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+button.go{background:var(--accent);color:#1b1500;border:0;font:700 14px system-ui;padding:10px 20px;border-radius:8px;cursor:pointer}
+button.go:disabled{opacity:.5;cursor:wait}
+button.sec{background:var(--panel2);color:var(--ink);border:1px solid var(--line);font:600 12.5px system-ui;padding:7px 12px;border-radius:7px;cursor:pointer}
+button.sec:hover{border-color:#47506a}
+.examples{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 12px}
+.examples button{background:none;border:1px dashed var(--line);color:var(--dim);font:12.5px system-ui;padding:5px 10px;border-radius:7px;cursor:pointer;text-align:left}
+.examples button:hover{color:var(--ink);border-color:#47506a}
+.examples button.x{border-color:#5c3a3a}
+.grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:16px}
+@media(max-width:980px){.grid{grid-template-columns:1fr}}
+canvas{width:100%;height:auto;display:block;border-radius:8px;background:#0a0b10;image-rendering:auto}
+.play{display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap}
+.play input[type=range]{flex:1;min-width:120px;accent-color:var(--accent)}
+.mono{font-family:var(--mono)}
+.moves{font:13px var(--mono);word-break:break-all;color:var(--dim);margin-top:8px}
+.moves b{color:var(--accent)}
+.rules{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;min-height:28px}
+.rule{font:600 12px var(--mono);padding:3px 8px;border-radius:6px;background:var(--panel2);border:1px solid var(--line)}
+.rule.new{border-color:var(--ok);color:var(--ok)}
+.badge{display:inline-block;font:700 13px var(--mono);padding:6px 12px;border-radius:7px;letter-spacing:.03em}
+.b-FULLY_VALIDATED{background:#17402c;color:#8ff0b8}.b-PROVEN_SOLVABLE{background:#173450;color:#9fd0ff}
+.b-STRUCTURALLY_VALID{background:#4a3a14;color:#ffd98a}.b-UNVERIFIED,.b-FAILED{background:#3a3d48;color:#c6cad6}
+.b-REJECTED_CONTRADICTION{background:#4d2020;color:#ffb1ae}
+.ladder{display:flex;gap:4px;margin:12px 0 4px}
+.ladder div{flex:1;height:5px;border-radius:3px;background:var(--line)}
+.ladder div.on{background:var(--ok)}
+.ladder-l{display:flex;font:10.5px var(--mono);color:var(--dim);gap:4px}.ladder-l span{flex:1}
+.lvl{display:flex;gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.lvl:first-of-type{border-top:0}
+.dot{flex:none;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font:700 12px var(--mono);margin-top:1px}
+.dot.p{background:#1c4a33;color:var(--ok)}.dot.f{background:#532423;color:var(--bad)}.dot.u{background:#3a3d48;color:var(--dim)}
+.lvl b{display:block;font-size:13.5px}.lvl small{color:var(--dim);font-size:12.5px;display:block}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;font:600 11px var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--dim);padding:6px 8px;border-bottom:1px solid var(--line)}
+td{padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+td.num,th.num{text-align:right;font-family:var(--mono)}
+.tag{font:600 11px var(--mono);padding:2px 7px;border-radius:5px;white-space:nowrap}
+.t-ok{background:#1c4a33;color:var(--ok)}.t-bad{background:#532423;color:var(--bad)}.t-warn{background:#4a3a14;color:#ffd98a}.t-dim{background:#2a2e3a;color:var(--dim)}
+details{margin-top:8px}summary{cursor:pointer;color:var(--dim);font-size:12.5px}
+pre{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px;overflow:auto;font:12px/1.45 var(--mono);max-height:340px;margin:8px 0 0}
+.md{white-space:pre-wrap;font:12.5px/1.55 var(--mono);max-height:520px}
+.hint{color:var(--dim);font-size:12.5px}
+.contra{border-left:3px solid var(--bad);padding:4px 0 4px 12px;margin:12px 0}
+.contra h3{margin:0 0 4px;font:700 13px var(--mono);color:var(--bad)}
+.chain{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:8px 0;font:12px var(--mono)}
+.chain span{background:var(--panel2);border:1px solid var(--line);padding:3px 7px;border-radius:5px}
+.chain i{color:var(--bad);font-style:normal}
+ul.sug{margin:6px 0 0;padding-left:18px;color:var(--ink)}
+.kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.kpi div{background:var(--panel2);border-radius:8px;padding:10px 12px}
+.kpi b{display:block;font:700 20px var(--mono)}.kpi span{color:var(--dim);font-size:12px}
+.spin{display:inline-block;width:14px;height:14px;border:2px solid #1b1500;border-top-color:transparent;border-radius:50%;animation:s .7s linear infinite;vertical-align:-2px;margin-right:6px}
+@keyframes s{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion: reduce){.spin{animation:none}}
+</style>
+</head>
+<body>
+<div id="testbar" style="display:none;background:#3a2f10;color:#ffd98a;border-bottom:1px solid #6b5514;padding:8px 18px;font:13.5px system-ui"></div>
+<header>
+  <h1><b>Level</b>-Forge</h1>
+  <span class="chip" id="c-game">game: …</span>
+  <span class="chip" id="c-bp">blueprint: …</span>
+  <span class="chip" id="c-engine">engine: …</span>
+  <nav>
+    <button data-t="gen" class="on">Generate</button>
+    <button data-t="bp">Blueprint</button>
+    <button data-t="bench">Benchmark</button>
+  </nav>
+</header>
+<main>
+
+<section class="tab on" id="t-gen">
+  <div class="card">
+    <h2>Level request (Agent 2)</h2>
+    <textarea id="req" rows="3" placeholder="Describe the level you want…"></textarea>
+    <div class="examples" id="examples"></div>
+    <div class="row">
+      <button class="go" id="go">Generate &amp; verify</button>
+      <select id="game" style="background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:9px 10px;font:14px system-ui"><option value="baba_is_auto">Game: Baba Is You engine (baba-is-auto)</option><option value="sokoban_sg">Game: Sokoban (sokoban-solver-generator)</option></select>
+      <input type="text" id="seed" placeholder="seed (optional)" style="width:150px">
+      <span class="hint" id="timing"></span>
+    </div>
+    <details><summary>Or verify a level written by hand / proposed by an LLM</summary>
+      <p class="hint">One row per line, cells separated by spaces. UPPERCASE = text tile, lowercase = object, <span class="mono">.</span> = empty, <span class="mono">a+b</span> = stacked.</p>
+      <textarea id="dsl" rows="7" class="mono" spellcheck="false">BABA IS YOU . . .
+. . . . . .
+. baba . FLAG IS .
+. . . . . WIN
+. . flag . . .</textarea>
+      <div class="row" style="margin-top:8px"><button class="sec" id="verify">Verify this level</button></div>
+    </details>
+  </div>
+  <div id="result"></div>
+</section>
+
+<section class="tab" id="t-bp"><div id="bp"></div></section>
+<section class="tab" id="t-bench"><div id="bench"></div></section>
+</main>
+
+<script>
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const EXAMPLES = [
+  ["Create a difficult level that tests the player's ability to manipulate rules, use object pushing strategically, and reason about changing win conditions. Make it solvable, use only mechanics supported by the game, and export it as a new native level file.", 0],
+  ["Create a level that teaches the player how to manipulate the IS YOU rule.", 0],
+  ["Make an easy level about pushing rocks into water.", 0],
+  ["A medium level with skulls where the win condition changes, no object pushing.", 0],
+  ["Easy level, solvable in at most 8 moves, with a unique solution.", 0],
+  ["Create a hard level where the only rocks are behind the water and the water can only be crossed by sinking a rock in it.", 1],
+  ["Make a level with teleporters and a PULL rule.", 1],
+  ["Hard level about changing the win condition but without any rule manipulation.", 1],
+];
+$("#examples").innerHTML = EXAMPLES.map((e,i)=>`<button class="${e[1]?'x':''}" data-i="${i}">${e[1]?'⚠ ':''}${esc(e[0].length>78?e[0].slice(0,76)+'…':e[0])}</button>`).join("");
+$("#examples").onclick = e => { const b=e.target.closest("button"); if(b){ $("#req").value = EXAMPLES[b.dataset.i][0]; } };
+$("#req").value = EXAMPLES[0][0];
+document.querySelectorAll("nav button").forEach(b => b.onclick = () => {
+  document.querySelectorAll("nav button").forEach(x=>x.classList.toggle("on",x===b));
+  document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("on",t.id==="t-"+b.dataset.t));
+});
+
+/* ---------- board rendering ---------- */
+const NOUN_COL = {PLAYER:"#f4f4f8",GOAL:"#f2c14e",BABA:"#f4f4f8",KEKE:"#f08a5d",ROCK:"#c8a46a",BOX:"#c98b4e",WALL:"#7c849c",HEDGE:"#4f9d69",FLAG:"#f2c14e",STAR:"#f7e26b",LOVE:"#ef6f9c",KEY:"#f2a65a",WATER:"#4a90e2",LAVA:"#ff6b35",SKULL:"#c0392b",CRAB:"#e25c5c",TILE:"#39405a",DOOR:"#b0413e",GRASS:"#5fa55a"};
+const PROP_COL = {YOU:"#e5609c",WIN:"#f2c14e",STOP:"#4f9d69",PUSH:"#c8a46a",SINK:"#4a90e2",DEFEAT:"#c0392b",HOT:"#ff6b35",MELT:"#6cb6ff"};
+function drawBoard(cv, W, H, frame){
+  const dpr = window.devicePixelRatio||1, cssW = cv.clientWidth||600, cell = Math.min(64, Math.floor(cssW/W));
+  cv.width = cell*W*dpr; cv.height = cell*H*dpr; cv.style.aspectRatio = `${W}/${H}`; cv.style.maxWidth = (cell*W)+"px";
+  const g = cv.getContext("2d"); g.scale(dpr,dpr);
+  g.fillStyle="#0a0b10"; g.fillRect(0,0,cell*W,cell*H);
+  g.strokeStyle="#181b26"; g.lineWidth=1;
+  for(let x=0;x<=W;x++){g.beginPath();g.moveTo(x*cell+.5,0);g.lineTo(x*cell+.5,H*cell);g.stroke();}
+  for(let y=0;y<=H;y++){g.beginPath();g.moveTo(0,y*cell+.5);g.lineTo(W*cell,y*cell+.5);g.stroke();}
+  const you = new Set(frame.rules.filter(r=>r.endsWith(" IS YOU")).map(r=>"ICON_"+r.split(" ")[0])); you.add("ICON_PLAYER");
+  const order = c => c.name==="ICON_GOAL" ? -1 : c.name.startsWith("ICON_") ? (you.has(c.name)?2:0) : 1;
+  [...frame.cells].sort((a,b)=>order(a)-order(b)).forEach(c=>{
+    const x=c.x*cell, y=c.y*cell, p=Math.max(3,cell*.09);
+    if(c.name==="ICON_GOAL"){ g.strokeStyle="#f2c14e"; g.lineWidth=Math.max(2,cell*.07); g.beginPath(); g.arc(x+cell/2,y+cell/2,cell*.2,0,7); g.stroke(); return; }
+    if(c.name.startsWith("ICON_")){
+      const n=c.name.slice(5), col=NOUN_COL[n]||"#9aa3b8";
+      g.fillStyle=col;
+      if(["WALL","HEDGE","WATER","LAVA","TILE"].includes(n)){ g.globalAlpha = n==="TILE"?.55:.9; g.fillRect(x+1,y+1,cell-2,cell-2); g.globalAlpha=1;
+        if(n==="WATER"||n==="LAVA"){ g.strokeStyle="rgba(255,255,255,.35)"; g.lineWidth=1.5; for(let k=1;k<=2;k++){ g.beginPath(); const yy=y+cell*k/3; g.moveTo(x+p,yy); g.quadraticCurveTo(x+cell*.3,yy-4,x+cell*.5,yy); g.quadraticCurveTo(x+cell*.7,yy+4,x+cell-p,yy); g.stroke(); } }
+        if(n==="WALL"){ g.strokeStyle="rgba(0,0,0,.35)"; g.lineWidth=1; g.strokeRect(x+3.5,y+3.5,cell-7,cell-7); }
+      } else {
+        g.beginPath();
+        if(["ROCK","BOX"].includes(n)){ const r=cell*.14; g.roundRect(x+p*1.6,y+p*1.6,cell-p*3.2,cell-p*3.2,n==="ROCK"?cell*.28:r); }
+        else if(["FLAG","STAR","LOVE","KEY"].includes(n)){ const cx=x+cell/2, cy=y+cell/2, R=cell*.36; for(let i=0;i<10;i++){ const a=-Math.PI/2+i*Math.PI/5, rr=i%2?R*.48:R; g[i?"lineTo":"moveTo"](cx+rr*Math.cos(a),cy+rr*Math.sin(a)); } g.closePath(); }
+        else { g.arc(x+cell/2,y+cell/2,cell*.34,0,7); }
+        g.fill();
+        if(you.has(c.name)){ g.strokeStyle="#e5609c"; g.lineWidth=2.5; g.stroke(); }
+        if(["SKULL","CRAB"].includes(n)){ g.fillStyle="#0a0b10"; g.beginPath(); g.arc(x+cell*.4,y+cell*.46,cell*.06,0,7); g.arc(x+cell*.6,y+cell*.46,cell*.06,0,7); g.fill(); }
+      }
+      g.fillStyle = ["WALL","HEDGE","WATER","LAVA"].includes(n) ? "rgba(255,255,255,.75)" : (["TILE"].includes(n)?"#8f96a8":"#0a0b10");
+      g.font = `700 ${Math.max(8,cell*.2)}px ui-monospace,Menlo,monospace`; g.textAlign="center"; g.textBaseline="middle";
+      g.fillText(n.toLowerCase(), x+cell/2, y+cell*(["ROCK","BOX","BABA","KEKE","SKULL","CRAB","PLAYER"].includes(n)?.66:.5), cell-4);
+    } else {
+      const col = c.name==="IS" ? "#e7e9ef" : (PROP_COL[c.name] || NOUN_COL[c.name] || "#b9a0ff");
+      const isProp = c.name in PROP_COL;
+      g.beginPath(); g.roundRect(x+p,y+p,cell-2*p,cell-2*p,cell*.12);
+      if(isProp){ g.fillStyle=col; g.fill(); g.fillStyle="#0a0b10"; }
+      else { g.fillStyle="#12141c"; g.fill(); g.strokeStyle=col; g.lineWidth=1.6; g.stroke(); g.fillStyle=col; }
+      g.font = `800 ${Math.max(8,cell*(c.name.length>4?.21:.26))}px ui-monospace,Menlo,monospace`; g.textAlign="center"; g.textBaseline="middle";
+      g.fillText(c.name, x+cell/2, y+cell/2+.5, cell-2*p-2);
+    }
+  });
+  if(frame.state==="WON"||frame.state==="LOST"){ g.fillStyle = frame.state==="WON"?"rgba(87,199,133,.16)":"rgba(239,111,108,.18)"; g.fillRect(0,0,cell*W,cell*H);
+    g.fillStyle=frame.state==="WON"?"#8ff0b8":"#ffb1ae"; g.font=`800 ${cell*.5}px ui-monospace,monospace`; g.textAlign="right"; g.textBaseline="bottom"; g.fillText(frame.state,cell*W-10,cell*H-6); }
+}
+
+/* ---------- result rendering ---------- */
+let R=null, step=0, timer=null;
+const STEPS=["STRUCTURALLY_VALID","PROVEN_SOLVABLE","FULLY_VALIDATED"];
+function show(i){
+  if(!R||!R.frames) return; step=Math.max(0,Math.min(R.frames.length-1,i));
+  const f=R.frames[step], prev=step?R.frames[step-1]:null;
+  drawBoard($("#board"),R.width,R.height,f);
+  $("#slider").value=step; $("#stepno").textContent=`${step}/${R.frames.length-1}`;
+  const before=new Set(prev?prev.rules:f.rules);
+  $("#rules").innerHTML=f.rules.map(r=>`<span class="rule ${before.has(r)?'':'new'}">${esc(r)}</span>`).join("")||'<span class="hint">no active rules</span>';
+  const s=R.solution||""; $("#moves").innerHTML = s ? `${esc(s.slice(0,step))}<b>${esc(s.slice(step,step+1))}</b>${esc(s.slice(step+1))}` : "";
+}
+function levelRow(name, lv, extra){
+  if(!lv) return `<div class="lvl"><span class="dot u">–</span><div><b>${name}</b><small>not reached</small></div></div>`;
+  const cls = lv.passed ? "p" : (lv.established===false ? "u" : "f");
+  return `<div class="lvl"><span class="dot ${cls}">${lv.passed?'✓':(cls==='u'?'?':'✕')}</span><div><b>${name}</b><small>${extra}</small></div></div>`;
+}
+function aiCard(g){ const a=g.ai; if(!a) return "";
+  if(a.mode==="off") return `<div class="card"><h2>AI trace</h2><p class="hint" style="margin:0">Language model is off (no key in .env): this run used the keyword parser and the constraint planner.</p></div>`;
+  const u=a.usage||{}, kw=a.keyword_parser_would_have_said, pr=g.presentation;
+  return `<div class="card"><h2>AI trace · ${esc((u.models||[]).join(", ")||a.intent_source)}${a.mode==="replay"?" · replayed from cache":""}</h2>
+   ${pr&&pr.title?`<p style="margin:0 0 6px"><b style="font-size:16px">“${esc(pr.title)}”</b><br><span class="hint">${esc(pr.designer_note||"")}</span><br><span class="hint"><b>Hint for players:</b> ${esc(pr.player_hint||"")}</span></p>`:""}
+   <p style="margin:0 0 6px;font-size:13px"><span class="tag t-ok">${/keyword/i.test(a.intent_source||"")?"Keyword reader understood":"LLM understood"}</span> ${esc(g.spec.summary||"")} → <b>${esc(g.spec.difficulty)}</b>; skills <span class="mono">${esc((g.spec.skills_required||[]).join(", ")||"none named")}</span>${(g.spec.skills_forbidden||[]).length?`; forbidden <span class="mono">${esc(g.spec.skills_forbidden.join(", "))}</span>`:""}</p>
+   ${kw?`<p class="hint" style="margin:0 0 8px">Keyword parser alone would have said: ${esc(kw.difficulty)}; skills <span class="mono">${esc(kw.skills_required.join(", ")||"none")}</span>.</p>`:""}
+   ${(a.proposals||[]).length?`<table><tr><th>LLM as designer</th><th>Verifier's verdict</th></tr>${a.proposals.map(p=>`<tr><td>${esc(p.by.replace(/\s*\(.*\)/,""))}<br><span class="hint">${esc(p.idea||"")}</span></td><td><span class="tag ${p.status==="FULLY_VALIDATED"?"t-ok":p.status==="PROVEN_SOLVABLE"?"t-warn":"t-bad"}">${esc(p.status.replaceAll("_"," ").toLowerCase())}</span><br><span class="hint">${esc((p.reasons||[]).slice(0,3).join("; "))}</span></td></tr>`).join("")}</table>`:""}
+   ${g.delivered_from?`<p class="hint" style="margin:8px 0 0">Delivered level came from: <b>${esc(g.delivered_from)}</b>.</p>`:""}
+   <p class="hint" style="margin:6px 0 0">${u.calls||0} model call(s) · ${u.total_tokens||0} tokens · ${u.seconds||0}s model time.${(a.errors||[]).length?` <span style="color:var(--warn)">Fell back: ${esc(a.errors.join("; ").slice(0,300))}</span>`:""}</p></div>`; }
+function render(res){
+  R=res; clearInterval(timer);
+  const out=$("#result");
+  if(res.error){ out.innerHTML=`<div class="card"><span class="badge b-REJECTED_CONTRADICTION">ERROR</span><pre>${esc(res.error)}</pre></div>`; return; }
+  const spec=res.spec||{};
+  const specHtml = `<details><summary>Parsed design spec (stage A)</summary><pre>${esc(JSON.stringify(spec,null,1))}</pre></details>`;
+  if(res.status==="REJECTED_CONTRADICTION"){
+    out.innerHTML = `<div class="card"><span class="badge b-REJECTED_CONTRADICTION">REQUEST REJECTED · no level produced</span>
+      <p class="hint" style="margin:10px 0 0">The request cannot be satisfied by any valid level of this game. Nothing was generated and nothing is labelled verified.</p>
+      ${res.contradictions.map((c,i)=>`<div class="contra"><h3>${esc(c.kind.replaceAll("_"," "))}</h3>${esc(c.explanation)}
+        ${c.cycle&&c.cycle.length?`<div class="chain">${c.cycle.map(esc).map(x=>`<span>${x}</span>`).join("<i>needs →</i>")}</div>`:""}
+        ${c.evidence&&c.evidence.detail?`<p class="hint"><b>Machine evidence:</b> ${esc(c.evidence.detail)}.</p><canvas id="ev${i}"></canvas>`:""}
+        <b style="display:block;margin-top:8px;font-size:12.5px">Valid alternatives</b><ul class="sug">${(c.suggestions||[]).map(s=>`<li>${esc(s)}</li>`).join("")}</ul></div>`).join("")}
+      ${specHtml}</div>`;
+    res.contradictions.forEach((c,i)=>{ const ev=c.evidence; if(ev&&ev.frame){ requestAnimationFrame(()=>drawBoard($("#ev"+i),ev.width,ev.height,ev.frame)); }});
+    return;
+  }
+  const v=res.verification||{levels:{},skills:{}}, L=v.levels||{}, idx=STEPS.indexOf(res.status);
+  const st=L.structural, so=L.solvable, q=L.solution_quality, rb=L.robustness, mc=L.mechanic_coverage;
+  const skills=Object.entries(v.skills||{});
+  out.innerHTML = `<div class="grid">
+   <div>
+    <div class="card"><h2>${res.game==="sokoban_sg"?"Sokoban level":"Level"} · ${res.width}×${res.height}${res.files?` · ${esc(res.files.level)}`:""}</h2>
+      <canvas id="board"></canvas>
+      <div class="play"><button class="sec" id="b0">⏮</button><button class="sec" id="b1">◀</button><button class="sec" id="bp">▶ Play solution</button><button class="sec" id="b2">▶|</button>
+        <input type="range" id="slider" min="0" max="${Math.max(0,(res.frames||[1]).length-1)}" value="0"><span class="mono hint" id="stepno"></span></div>
+      <div class="moves" id="moves"></div>
+      <h2 style="margin-top:14px">Active rules at this step <span class="hint" style="text-transform:none;letter-spacing:0">(read from the engine; green = new this move)</span></h2>
+      <div class="rules" id="rules"></div>
+    </div>
+    <div class="card"><h2>Export</h2><div class="row">
+      <button class="sec" id="dl-l">Download native level (.txt)</button><button class="sec" id="dl-r">Download verification report (.json)</button>${res.game==="sokoban_sg"?"":`<button class="sec" id="launch">Play in the original engine</button>`}<span class="hint" id="launch-msg"></span></div>
+      <details><summary>Native level file</summary><pre>${esc(res.native)}</pre></details>
+      <details><summary>Readable form</summary><pre>${esc(res.dsl)}</pre></details>
+    </div>
+   </div>
+   <div>
+    <div class="card"><h2>Verification status</h2>
+      <span class="badge b-${res.status}">${esc(res.status.replaceAll("_"," "))}</span>
+      <div class="ladder">${STEPS.map((s,i)=>`<div class="${i<=idx?'on':''}"></div>`).join("")}</div>
+      <div class="ladder-l"><span>structurally valid</span><span>proven solvable</span><span>fully validated</span></div>
+      ${res.unmet_requirements&&res.unmet_requirements.length?`<p style="margin:12px 0 0;color:var(--warn);font-size:13px"><b>Not established / not met:</b> ${res.unmet_requirements.map(esc).join("; ")}</p>`:""}
+      <div style="margin-top:10px">
+      ${levelRow("1 · Structural validity", st, st?`${st.checks.filter(c=>c.passed).length}/${st.checks.length} checks, including the original engine's loader`:"")}
+      ${levelRow("2 · Solvability", so, so?esc(so.detail):"")}
+      ${levelRow("3 · Difficulty and solution quality", q?{...q,established:q.difficulty_established}:null, q?(q.difficulty_established?`difficulty score <b style="color:var(--ink)">${q.difficulty_score}</b> (requested band ${q.difficulty_band[0]}–${q.difficulty_band[1]>=1000?"∞":q.difficulty_band[1]}), not based on length: a player choosing at random among real moves along the solution keeps the level winnable with probability 1 in ${Math.round(2**q.difficulty_components.trap_bits).toLocaleString()} (${q.difficulty_components.trap_states} trap points); ${Math.round(q.difficulty_components.dead_ratio*100)}% of reachable states are dead ends; ${res.game==="sokoban_sg"?`${q.difficulty_components.boxes} box(es) to deliver`:`${q.difficulty_components.rule_changes} rule change(s); ${q.difficulty_components.sacrifices} rule word(s) sacrificed`}. `:"difficulty NOT established (state space exceeded the analysis bound). ")+`Shortest solution ${q.shortest_length} moves; ${q.shortest_solution_count??"?"} distinct shortest solution(s)${q.shortest_count_exact?"":" (lower bound)"}`:"")}
+      ${levelRow("4 · Mechanic coverage", mc, mc?`${mc.covered}/${mc.requested} requested skills exercised and proven necessary`:"")}
+      ${levelRow("5 · Robustness (dead states)", rb?{passed:rb.passed&&rb.analysis_complete,established:rb.analysis_complete&&!rb.passed?true:rb.analysis_complete}:null, rb?esc(rb.detail)+(rb.analysis_complete&&rb.dead_states?" — reported, not a failure unless a dead-state-free level was requested":""):"")}
+      </div>
+      ${st?`<details><summary>All structural checks</summary><table>${st.checks.map(c=>`<tr><td><span class="tag ${c.passed?'t-ok':'t-bad'}">${c.passed?'pass':'FAIL'}</span></td><td class="mono">${esc(c.check)}</td><td class="hint">${esc(c.detail)}</td></tr>`).join("")}</table></details>`:""}
+    </div>
+    ${aiCard(res)}
+    ${skills.length?`<div class="card"><h2>Requested skills</h2><table><tr><th>Skill</th><th>In solution</th><th>Necessary?</th></tr>
+      ${skills.map(([k,s])=>`<tr><td><b>${esc(k.replaceAll("_"," "))}</b>${s.forbidden?' <span class="tag t-dim">forbidden</span>':''}<br><span class="hint">${esc(s.detail||"")}</span></td>
+      <td>${s.forbidden?'—':`<span class="tag ${s.exercised_in_witness?'t-ok':'t-bad'}">${s.exercised_in_witness?'exercised':'no'}</span>`}</td>
+      <td>${s.forbidden?`<span class="tag ${s.passed?'t-ok':'t-bad'}">${s.passed?'avoidable':'needed'}</span>`:`<span class="tag ${s.necessity==='proven'?'t-ok':s.necessity==='refuted'?'t-bad':s.necessity==='n/a'?'t-dim':'t-warn'}">${esc((s.necessity||'').replaceAll("_"," "))}${s.proof?` · ${s.proof}`:''}</span>`}</td></tr>`).join("")}</table></div>`:""}
+    <div class="card"><h2>Generation log · ${res.attempts.length} attempt(s)${res.elapsed_seconds!=null?` · ${res.elapsed_seconds}s`:""}</h2>
+      ${res.search?`<p class="hint" style="margin:0 0 8px">Hard-level search: built ${res.search.candidates_built} candidates in ${res.search.seconds}s, ${res.search.candidates_scored} were solvable and small enough to score exactly; median difficulty ${res.search.median_score}, best ${res.search.best_scores[0]}. The hardest one that passes every check is delivered.</p>`:""}
+      <table><tr><th>#</th><th>Result</th><th>Why it was repaired / plan</th></tr>
+      ${res.attempts.map(a=>`<tr><td class="num">${a.attempt}</td><td><span class="tag ${a.status==='FULLY_VALIDATED'?'t-ok':a.status==='PROVEN_SOLVABLE'?'t-warn':'t-bad'}">${esc(a.status.replaceAll("_"," ").toLowerCase())}</span></td><td class="hint">${esc((a.reasons||[]).join("; ")||a.plan||"")}${a.reasons&&a.reasons.length&&a.plan?`<br><span class="mono" style="font-size:11.5px">${esc(a.plan)}</span>`:""}</td></tr>`).join("")}</table>
+      ${res.design_notes&&res.design_notes.protected_rules?`<p class="hint" style="margin:10px 0 0">Protected rules: ${res.design_notes.protected_rules.map(esc).join(" · ")||"—"}<br>Breakable rules: ${(res.design_notes.breakable_rules||[]).map(esc).join(" · ")||"—"}</p>`:""}
+      ${specHtml}
+      ${v.rule_timeline&&v.rule_timeline.length?`<details><summary>Rule changes along the solution</summary><pre>${esc(v.rule_timeline.map(r=>`move ${r.step}: `+(r.added.map(x=>"+ "+x).concat(r.removed.map(x=>"− "+x))).join("   ")).join("\n"))}</pre></details>`:""}
+    </div>
+   </div></div>`;
+  $("#b0").onclick=()=>show(0); $("#b1").onclick=()=>show(step-1); $("#b2").onclick=()=>show(step+1);
+  $("#slider").oninput=e=>show(+e.target.value);
+  $("#bp").onclick=()=>{ clearInterval(timer); if(step>=R.frames.length-1) show(0); timer=setInterval(()=>{ if(step>=R.frames.length-1){clearInterval(timer);return;} show(step+1); }, 260); };
+  const save=(name,text,type)=>{ const a=document.createElement("a"); a.href=URL.createObjectURL(new Blob([text],{type})); a.download=name; a.click(); };
+  $("#dl-l").onclick=()=>save("forge_level.txt",res.native,"text/plain");
+  $("#dl-r").onclick=()=>{ const {frames,...rest}=res; save("forge_level.report.json",JSON.stringify(rest,null,1),"application/json"); };
+  if($("#launch")) $("#launch").onclick=async()=>{ const r=await (await fetch("/api/launch",{method:"POST",body:JSON.stringify({native:res.native,solution:res.solution||"",game:$("#game").value})})).json(); $("#launch-msg").textContent=r.ok?"opened: arrows move, Z undo, R restart, P plays the verified solution, F fullscreen":r.error; };
+  requestAnimationFrame(()=>show(0));
+}
+async function call(url, body, btn, label){
+  btn.disabled=true; const old=btn.innerHTML; btn.innerHTML=`<span class="spin"></span>${label}`; const t0=performance.now();
+  $("#timing").textContent="searching the state space and replaying in the engine…";
+  try{ render(await (await fetch(url,{method:"POST",body:JSON.stringify(body)})).json()); }
+  catch(e){ render({error:String(e)}); }
+  $("#timing").textContent=`done in ${((performance.now()-t0)/1000).toFixed(1)} s`; btn.disabled=false; btn.innerHTML=old;
+}
+$("#go").onclick=()=>call("/api/generate",{request:$("#req").value,seed:$("#seed").value,game:$("#game").value},$("#go"),"Generating…");
+const SOK_EX=["Make an easy sokoban level.","A medium level with two boxes.","Create a hard level that needs careful planning with several boxes.","Make a level with three boxes and two goals."];
+$("#game").onchange=()=>{ const sok=$("#game").value==="sokoban_sg"; $("#examples").innerHTML=(sok?SOK_EX.map((e,i)=>[e,i===3?1:0]):EXAMPLES).map((e,i)=>`<button class="${e[1]?'x':''}" data-t="${esc(e[0])}">${e[1]?'⚠ ':''}${esc(e[0].length>78?e[0].slice(0,76)+'…':e[0])}</button>`).join(""); $("#req").value=sok?SOK_EX[2]:EXAMPLES[0][0]; };
+$("#examples").onclick=e=>{ const b=e.target.closest("button"); if(b){ $("#req").value = b.dataset.t || EXAMPLES[b.dataset.i][0]; } };
+$("#verify").onclick=()=>call("/api/verify",{request:$("#req").value,dsl:$("#dsl").value},$("#verify"),"Verifying…");
+window.addEventListener("resize",()=>R&&R.frames&&show(step));
+
+/* ---------- blueprint tab ---------- */
+fetch("/api/blueprint").then(r=>r.json()).then(b=>{
+  $("#c-game").textContent=`game: ${b.game.name} @ ${b.game.commit.slice(0,7)}`;
+  $("#c-bp").textContent=b.stale?`blueprint v${b.blueprint_version}: STALE`:`blueprint v${b.blueprint_version}: current`; $("#c-bp").className="chip "+(b.stale?"bad":"ok");
+  $("#c-engine").textContent=b.engine_available?"engine: built":"engine: NOT BUILT (run ./build_engine.sh)"; $("#c-engine").className="chip "+(b.engine_available?"ok":"bad");
+  const cs=b.claim_summary, sup=k=>b.words.filter(w=>w.support===k);
+  const tagFor=s=>s==="confirmed"?"t-ok":s==="unresolved"?"t-bad":s==="refuted"?"t-bad":"t-warn";
+  $("#bp").innerHTML=`
+  <div class="card"><h2>Blueprint produced by Agent 1</h2>
+    <div class="kpi">
+      <div><b>${Object.values(b.counts).reduce((a,c)=>a+c,0)}</b><span>entities read from the game's enum definitions</span></div>
+      <div><b>${cs.confirmed||0}</b><span>claims confirmed (source line + passing probe)</span></div>
+      <div><b>${(cs.inferred||0)+(cs["confirmed-by-source"]||0)}</b><span>inferred / source-only</span></div>
+      <div><b>${(cs.unresolved||0)+(cs["out-of-scope"]||0)}</b><span>unresolved or out of scope, flagged</span></div>
+      <div><b>${sup("unsupported").length}</b><span>words with no runtime behaviour</span></div>
+      <div><b>${b.example_levels.loader_agreement}/${b.example_levels.total}</b><span>shipped levels: validator agrees with the real loader</span></div>
+    </div>
+    <p class="hint" style="margin:12px 0 0">Source: <a style="color:var(--info)" href="${esc(b.game.upstream)}">${esc(b.game.upstream)}</a> · ${esc(b.game.license)} · built ${esc(b.generated_at)}.
+    ${b.stale?`<br><b style="color:var(--bad)">Source changed since analysis:</b> ${b.changed_files.map(esc).join(", ")} → revalidate ${b.stale_sections.map(esc).join(", ")}`:`All ${b.analysed_files.length} analysed source files match their recorded fingerprints.`}</p>
+  </div>
+  <div class="grid">
+   <div class="card"><h2>Turn pipeline · extracted from Game::MovePlayer</h2>
+     <table>${b.turn_pipeline.map((p,i)=>`<tr><td class="num">${i+1}</td><td class="mono">${esc(p.phase)}</td><td class="hint mono">${esc(p.source)}</td></tr>`).join("")}</table></div>
+   <div class="card"><h2>Skills the generator can prove</h2>
+     <table><tr><th>Skill</th><th>Definition</th><th>Necessity test</th></tr>${b.skills.map(s=>`<tr><td><b>${esc(s.label)}</b></td><td class="hint">${esc(s.definition)}</td><td class="mono hint">${s.necessity_ablation?`--forbid ${esc(s.necessity_ablation)}`:"presence only"}</td></tr>`).join("")}</table>
+     <p class="hint" style="margin:10px 0 0">Generation vocabulary (probe-confirmed only): <span class="mono">${b.generation_vocabulary.text.join(" ")}</span> + nouns <span class="mono">${b.generation_vocabulary.nouns.join(" ")}</span></p></div>
+  </div>
+  <div class="card"><h2>Claims and provenance · ${b.claims.length}</h2>
+    <table><tr><th>Status</th><th>Claim</th><th>Source</th><th>Evidence</th></tr>
+    ${b.claims.map(c=>`<tr><td><span class="tag ${tagFor(c.status)}">${esc(c.status)}</span></td><td>${esc(c.statement)}${c.consequence?`<br><span class="hint">→ ${esc(c.consequence)}</span>`:""}</td>
+      <td class="mono hint">${c.source&&c.source.line?esc(c.source.file.split("/").pop()+":"+c.source.line):"—"}</td><td class="mono hint">${c.evidence?esc(c.evidence.probe.split("::")[1])+(c.evidence.passed?" ✓":" ✕"):esc(c.basis||"")}</td></tr>`).join("")}</table></div>
+  <div class="card"><h2>Words without behaviour · never used, requests for them are rejected</h2>
+    <table><tr><th>Word</th><th>Kind</th><th>Evidence</th></tr>${sup("unsupported").map(w=>`<tr><td class="mono"><b>${esc(w.name)}</b></td><td class="hint">${esc(w.kind)}</td><td class="hint">${esc(w.evidence)}</td></tr>`).join("")}</table></div>
+  <div class="grid"><div class="card"><h2>skill.md</h2><pre class="md">${esc(b.skill_md)}</pre></div><div class="card"><h2>mechanics.md</h2><pre class="md">${esc(b.mechanics_md)}</pre></div></div>`;
+});
+
+/* ---------- benchmark tab ---------- */
+fetch("/api/benchmark").then(r=>r.json()).then(s=>{
+  if(s.missing){ $("#bench").innerHTML=`<div class="card"><h2>Benchmark</h2><p class="hint">No results yet. Run <span class="mono">python3 bench/run_benchmark.py</span>.</p></div>`; return; }
+  const A=s.arms, names={random_tiles:"Random tiles (no blueprint)",blueprint_only:"Blueprint-guided, unverified",full_pipeline:"Full pipeline"};
+  const rows=[["schema_validity_pct","Schema validity (real loader)","%"],["rule_validity_pct","Rule validity","%"],["solvability_established_pct","Solvability established","%"],["mechanic_coverage_pct","Mechanic coverage","%"],["difficulty_alignment_pct","Difficulty score inside requested band","%"],["fully_validated_pct","Fully validated","%"],["mean_attempts","Mean attempts",""]];
+  const c=s.contradiction_handling, m=s.model_vs_engine_on_sabotaged_levels, fp=A.full_pipeline;
+  $("#bench").innerHTML=`<div class="card"><h2>Measured results · ${s.meta.trials} prompts × 3 arms · seed ${s.meta.seed}</h2>
+    <table><tr><th>Metric</th>${Object.keys(names).map(k=>`<th class="num">${names[k]}</th>`).join("")}</tr>
+    ${rows.map(([k,l,u])=>`<tr><td>${l}</td>${Object.keys(names).map(a=>`<td class="num">${A[a][k]??"—"}${u}</td>`).join("")}</tr>`).join("")}
+    <tr><td>Latency, median / p90 / max (s)</td>${Object.keys(names).map(a=>`<td class="num">${A[a].latency_seconds.median} / ${A[a].latency_seconds.p90} / ${A[a].latency_seconds.max}</td>`).join("")}</tr>
+    <tr><td>Proved unsolvable / unresolved in bound</td>${Object.keys(names).map(a=>`<td class="num">${A[a].proved_unsolvable} / ${A[a].unresolved_within_bound}</td>`).join("")}</tr></table>
+    <p class="hint" style="margin:10px 0 0">All three arms are scored afterwards by the same verifier. The first two are no-LLM stand-ins for "raw LLM" and "LLM + skill.md", which were <b>not run</b> (no API key).</p></div>
+  <div class="grid"><div class="card"><h2>Honesty checks</h2><div class="kpi">
+    <div><b>${fp.false_acceptances}/${fp.levels_labelled_solvable}</b><span>levels labelled solvable whose witness did not win in an independent pyBaba replay</span></div>
+    <div><b>${m.agree}/${m.comparable_verdicts}</b><span>sabotaged levels: model verdict = real-engine verdict</span></div>
+    <div><b>${c.correctly_rejected}/${c.contradictory_prompts}</b><span>contradictory prompts rejected with an explanation</span></div>
+    <div><b>${c.wrongly_rejected_controls}/${c.valid_control_prompts}</b><span>valid control prompts wrongly rejected</span></div></div>
+    ${c.missed.length?`<p class="hint" style="margin:10px 0 0">Missed contradictions: ${c.missed.map(esc).join(" | ")}</p>`:""}</div>
+   <div class="card"><h2>Full pipeline by difficulty</h2><table><tr><th>Difficulty</th><th class="num">n</th><th class="num">Fully validated</th><th class="num">Median difficulty score</th><th class="num">Median solution</th><th class="num">Median latency</th></tr>
+    ${Object.entries(fp.by_difficulty).map(([d,x])=>`<tr><td>${d}</td><td class="num">${x.n}</td><td class="num">${x.fully_validated_pct}%</td><td class="num">${x.median_difficulty_score??"—"}</td><td class="num">${x.median_solution_length} moves</td><td class="num">${x.median_latency_s}s</td></tr>`).join("")}</table></div></div>
+  <div class="card"><h2>Not measured</h2><table>${Object.entries(s.not_measured).map(([k,v])=>`<tr><td class="mono">${esc(k)}</td><td class="hint">${esc(v)}</td></tr>`).join("")}</table>
+    <p class="hint" style="margin:10px 0 0">${esc(s.meta.platform)} · ${s.meta.cpu_count} CPUs · Python ${esc(s.meta.python)} · limits: analysis ${s.meta.limits.analysis_ms} ms, ablation ${s.meta.limits.ablation_ms} ms, ${s.meta.limits.max_attempts} attempts · wall clock ${s.meta.wall_clock_seconds}s</p></div>`;
+});
+
+fetch("/api/status").then(r=>r.json()).then(st=>{ if(st.mode!=="live"){ const b=document.getElementById("testbar"); b.style.display="block";
+  b.textContent="Test version: "+st.reason+", so the language model is not used. Requests are read by the built-in keyword reader and levels are built by the planner. Every level is still checked the same way."; } }).catch(()=>{});
+document.getElementById("game").addEventListener("change",e=>{ const c=document.getElementById("c-game"); if(c) c.textContent="game: "+(e.target.value==="sokoban_sg"?"sokoban (pygame)":"baba-is-auto"); });
+</script>
+</body>
+</html>

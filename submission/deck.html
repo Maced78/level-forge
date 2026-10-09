@@ -1,0 +1,251 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Level-Forge pitch deck</title><style>
+@page{size:1280px 720px;margin:0}*{box-sizing:border-box}
+body{margin:0;background:#0d0f15;color:#eceef4;font:17px/1.42 Inter,system-ui,sans-serif;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.s{width:1280px;height:720px;padding:34px 46px 40px;position:relative;page-break-after:always;overflow:hidden;background:#0d0f15}
+.k{font:700 11.5px "DejaVu Sans Mono",monospace;letter-spacing:.1em;text-transform:uppercase;color:#f2c14e}
+h1{font:800 30px/1.16 "Inter Display",Inter,sans-serif;margin:6px 0 12px;letter-spacing:-.015em;max-width:1120px}
+h1.big{font-size:64px;margin:6px 0 6px;letter-spacing:-.03em}
+h3{font:700 11px "DejaVu Sans Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:#949bb0;margin:0 0 7px}
+p{margin:0 0 8px}ul,ol{margin:0;padding-left:18px}li{margin:0 0 5px}
+.card{background:#151821;border:1px solid #2a2f40;border-radius:11px;padding:13px 16px;margin-bottom:10px}
+.card.hl{border-color:#f2c14e}.card.bad{border-left:3px solid #ef6f6c}.card.warnc{border-left:3px solid #f2a65a}
+.cols2{display:grid;grid-template-columns:1fr 1fr;gap:14px}.cols2.wide-left{grid-template-columns:1.25fr 1fr}.cols3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.strip{background:#1a1d2a;border:1px solid #2a2f40;border-left:3px solid #f2c14e;border-radius:8px;padding:10px 14px;font-size:15px;margin-top:2px}
+.dim{color:#949bb0}.small{font-size:13.6px}.mono{font-family:"DejaVu Sans Mono",monospace;font-size:.88em}
+.foot{position:absolute;left:46px;right:46px;bottom:14px;display:flex;justify-content:space-between;font:11px "DejaVu Sans Mono",monospace;color:#5d6478}
+.tgrid{display:grid;grid-template-columns:1.05fr 1fr;gap:30px;align-items:center;margin-top:12px}
+.tag{font:700 25px/1.2 "Inter Display",Inter;color:#f2c14e;margin:0 0 12px}.lede{font-size:16.5px;color:#c9cedb}
+.team{font-weight:600;margin-top:10px}.links{margin-top:10px;font-size:13.5px}.links div{display:flex;gap:10px}.links span{color:#949bb0;width:56px}.links b{font-family:"DejaVu Sans Mono",monospace;font-weight:400;color:#7db7ff;font-size:12.5px}
+.cap{font-size:12.5px;color:#949bb0;margin-top:6px}
+.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:16px}.kpi{background:#151821;border:1px solid #2a2f40;border-radius:10px;padding:10px 12px}.kpi b{display:block;font:800 23px "DejaVu Sans Mono",monospace}.kpi span{font-size:11.8px;color:#949bb0;line-height:1.3;display:block}
+canvas.board{width:100%;border-radius:8px;display:block}canvas.board.small{width:62%;margin:8px 0}canvas.board.sok{width:42%}
+table{width:100%;border-collapse:collapse;font-size:14.6px}td,th{padding:5px 7px;border-bottom:1px solid #2a2f40;vertical-align:top;text-align:left}th{font:700 10.5px "DejaVu Sans Mono",monospace;text-transform:uppercase;letter-spacing:.05em;color:#949bb0}
+table.num td:not(:first-child),table.num th:not(:first-child){text-align:right;font-family:"DejaVu Sans Mono",monospace;font-size:12.5px}tr.tot td{font-weight:700;color:#fff}
+table.fail td:first-child{color:#ffb1ae;width:44%}table.cmp td:last-child{color:#8ff0b8}table.cmp{font-size:13.8px}
+table.score td{padding:11px 8px;font-size:15.3px}table.score td:first-child{width:21%;white-space:nowrap}table.score td:last-child{width:17%;color:#949bb0}
+.pill{font:700 10.5px "DejaVu Sans Mono",monospace;padding:2px 7px;border-radius:5px;white-space:nowrap}.pill.ok{background:#1c4a33;color:#57c785}.pill.warn{background:#4a3a14;color:#ffd98a}.pill.info{background:#1b3554;color:#7db7ff}.pill.bad{background:#532423;color:#ef6f6c}
+.q{font-style:italic;color:#c9cedb}.formula{font:700 13.5px "DejaVu Sans Mono",monospace;background:#0a0b10;border:1px solid #2a2f40;border-radius:7px;padding:8px 10px;color:#f2c14e}
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}.flow div{background:#151821;border:1px solid #2a2f40;border-radius:9px;padding:9px 10px;font-size:13.2px;color:#c9cedb;line-height:1.35}.flow b{display:block;font:700 10.5px "DejaVu Sans Mono",monospace;color:#f2c14e;text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px}
+.arch{display:grid;grid-template-columns:.62fr auto 1.5fr auto 1.25fr;gap:10px;align-items:stretch;margin-bottom:8px}.arch i{align-self:center;color:#949bb0;font-style:normal;font-size:20px}
+.box{background:#1c2030;border:1.5px solid #2a2f40;border-radius:10px;padding:8px 12px}.box.acc{border-color:#f2c14e}.box.ok{border-color:#57c785}.box b{display:block;font-size:15.5px;margin-bottom:3px}.box span{font-size:13.8px;color:#c9cedb;line-height:1.35;display:block}.box u{text-decoration:none;font:700 11px "DejaVu Sans Mono",monospace;color:#f2c14e}
+.how{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}.how div{font-size:13.6px;color:#c9cedb;line-height:1.38;border-top:2px solid #f2c14e;padding-top:8px}.how b{display:block;color:#eceef4;font-size:14.5px;margin-bottom:3px}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:6px 14px;margin-bottom:8px}.facts div{border-bottom:1px solid #2a2f40;padding-bottom:4px}.facts b{display:block;font:800 19px "DejaVu Sans Mono",monospace}.facts span{font-size:12px;color:#949bb0}
+
+.e{font-size:21px;line-height:1.4;padding:40px 54px 44px}.e h1{font-size:37px;margin:8px 0 20px}.e h3{font-size:13px;margin-bottom:10px}
+.e .card{padding:20px 24px;margin-bottom:14px}.e .cols2,.e .cols3{gap:18px}.e li{margin-bottom:9px}.e .lg{font-size:24px;line-height:1.35}.e ul.lg li{margin-bottom:14px}
+.e .strip{font-size:18px;padding:13px 18px;margin-top:6px}.e .small{font-size:15.5px}.e table{font-size:19px}.e td,.e th{padding:9px 9px}.e th{font-size:12px}
+.e table.num td:not(:first-child){font-size:19px}.e table.cmp{font-size:18px}.e table.score td{font-size:19px;padding:13px 9px}.e table.score td:last-child{width:13%}
+.e h1.big{font-size:78px}.e .tag{font-size:31px}.e .lede{font-size:20px}.e .cap{font-size:15px}.e .links{font-size:15px}.e .links b{font-size:14px}
+.kpis.k3{grid-template-columns:repeat(3,1fr);gap:16px;margin-top:22px}.kpis.k2{grid-template-columns:1fr 1fr;gap:14px;margin:0 0 10px}.e .kpi{padding:14px 18px}.e .kpi b{font-size:34px}.e .kpi span{font-size:16px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:18px}.steps div{border-top:3px solid #f2c14e;padding-top:10px}.steps i{font:800 15px "DejaVu Sans Mono",monospace;color:#f2c14e;font-style:normal;margin-right:10px}.steps b{font-size:25px}.steps p{color:#c9cedb;margin-top:6px}
+.e .arch{margin-bottom:14px;grid-template-columns:.7fr auto 1.6fr auto 1fr}.e .box{padding:14px 16px}.e .box b{font-size:21px}.e .box span{font-size:17.5px}
+.e .facts b{font-size:24px}.e .facts span{font-size:14.5px}.e .pill{font-size:12.5px}.req{font-size:18px;margin-top:10px}
+.e canvas.board.small{width:50%}.e canvas.board.sok{width:46%}.e table.fail td{font-size:17.5px;padding:8px}
+
+.e h1{font-size:44px}.cap.big{font-size:22px;color:#eceef4;margin-top:14px}
+.qwrap{position:relative}.qmark{position:absolute;left:44%;top:4%;font:800 190px "Inter Display",Inter;color:#f2c14e;text-shadow:0 0 30px #0d0f15}
+.nums div{display:flex;gap:18px;align-items:center;margin-bottom:26px;font-size:25px;line-height:1.3}.nums i{flex:none;width:52px;height:52px;border-radius:50%;background:#f2c14e;color:#0d0f15;font:800 24px Inter;font-style:normal;display:flex;align-items:center;justify-content:center}
+.nums.row{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.nums.row div{margin:0;font-size:21px}
+.pic3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:22px}.pic3>div{display:flex;flex-direction:column}.pic3 b{font-size:26px;margin-top:auto;padding-top:16px}.pic3 span{color:#c9cedb}
+.bubble{background:#1f2a44;border:1px solid #35487a;border-radius:18px 18px 18px 4px;padding:16px 20px;font-size:21px;font-style:italic;color:#dfe6ff;margin-bottom:14px}.bubble.wide{font-size:23px;margin-bottom:20px}
+.won{position:relative}.won em{position:absolute;right:8px;bottom:8px;background:#57c785;color:#0d0f15;font:800 20px Inter;font-style:normal;padding:4px 14px;border-radius:8px}
+.tick{display:flex;gap:16px;align-items:center;margin-bottom:18px;font-size:23px;line-height:1.3}.tick i{flex:none;width:42px;height:42px;border-radius:50%;font:800 22px Inter;font-style:normal;display:flex;align-items:center;justify-content:center;color:#0d0f15;background:#57c785}.tick.bad i{background:#ef6f6c}.tick.open i{background:#f2a65a}
+.film{display:grid;grid-template-columns:1fr 1fr;gap:10px 22px;margin:0 auto 10px;width:84%}.film span{display:block;font:700 15px "DejaVu Sans Mono",monospace;color:#949bb0;margin-top:5px;text-transform:uppercase;letter-spacing:.06em}.film span.g{color:#57c785}
+.flowrow{display:grid;grid-template-columns:.8fr auto 1.6fr auto .8fr;gap:14px;align-items:stretch;margin-bottom:14px}.flowrow u{align-self:center;text-decoration:none;font-size:30px;color:#949bb0}
+.fb{background:#1c2030;border:2px solid #2a2f40;border-radius:14px;padding:14px 18px;display:flex;flex-direction:column;justify-content:center}.fb.acc{border-color:#f2c14e}.fb.ok{border-color:#57c785}.fb em{font:800 26px "DejaVu Sans Mono",monospace;color:#f2c14e;font-style:normal}.fb.ok em{color:#57c785}.fb b{font-size:23px}.fb span{font-size:18px;color:#c9cedb}
+.ai .card{margin:0}.ai p{font-size:18.5px;margin:0}
+.games .card{text-align:center}.games canvas{margin:0 auto 12px}.games h2{font:800 30px "Inter Display",Inter;margin:0 0 4px}.games p{margin:0 0 6px;color:#c9cedb}.stat b{font:800 34px "DejaVu Sans Mono",monospace;color:#f2c14e;margin-right:8px}canvas.board.sok2{width:38%}
+.bar{display:grid;grid-template-columns:1fr;gap:5px;margin-bottom:20px;position:relative}.bar span{font-size:20px}.bar .track{height:30px;background:#0a0b10;border-radius:6px;margin-right:110px}.bar .fill{height:100%;background:#5d6478;border-radius:6px}.bar.strong .fill{background:#f2c14e}.bar b{position:absolute;right:0;bottom:-2px;font:800 28px "DejaVu Sans Mono",monospace}.bar.strong span{font-weight:700}
+.kpis.k1{grid-template-columns:1fr;gap:14px;margin:0}
+.tiles .card{text-align:center;padding:26px 20px}.huge{display:block;font:800 76px "Inter Display",Inter;color:#f2c14e;line-height:1}.tiles p{margin-top:10px;font-size:21px}.next{margin-top:4px}
+.four{gap:18px}.four .card{display:flex;gap:20px;align-items:center;padding:26px 24px;margin:0}.four em{flex:none;width:70px;height:70px;border-radius:16px;background:#f2c14e;color:#0d0f15;font:800 30px "DejaVu Sans Mono",monospace;font-style:normal;display:flex;align-items:center;justify-content:center}.four p{font-size:24px;margin:0;line-height:1.3}.four+.strip{margin-top:18px}
+
+img.orig{width:100%;border-radius:8px;display:block;image-rendering:pixelated}.games img.g1{width:62%;margin:0 auto 12px}.games img.g2{width:32%;margin:0 auto 12px}
+.rulex{display:flex;align-items:center;gap:16px;margin-bottom:12px}.rulex span{font:800 19px "DejaVu Sans Mono",monospace;background:#0a0b10;border:1.5px solid #f2c14e;color:#f2c14e;border-radius:8px;padding:7px 12px;white-space:nowrap}.rulex em{font-style:normal;color:#c9cedb}
+.e .flowrow{grid-template-columns:.75fr auto 1.7fr auto .85fr;margin-bottom:6px}.fb.book{border-color:#f2c14e;background:#2a2412}.fb.acc em{font-size:13px;letter-spacing:.06em;text-transform:uppercase}.e .fb span{font-size:16.5px;line-height:1.35}
+.uses{text-align:center;font:700 14px "DejaVu Sans Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:#f2c14e;margin:6px 0}
+.chain{display:grid;grid-template-columns:1fr auto 1fr auto 1fr auto 1fr auto 1fr;gap:8px;align-items:stretch}.chain>div{background:#1c2030;border:2px solid #2a2f40;border-radius:12px;padding:10px 12px}.chain u{align-self:center;text-decoration:none;color:#949bb0;font-size:22px}
+.chain em{font:800 15px "DejaVu Sans Mono",monospace;color:#f2c14e;font-style:normal;margin-right:8px}.chain b{font-size:20px}.chain span{display:block;font-size:15.5px;color:#c9cedb;line-height:1.3;margin-top:4px}
+.io{display:flex;justify-content:space-between;font:700 13px "DejaVu Sans Mono",monospace;text-transform:uppercase;letter-spacing:.06em;color:#949bb0;margin:8px 0 10px}.io span:nth-child(2){color:#f2c14e}.ainote{margin:0}.shots{display:grid;grid-template-columns:.5fr .5fr 1fr;gap:22px;align-items:center}.shots span{display:block;font:700 12.5px 'DejaVu Sans Mono',monospace;text-transform:uppercase;letter-spacing:.05em;color:#949bb0;margin-top:5px}
+.ty .tgrid{margin-top:60px}.ty .lede{margin-top:18px}.tyimg{width:46%!important;margin-top:14px}
+</style></head><body><section class="s e title"><div class="k">NeuroBridge.SI Baku · 9–10 October 2026 · AI Gaming track</div>
+<div class="tgrid"><div><h1 class="big">Level-Forge</h1>
+<p class="tag">Type a sentence.<br>Get a puzzle level that can be won.</p>
+<p class="team">Team Azərçay: Nural Shukurlu · Alfaddin Hamidov · Chingiz Aslanov</p><div class="links"><div><span>Demo</span><b>https://maced78.github.io/level-forge/</b></div><div><span>Source</span><b>https://github.com/Maced78/level-forge</b></div></div></div>
+<div><canvas class="board" data-run="0" data-frame="0"></canvas><p class="cap">A hard puzzle level made from one sentence.</p></div></div>
+<div class="kpis k3"><div class="kpi"><b>100%</b><span>of 200 test requests produced a level the game could win</span></div>
+<div class="kpi"><b>0 of 200</b><span>levels were wrongly marked as winnable</span></div>
+<div class="kpi"><b>2 games</b><span>work with the same program</span></div></div>
+<div class="foot"><span>Built during the hackathon, 9 October 2026</span><span>1</span></div></section><section class="s e"><div class="k">Value for the user · 25 points</div><h1>The problem</h1>
+<div class="cols2 wide-left"><div class="qwrap"><canvas class="board" data-run="4" data-frame="0"></canvas><div class="qmark">?</div>
+<p class="cap big">Can this level be won? Today a person has to play it to find out.</p></div>
+<div class="nums">
+<div><i>1</i><span>Puzzle designers draw every level by hand.</span></div>
+<div><i>2</i><span>They play each one to check that it works.</span></div>
+<div><i>3</i><span>Mistakes they miss reach the players.</span></div></div></div>
+<div class="strip">Who has this problem: small puzzle-game studios and solo developers who ship 50 to 200 levels per game.</div><div class="foot"><span>Level-Forge · NeuroBridge.SI Baku · AI Gaming track</span><span>2</span></div></section><section class="s e"><div class="k">Value for the user · 25 points</div><h1>Our idea</h1>
+<div class="pic3">
+<div><div class="bubble">“Make a hard level about pushing rocks and changing the rules.”</div><b>1. You ask</b><span>In plain words.</span></div>
+<div><canvas class="board" data-run="0" data-frame="0"></canvas><b>2. It builds the level</b><span>In the game's own file format.</span></div>
+<div><div class="won"><canvas class="board" data-run="0" data-frame="99"></canvas><em>WON</em></div><b>3. The game plays it and wins</b><span>Before you ever see it.</span></div></div>
+<div class="strip">A typical level takes about 0.8 seconds. A hard one takes about 7 seconds.</div><div class="foot"><span>Level-Forge · NeuroBridge.SI Baku · AI Gaming track</span><span>3</span></div></section><section class="s e"><div class="k">Prototype and use of AI · 30 points</div><h1>Our example game: Baba Is You</h1>
+<div class="cols2 wide-left"><div><img class="orig" src="img/baba_1_start.png">
+<p class="cap">One of our generated levels, drawn with the game's own graphics.</p></div>
+<div><p class="lg">In Baba Is You the rules are words lying on the board. Push the words and the rules change.</p>
+<div class="rulex"><span>BABA IS YOU</span><em>you move Baba</em></div>
+<div class="rulex"><span>FLAG IS WIN</span><em>touch the flag to win</em></div>
+<div class="rulex"><span>WALL IS STOP</span><em>walls block you</em></div>
+<p class="small dim">Baba Is You was made by Arvi Teikari (Hempuli) and released in 2019. We used baba-is-auto, a free open-source copy of its rules by utilForever.</p></div></div>
+<div class="strip"><b>It is only our example.</b> The same steps apply to other 2D puzzle games, and we tested a second one (Sokoban). 3D puzzle games would need extra work and are not tested yet.</div><div class="foot"><span>Level-Forge · NeuroBridge.SI Baku · AI Gaming track</span><span>4</span></div></section><section class="s e"><div class="k">Prototype and use of AI · 30 points</div><h1>An example</h1>
+<div class="bubble wide">“Create a difficult level that tests rule manipulation, strategic object pushing and a changing win condition.”</div>
+<div class="cols2 wide-left"><div><canvas class="board" data-run="0" data-frame="0"></canvas><p class="cap">The level that came back, 15 seconds later.</p></div>
+<div><div class="tick ok"><i>✓</i><span>It can be won, in 47 moves.</span></div><div class="tick ok"><i>✓</i><span>It cannot be won without each skill that was asked for.</span></div><div class="tick ok"><i>✓</i><span>It is hard. Moving at random, a player avoids the traps 1 time in 128.</span></div><div class="tick ok"><i>✓</i><span>It opens in the real game.</span></div></div></div><div class="foot"><span>Level-Forge · NeuroBridge.SI Baku · AI Gaming track</span><span>5</span></div></section><section class="s e"><div class="k">Prototype and use of AI · 30 points</div><h1>The computer beats its own level</h1>
+<div class="film">
+<div><canvas class="board" data-run="0" data-frame="0"></canvas><span>Start</span></div>
+<div><canvas class="board" data-run="0" data-frame="16"></canvas><span>Move 16</span></div>
+<div><canvas class="board" data-run="0" data-frame="32"></canvas><span>Move 32</span></div>
+<div><canvas class="board" data-run="0" data-frame="99"></canvas><span class="g">Move 47: won</span></div></div>
+<div class="strip">Every solution is played in the original game engine. You can watch it or play the level yourself at the demo link.</div><div class="foot"><span>Level-Forge · NeuroBridge.SI Baku · AI Gaming track</span><span>6</span></div></section><section class="s e"><div class="k">Prototype and use of AI · 30 points</div><h1>It refuses impossible requests</h1>
+<div class="cols2"><div><div class="bubble">“Put the only rocks behind the water. The water can only be crossed by sinking a rock.”</div>
+<canvas class="board small" data-ev="1"></canvas>
+<div class="tick bad"><i>✕</i><span>Refused. You need a rock to cross the water, and the rocks are on the other side.</span></div></div>
+<div><div class="bubble">“Make a level with teleporters.”</div>
+<div class="tick bad"><i>✕</i><span>Refused. This game has the word, but its code does nothing with it.</span></div>
+<div class="kpis k2"><div class="kpi"><b>19 of 19</b><span>impossible requests refused</span></div><div class="kpi"><b>0 of 10</b><span>good requests refused by mistake</span></div></div>
+<p class="small dim">We wrote these test requests ourselves while building the checker.</p></div></div><div class="foot"><span>Level-Forge · NeuroBridge.SI Baku · AI Gaming track</span><span>7</span></div></section><section class="s e"><div class="k">Prototype and use of AI · 30 points</div><h1>How it works</h1>
+<div class="flowrow"><div class="fb"><em>{ }</em><b>The game's code</b><span>and the levels that ship with it</span></div><u>→</u>
+<div class="fb acc"><em>Part 1 · done once per game</em><b>Learn the rules</b><span>An AI coding assistant reads the code, writes down each rule with the line it came from, and tests each rule in the real game. Words the game ignores are marked.</span></div><u>→</u>
+<div class="fb book"><em>▤</em><b>Rule book</b><span>rules · file format · level checker · solver</span></div></div>
+<div class="uses">▼ Every step below uses the rule book ▼</div>
+<div class="chain">
+<div><em>1</em><b>Understand</b><span>Which skills? How hard?</span></div><u>→</u>
+<div><em>2</em><b>Possible?</b><span>If not, refuse and say why.</span></div><u>→</u>
+<div><em>3</em><b>Build</b><span>Several levels in the game's file format.</span></div><u>→</u>
+<div><em>4</em><b>Play</b><span>Search finds the shortest solution. The real game replays it.</span></div><u>→</u>
+<div><em>5</em><b>Fix or label</b><span>Repair what failed. Say what was proven.</span></div></div>
+<div class="io"><span>In: your sentence</span><span>Part 2 · runs for every request</span><span>Out: level file, solution, proof</span></div>
+<div class="shots"><div><img class="orig" src="img/baba_2_start.png"><span>Step 3: a level it built</span></div><div><img class="orig" src="img/baba_2_end.png"><span>Step 4: the real game has won it</span></div>
+<p class="small dim ainote"><b>Who does what.</b> Coding assistant (Claude): part 1. Search program: steps 2 to 5. A language model (Google Gemini) is written for step 1. It has not run yet because our key was rejected, so a keyword reader did step 1 in every result shown.</p></div><div class="foot"><span>Level-Forge · NeuroBridge.SI Baku · AI Gaming track</span><span>8</span></div></section><section class="s e"><div class="k">Prototype and use of AI · 30 points</div><h1>It works on two different games</h1>
+<div class="cols2 games"><div class="card"><img class="orig g1" src="img/baba_2_start.png"><h2>Baba Is You</h2><p>A puzzle where the player changes the rules.</p>
+<p class="stat"><b>100%</b> of 200 requests gave a winnable level</p></div>
+<div class="card"><img class="orig g2" src="img/sokoban_start.png"><h2>Sokoban</h2><p>A puzzle about pushing boxes onto targets.</p>
+<p class="stat"><b>96.7%</b> of 60 requests gave a winnable level</p></div></div>
+<div class="strip">Both pictures are levels our program made, drawn with each game's own graphics. Adding the second game took about one hour and the main program did not change.</div><div class="foot"><span>Level-Forge · NeuroBridge.SI Baku · AI Gaming track</span><span>9</span></div></section><section class="s e"><div class="k">Quality testing · 20 points</div><h1>Test results</h1>
+<div class="cols2 wide-left"><div class="card"><h3>Levels that passed every check, out of 200 requests</h3>
+<div class="bar"><span>Random tiles</span><div class="track"><div class="fill" style="width:0.6%"></div></div><b>0%</b></div><div class="bar"><span>Our builder with checking switched off</span><div class="track"><div class="fill" style="width:59.0%"></div></div><b>59%</b></div><div class="bar strong"><span>Level-Forge</span><div class="track"><div class="fill" style="width:95.5%"></div></div><b>95.5%</b></div>
+<p class="small dim">Every check means: winnable, as hard as requested, and needing the requested skills.</p></div>
+<div><div class="kpis k1"><div class="kpi"><b>0 of 200</b><span>levels we marked as winnable failed a second, separate replay</span></div>
+<div class="kpi"><b>100,000</b><span>random moves where our fast solver and the real game agreed</span></div>
+<div class="kpi"><b>60 of 60</b><span>automatic tests pass</span></div></div></div></div><div class="foot"><span>Level-Forge · NeuroBridge.SI Baku · AI Gaming track</span><span>10</span></div></section><section class="s e"><div class="k">Quality testing · 20 points</div><h1>What went wrong</h1>
+<div class="cols2 wide-left"><div>
+<div class="tick ok"><i>✓</i><span>Our first “hard” levels were long but easy. <b>Fixed:</b> difficulty now counts traps.</span></div>
+<div class="tick ok"><i>✓</i><span>We said pushing was required. A shortcut existed. <b>Fixed:</b> our own search found it.</span></div>
+<div class="tick ok"><i>✓</i><span>On the second game only 68% passed at first. <b>Fixed:</b> now 96.7%.</span></div>
+<div class="tick open"><i>!</i><span>About 1 in 10 hard requests still misses a check. <b>Open:</b> the level is delivered with a warning.</span></div>
+<div class="tick open"><i>!</i><span>The language model never ran. <b>Open.</b></span></div></div>
+<div class="card"><h3>Compared with today</h3><table class="cmp">
+<tr><th></th><th>By hand</th><th>Level-Forge</th></tr>
+<tr><td>Can it be won?</td><td>play it</td><td>proven</td></tr>
+<tr><td>Shortcuts</td><td>found by luck</td><td>searched for</td></tr>
+<tr><td>Difficulty</td><td>a feeling</td><td>measured</td></tr></table>
+<p class="small dim">We did not time human designers or compare difficulty with real players.</p></div></div><div class="foot"><span>Level-Forge · NeuroBridge.SI Baku · AI Gaming track</span><span>11</span></div></section><section class="s e"><div class="k">Feasibility · 15 points</div><h1>Cost and next steps</h1>
+<div class="cols3 tiles">
+<div class="card"><b class="huge">0</b><p>data to collect. It only needs the game's own code.</p></div>
+<div class="card"><b class="huge">1</b><p>ordinary computer. No graphics card, works offline.</p></div>
+<div class="card"><b class="huge">1 hour</b><p>to add the second game.</p></div></div>
+<div class="card hl next"><h3>Next</h3><div class="nums row"><div><i>1</i><span>Get the language model running.</span></div><div><i>2</i><span>Add a third game with no human help.</span></div><div><i>3</i><span>Try it with a real puzzle studio.</span></div></div></div>
+<p class="small dim">Tested on two turn-based 2D puzzle games. Other 2D puzzle games follow the same steps. 3D puzzle games need extra work. Very large levels cannot be fully searched.</p><div class="foot"><span>Level-Forge · NeuroBridge.SI Baku · AI Gaming track</span><span>12</span></div></section><section class="s e"><div class="k">Originality · 10 points</div><h1>What is new</h1>
+<div class="cols2 four">
+<div class="card"><em>{ }</em><p>The rules come from the game's own code, and each rule is tested.</p></div>
+<div class="card"><em>✓</em><p>It shows the level needs the skill you asked for.</p></div>
+<div class="card"><em>▲</em><p>Difficulty is measured from every possible position.</p></div>
+<div class="card"><em>✕</em><p>It refuses impossible requests and says why.</p></div></div>
+<div class="strip">AI chatbots can also write a level from a sentence. They work from memory and do not check the result.</div><div class="foot"><span>Level-Forge · NeuroBridge.SI Baku · AI Gaming track</span><span>13</span></div></section><section class="s e"><div class="k">Mandatory disclosure</div><h1>Models, data and components</h1>
+<div class="cols3">
+<div class="card"><h3>Models</h3><ul><li><b>Anthropic Claude</b>, as a coding assistant: read the game code and wrote the program, tests, demo and this deck with us.</li><li><b>Google Gemini</b>: the code is included, but it never ran. No result comes from it.</li><li>Nothing was trained.</li></ul></div>
+<div class="card"><h3>Data</h3><ul><li>Two open-source games, unmodified: <b>utilForever/baba-is-auto</b> and <b>xbandrade/sokoban-solver-generator</b> (MIT licence).</li><li>Test requests made by our own script.</li><li>No other data.</li></ul></div>
+<div class="card"><h3>Components</h3><ul><li>Python 3, C++, pybind11</li><li>pygame, pygame-widgets, numpy</li><li>Playwright and Chromium</li><li>GitHub Pages</li></ul></div></div>
+<div class="strip"><b>Built after the hackathon started.</b> Everything was made on 9 October 2026. Before the event we had only the idea and a written specification. Pages 16 to 18 hold the detailed numbers.</div><div class="foot"><span>Level-Forge · NeuroBridge.SI Baku · AI Gaming track</span><span>14</span></div></section><section class="s e title ty"><div class="k">NeuroBridge.SI Baku · AI Gaming track</div>
+<div class="tgrid"><div><h1 class="big">Thank you</h1>
+<p class="tag">Questions are welcome.</p>
+<p class="team">Team Azərçay: Nural Shukurlu · Alfaddin Hamidov · Chingiz Aslanov</p><div class="links"><div><span>Demo</span><b>https://maced78.github.io/level-forge/</b></div><div><span>Source</span><b>https://github.com/Maced78/level-forge</b></div></div>
+<p class="lede">Open the demo link to watch the levels being solved, or play them yourself with the arrow keys.</p></div>
+<div><div class="won"><canvas class="board" data-run="0" data-frame="99"></canvas><em>WON</em></div>
+<img class="orig tyimg" src="img/baba_2_end.png"><p class="cap">Two levels our program made, both already won.</p></div></div>
+<div class="foot"><span>Level-Forge · NeuroBridge.SI Baku · AI Gaming track</span><span>15</span></div></section><section class="s "><div class="k">Appendix A · how a level earns its label</div><h1>What “verified” means and how difficulty is computed</h1>
+<div class="cols2"><div class="card"><h3>Four labels</h3><table>
+<tr><td><span class="pill warn">structurally valid</span></td><td>schema checks, no meaningless words, <b>loaded by the original engine</b>, a controllable object exists</td></tr>
+<tr><td><span class="pill info">proven solvable</span></td><td>a move sequence the <b>original engine replays to WON</b> (C++ and again through its Python binding)</td></tr>
+<tr><td><span class="pill ok">fully validated</span></td><td>difficulty score inside the requested band; every requested skill exercised <b>and proven necessary</b>; explicit limits met</td></tr>
+<tr><td><span class="pill bad">refused</span></td><td>no valid level can satisfy the request</td></tr></table>
+<p><b>Necessity by ablation.</b> The solver is forbidden one kind of move (rule changes, object pushes, win-rule changes, control changes). If it then exhausts the state space without winning, every solution needs that skill.</p></div>
+<div class="card"><h3>Difficulty without length</h3>
+<p class="formula">score = 2 × trap bits + 4 × dead-end ratio + 2 × rule changes + 3 × sacrificed rule words</p>
+<ul><li><b>Trap bits:</b> −log₂ of the chance that a player choosing at random among real moves along the solution never makes the level unwinnable.</li>
+<li><b>Dead-end ratio:</b> share of reachable states that can no longer be won.</li>
+<li>Bands: easy 0–8 · medium 6–15 · hard 15+. No score if the state space exceeds the bound.</li></ul>
+<table class="num"><tr><th>Requested</th><th>Median score</th><th>Median solution</th><th>Fully validated</th></tr>
+<tr><td>easy</td><td>3.5</td><td>10 moves</td><td>97%</td></tr><tr><td>medium</td><td>8.3</td><td>18 moves</td><td>100%</td></tr><tr><td>hard</td><td>20.85</td><td>44 moves</td><td>89.4%</td></tr></table>
+<p class="small dim">Hard requests build dozens of candidates and deliver the hardest that passes every check. The score is our definition; it has not been compared with human ratings.</p></div></div><div class="foot"><span>Level-Forge · NeuroBridge.SI Baku · AI Gaming track</span><span>16</span></div></section><section class="s "><div class="k">Appendix B · full benchmark</div><h1>200 requests, three ways of making a level, one verifier</h1>
+<div class="cols2 wide-left"><div class="card"><h3>Benchmark (seed 2026, scripts in bench/, nothing typed by hand)</h3><table class="num">
+<tr><th>Metric</th><th>Random tiles</th><th>Blueprint, unverified</th><th>Full pipeline</th></tr>
+<tr><td>Accepted by the original loader</td><td>100%</td><td>100%</td><td><b>100%</b></td></tr><tr><td>Solvability established (solution replayed in the engine)</td><td>0%</td><td>92%</td><td><b>100%</b></td></tr><tr><td>Requested skills exercised and proven necessary</td><td>0%</td><td>87.5%</td><td><b>99.7%</b></td></tr><tr><td>Difficulty score inside the requested band</td><td>0%</td><td>59%</td><td><b>95.5%</b></td></tr><tr><td>Fully validated</td><td>0%</td><td>59%</td><td><b>95.5%</b></td></tr>
+<tr><td>Latency median / p90</td><td>n/a</td><td>0.001 s / 0.002 s</td><td>0.778 s / 7.406 s</td></tr></table>
+<p class="small dim">“Blueprint, unverified” is the same constructor with the verifier and repair loop switched off: the gap is what verification adds. Requests come from templates over the skills the generator supports, so this measures reliability inside its vocabulary.</p></div>
+<div class="card"><h3>Can the verifier be wrong?</h3><ul>
+<li><b>False acceptance: 0 of 200.</b> Every level labelled solvable was re-played through the engine's Python binding.</li>
+<li><b>Model vs real engine: 117 of 117 verdicts agree</b> on 120 deliberately damaged levels (3 hit the engine's search bound).</li>
+<li><b>Differential test:</b> the fast search model and the original engine compared move by move on 100,000 random moves, with no disagreement.</li>
+<li><b>30 mechanic probes</b> on the real engine; validator agrees with the real loader on all 51 shipped levels.</li>
+<li><b>Regression suite: 60/60</b> checks pass.</li></ul></div></div><div class="foot"><span>Level-Forge · NeuroBridge.SI Baku · AI Gaming track</span><span>17</span></div></section><section class="s "><div class="k">Appendix C · every failure we found</div><h1>Failures found while building it, and what each one changed</h1>
+<div class="cols2 wide-left"><div class="card"><h3>What broke</h3><table class="fail">
+<tr><td>The real engine explores only ~2,000 states per second, too slow for proofs.</td><td>Wrote a fast model of it; every solution is still replayed in the real engine and the two are differential-tested.</td></tr>
+<tr><td>“Pushing is required” was false: a loose rule word can be drowned instead of a rock.</td><td>Found by the ablation search. Sink gates are now one column thicker than the number of loose words.</td></tr>
+<tr><td>Early “hard” levels were long but easy: 0–1 trap points on the solution.</td><td>Replaced length with a difficulty score from the full state space; hard requests search and keep the hardest candidate.</td></tr>
+<tr><td>The game's bundled viewer: tiny fixed window, scripted, no sprite for boxes or hedges.</td><td>Wrote a resizable keyboard player on the same engine.</td></tr>
+<tr><td>Hard requests: 10.6% not fully validated.</td><td>Delivered with the lower label and the unmet requirement listed.</td></tr>
+<tr><td>Second game, first run: only 68% fully validated.</td><td>Boxes were placed in dead corners; constructor fixed and bands calibrated; now 96.7%.</td></tr>
+<tr><td>Keyword parser misses paraphrased requests.</td><td>Not fixed. The LLM reader that should replace it is written but never ran (invalid API key), so this weakness is still in every result.</td></tr></table></div>
+<div><div class="card"><h3>Compared with how the task is done today</h3><table class="cmp">
+<tr><th></th><th>By hand</th><th>Ask an LLM</th><th>Level-Forge</th></tr>
+<tr><td>Loads in the game</td><td>yes</td><td>unchecked</td><td>checked by the real loader</td></tr>
+<tr><td>Known solvable</td><td>after play-testing</td><td>no evidence</td><td>replayed in the engine</td></tr>
+<tr><td>Shortcuts found</td><td>if a tester finds one</td><td>no</td><td>exhaustive ablation</td></tr>
+<tr><td>Difficulty</td><td>feel</td><td>a guess</td><td>computed</td></tr>
+<tr><td>Impossible request</td><td>found late</td><td>not checked</td><td>refused with reason</td></tr></table></div>
+<div class="card warnc"><h3>Not established</h3><ul class="small"><li>Model ≡ engine is tested, not proven; “unsolvable” means with the four directional inputs.</li><li>Two games, one version each; the difficulty score is not calibrated on human players.</li><li>We did not time human designers.</li></ul></div></div></div><div class="foot"><span>Level-Forge · NeuroBridge.SI Baku · AI Gaming track</span><span>18</span></div></section><script src="../docs/data.js"></script><script>
+const D=window.FORGE_DATA;const NOUN_COL={PLAYER:"#f4f4f8",GOAL:"#f2c14e",BABA:"#f4f4f8",KEKE:"#f08a5d",ROCK:"#c8a46a",BOX:"#c98b4e",WALL:"#7c849c",HEDGE:"#4f9d69",FLAG:"#f2c14e",STAR:"#f7e26b",LOVE:"#ef6f9c",KEY:"#f2a65a",WATER:"#4a90e2",LAVA:"#ff6b35",SKULL:"#c0392b",CRAB:"#e25c5c",TILE:"#39405a"};
+const PROP_COL={YOU:"#e5609c",WIN:"#f2c14e",STOP:"#4f9d69",PUSH:"#c8a46a",SINK:"#4a90e2",DEFEAT:"#c0392b"};
+function drawBoard(cv,W,H,cells,rules,state){
+  const dpr=window.devicePixelRatio||1,cssW=cv.clientWidth||600,cell=Math.max(14,Math.min(60,Math.floor(cssW/W)));
+  cv.width=cell*W*dpr;cv.height=cell*H*dpr;cv.style.maxWidth=(cell*W)+"px";cv.style.aspectRatio=`${W}/${H}`;
+  const g=cv.getContext("2d");g.scale(dpr,dpr);g.fillStyle="#090a0f";g.fillRect(0,0,cell*W,cell*H);g.strokeStyle="#171a25";g.lineWidth=1;
+  for(let x=0;x<=W;x++){g.beginPath();g.moveTo(x*cell+.5,0);g.lineTo(x*cell+.5,H*cell);g.stroke();}
+  for(let y=0;y<=H;y++){g.beginPath();g.moveTo(0,y*cell+.5);g.lineTo(W*cell,y*cell+.5);g.stroke();}
+  const you=new Set((rules||[]).filter(r=>r.endsWith(" IS YOU")).map(r=>"ICON_"+r.split(" ")[0]));you.add("ICON_PLAYER");
+  const ord=c=>c[2]==="ICON_GOAL"?-1:c[2].startsWith("ICON_")?(you.has(c[2])?2:0):1;
+  [...cells].sort((a,b)=>ord(a)-ord(b)).forEach(c=>{const x=c[0]*cell,y=c[1]*cell,p=Math.max(2,cell*.09),name=c[2];
+    if(name==="ICON_GOAL"){g.strokeStyle="#f2c14e";g.lineWidth=Math.max(2,cell*.07);g.beginPath();g.arc(x+cell/2,y+cell/2,cell*.2,0,7);g.stroke();return;}
+    if(name.startsWith("ICON_")){const n=name.slice(5),col=NOUN_COL[n]||"#9aa3b8";g.fillStyle=col;
+      if(["WALL","HEDGE","WATER","LAVA","TILE"].includes(n)){g.globalAlpha=n==="TILE"?.5:.9;g.fillRect(x+1,y+1,cell-2,cell-2);g.globalAlpha=1;
+        if(n==="WATER"||n==="LAVA"){g.strokeStyle="rgba(255,255,255,.35)";g.lineWidth=1.4;for(let k=1;k<=2;k++){g.beginPath();const yy=y+cell*k/3;g.moveTo(x+p,yy);g.quadraticCurveTo(x+cell*.3,yy-3,x+cell*.5,yy);g.quadraticCurveTo(x+cell*.7,yy+3,x+cell-p,yy);g.stroke();}}
+      }else{g.beginPath();
+        if(["ROCK","BOX"].includes(n))g.roundRect(x+p*1.6,y+p*1.6,cell-p*3.2,cell-p*3.2,n==="ROCK"?cell*.28:cell*.12);
+        else if(["FLAG","STAR","LOVE","KEY"].includes(n)){const cx=x+cell/2,cy=y+cell/2,R=cell*.36;for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,rr=i%2?R*.48:R;g[i?"lineTo":"moveTo"](cx+rr*Math.cos(a),cy+rr*Math.sin(a));}g.closePath();}
+        else g.arc(x+cell/2,y+cell/2,cell*.34,0,7);
+        g.fill();if(you.has(name)){g.strokeStyle="#e5609c";g.lineWidth=2.5;g.stroke();}
+        if(["SKULL","CRAB"].includes(n)){g.fillStyle="#090a0f";g.beginPath();g.arc(x+cell*.4,y+cell*.46,cell*.06,0,7);g.arc(x+cell*.6,y+cell*.46,cell*.06,0,7);g.fill();}}
+      if(cell>=26){g.fillStyle=["WALL","HEDGE","WATER","LAVA"].includes(n)?"rgba(255,255,255,.78)":(n==="TILE"?"#8f96a8":"#090a0f");g.font=`700 ${Math.max(8,cell*.2)}px ui-monospace,Menlo,monospace`;g.textAlign="center";g.textBaseline="middle";g.fillText(n==="PLAYER"?"you":n.toLowerCase(),x+cell/2,y+cell*(["ROCK","BOX","BABA","KEKE","SKULL","CRAB"].includes(n)?.66:.5),cell-4);}
+    }else{const col=name==="IS"?"#eceef4":(PROP_COL[name]||NOUN_COL[name]||"#b9a0ff"),isProp=name in PROP_COL;
+      g.beginPath();g.roundRect(x+p,y+p,cell-2*p,cell-2*p,cell*.12);
+      if(isProp){g.fillStyle=col;g.fill();g.fillStyle="#090a0f";}else{g.fillStyle="#12141c";g.fill();g.strokeStyle=col;g.lineWidth=1.5;g.stroke();g.fillStyle=col;}
+      g.font=`800 ${Math.max(7,cell*(name.length>4?.2:.26))}px ui-monospace,Menlo,monospace`;g.textAlign="center";g.textBaseline="middle";g.fillText(name,x+cell/2,y+cell/2+.5,cell-2*p-2);}
+  });
+  if(state==="WON"||state==="LOST"){g.fillStyle=state==="WON"?"rgba(87,199,133,.16)":"rgba(239,111,108,.18)";g.fillRect(0,0,cell*W,cell*H);g.fillStyle=state==="WON"?"#8ff0b8":"#ffb1ae";g.font=`800 ${cell*.5}px ui-monospace,monospace`;g.textAlign="right";g.textBaseline="bottom";g.fillText(state,cell*W-8,cell*H-4);}
+}
+
+document.querySelectorAll("canvas.board").forEach(cv=>{
+  if(cv.dataset.sok){const g=D.sokoban.runs.find(r=>r.frames&&r.frames.length&&r.spec.difficulty==="hard")||D.sokoban.runs.find(r=>r.frames&&r.frames.length),f=g.frames[0];drawBoard(cv,g.width,g.height,f.cells,f.rules,f.state);return;}
+  if(cv.dataset.ev){const ev=D.gallery.find(g=>g.status==="REJECTED_CONTRADICTION"&&g.contradictions[0].evidence).contradictions[0].evidence;drawBoard(cv,ev.width,ev.height,ev.cells,[],"");return;}
+  const g=D.gallery[+cv.dataset.run],f=g.frames[Math.min(+cv.dataset.frame,g.frames.length-1)];drawBoard(cv,g.width,g.height,f.cells,f.rules,f.state);});
+</script></body></html>

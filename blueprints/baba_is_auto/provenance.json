@@ -1,0 +1,617 @@
+{
+ "blueprint_version": "0.1.0",
+ "game_commit": "24cefb48d47ae6a6f5c0d936310d8bceb9c4279d",
+ "source_fingerprint": {
+  "Includes/baba-is-auto/Enums/NounType.def": "a42feb650742b5f6de7c1191bbb39ddfa729bbb09c13d8163b5cea002c901e94",
+  "Includes/baba-is-auto/Enums/OpType.def": "1d093676b69b98d2e73616c24f3f7a789656fa816dbc1415d36b5f7e9d23e941",
+  "Includes/baba-is-auto/Enums/PropertyType.def": "e52b7770af21b63fbdafd125228ab59507f85eefe36f3074d9a3e834032e1b0d",
+  "Includes/baba-is-auto/Enums/IconType.def": "62b91453abc6aeab792eab9b7f9bd6d65b4da93876582292ff84882a4b4e2abe",
+  "Includes/baba-is-auto/Enums/GameEnums.hpp": "3bbe52322f4c6568d572690e8886d23e6e0341b358f51142dc74e4954cfa5d11",
+  "Sources/baba-is-auto/Games/Game.cpp": "17eff7ba7f6dc5b4039cda432405d9806ee5fae2ba810f19fc498d0aeca23221",
+  "Sources/baba-is-auto/Games/Map.cpp": "9e68016a9941415a80232b0abfa6a6bef447539ab0f6ec5a425c63f4c4670ff0",
+  "Sources/baba-is-auto/Games/Object.cpp": "ceadd26148e1261f9b38753df567dc1fe3c20683e18705dd5629aa959c21da00",
+  "Sources/baba-is-auto/Rules/RuleManager.cpp": "fe829c49c7a7daba07b159b715de3b72b82ceab3d0961bff52c60dcef77344f4",
+  "Documents/rule-language.md": "a09d3feb0b0e905b2e65671b64ae7e3ff6d7ca2a3fc8e29dc1ee3fa40d681964"
+ },
+ "depends_on": {
+  "Includes/baba-is-auto/Enums/NounType.def": [
+   "game_spec.entities",
+   "level_schema.tile_ids"
+  ],
+  "Includes/baba-is-auto/Enums/OpType.def": [
+   "game_spec.entities",
+   "level_schema.tile_ids"
+  ],
+  "Includes/baba-is-auto/Enums/PropertyType.def": [
+   "game_spec.entities",
+   "level_schema.tile_ids"
+  ],
+  "Includes/baba-is-auto/Enums/IconType.def": [
+   "game_spec.entities",
+   "level_schema.tile_ids"
+  ],
+  "Includes/baba-is-auto/Enums/GameEnums.hpp": [
+   "game_spec.entities",
+   "level_schema.tile_ids"
+  ],
+  "Sources/baba-is-auto/Games/Game.cpp": [
+   "game_spec.turn_pipeline",
+   "game_spec.support",
+   "mechanics.md",
+   "provenance",
+   "solver (re-link)",
+   "tests/probes.py"
+  ],
+  "Sources/baba-is-auto/Games/Map.cpp": [
+   "level_schema.json",
+   "validator",
+   "provenance"
+  ],
+  "Sources/baba-is-auto/Games/Object.cpp": [
+   "solver (re-link)"
+  ],
+  "Sources/baba-is-auto/Rules/RuleManager.cpp": [
+   "solver (re-link)"
+  ],
+  "Documents/rule-language.md": [
+   "game_spec.support (cross-check only)"
+  ]
+ },
+ "narrative_fingerprint": {
+  "skill.md": "d940b93b01b635ddbe47a6de32051e3822e1db6173a895431b80614f50e17d92",
+  "mechanics.md": "67cf5cc04d2174d552bcf7ba2d9256145f0a8f9a99ece80b0b8fceb51ff37fcb"
+ },
+ "summary": {
+  "confirmed": 30,
+  "confirmed-by-source": 1,
+  "inferred": 2,
+  "out-of-scope": 1,
+  "unresolved": 1
+ },
+ "unsupported_tokens": {
+  "tokens": [
+   "CURSOR",
+   "GROUP",
+   "IMAGE",
+   "LEVEL",
+   "MAKE",
+   "PULL",
+   "SWAP",
+   "TELE",
+   "FALL",
+   "SHIFT",
+   "MORE",
+   "WORD",
+   "BEST",
+   "SLEEP",
+   "RED",
+   "BLUE",
+   "HIDE",
+   "BONUS",
+   "END",
+   "DONE"
+  ],
+  "evidence": "zero references in Sources/baba-is-auto/Games/Game.cpp and/or 'Unsupported' in Documents/rule-language.md"
+ },
+ "claims": [
+  {
+   "id": "text_always_push",
+   "statement": "Every text tile is pushable without any rule",
+   "section": "mechanics.push",
+   "status": "confirmed",
+   "source": {
+    "file": "Sources/baba-is-auto/Games/Game.cpp",
+    "line": 1808,
+    "text": "(IsTextType(instance.type) ||",
+    "anchor": "\\(IsTextType\\(instance\\.type\\) \\|\\|"
+   },
+   "evidence": {
+    "probe": "tests/probes.py::text_always_push",
+    "passed": true
+   }
+  },
+  {
+   "id": "edge_blocks",
+   "statement": "The map edge blocks movement; nothing leaves the grid",
+   "section": "mechanics.movement",
+   "status": "confirmed",
+   "source": {
+    "file": "Sources/baba-is-auto/Games/Game.cpp",
+    "line": 1768,
+    "text": "// Check boundary",
+    "anchor": "// Check boundary"
+   },
+   "evidence": {
+    "probe": "tests/probes.py::edge_blocks",
+    "passed": true
+   }
+  },
+  {
+   "id": "stop_blocks",
+   "statement": "X IS STOP blocks entry into X's cell",
+   "section": "mechanics.stop",
+   "status": "confirmed",
+   "source": {
+    "file": "Sources/baba-is-auto/Games/Game.cpp",
+    "line": 1788,
+    "text": "// Check the icon has property 'STOP'.",
+    "anchor": "// Check the icon has property 'STOP'"
+   },
+   "evidence": {
+    "probe": "tests/probes.py::stop_blocks",
+    "passed": true
+   }
+  },
+  {
+   "id": "no_rule_no_block",
+   "statement": "An icon with no property is walked over (shares the cell)",
+   "section": "mechanics.movement",
+   "status": "confirmed",
+   "source": {
+    "file": "Sources/baba-is-auto/Games/Game.cpp",
+    "line": 1756,
+    "text": "bool Game::CanMove(std::size_t x, std::size_t y, Direction dir,",
+    "anchor": "bool Game::CanMove\\("
+   },
+   "evidence": {
+    "probe": "tests/probes.py::no_rule_no_block",
+    "passed": true
+   }
+  },
+  {
+   "id": "push_moves",
+   "statement": "X IS PUSH objects are pushed one cell by the mover",
+   "section": "mechanics.push",
+   "status": "confirmed",
+   "source": {
+    "file": "Sources/baba-is-auto/Games/Game.cpp",
+    "line": 1910,
+    "text": "void Game::ProcessPush(std::size_t x, std::size_t y, Direction dir,",
+    "anchor": "void Game::ProcessPush\\("
+   },
+   "evidence": {
+    "probe": "tests/probes.py::push_moves",
+    "passed": true
+   }
+  },
+  {
+   "id": "push_chain",
+   "statement": "A line of pushable things moves together",
+   "section": "mechanics.push",
+   "status": "confirmed",
+   "source": {
+    "file": "Sources/baba-is-auto/Games/Game.cpp",
+    "line": 1845,
+    "text": "if (!CanMove(_x, _y, dir, pushedIDs))",
+    "anchor": "if \\(!CanMove\\(_x, _y, dir, pushedIDs\\)\\)"
+   },
+   "evidence": {
+    "probe": "tests/probes.py::push_chain",
+    "passed": true
+   }
+  },
+  {
+   "id": "push_chain_blocked",
+   "statement": "A push chain that hits the edge or STOP blocks the mover",
+   "section": "mechanics.push",
+   "status": "confirmed",
+   "source": {
+    "file": "Sources/baba-is-auto/Games/Game.cpp",
+    "line": 1845,
+    "text": "if (!CanMove(_x, _y, dir, pushedIDs))",
+    "anchor": "if \\(!CanMove\\(_x, _y, dir, pushedIDs\\)\\)"
+   },
+   "evidence": {
+    "probe": "tests/probes.py::push_chain_blocked",
+    "passed": true
+   }
+  },
+  {
+   "id": "push_overrides_stop",
+   "statement": "PUSH overrides STOP on the same instance",
+   "section": "mechanics.stop",
+   "status": "confirmed",
+   "source": {
+    "file": "Sources/baba-is-auto/Games/Game.cpp",
+    "line": 1795,
+    "text": "ObjectType::STOP) &&",
+    "anchor": "ObjectType::STOP\\) &&"
+   },
+   "evidence": {
+    "probe": "tests/probes.py::push_overrides_stop",
+    "passed": true
+   }
+  },
+  {
+   "id": "win_on_overlap",
+   "statement": "The game is WON when a YOU instance shares a cell with a WIN instance",
+   "section": "mechanics.win",
+   "status": "confirmed",
+   "source": {
+    "file": "Sources/baba-is-auto/Games/Game.cpp",
+    "line": 2179,
+    "text": "m_playState = PlayState::WON;",
+    "anchor": "m_playState = PlayState::WON;"
+   },
+   "evidence": {
+    "probe": "tests/probes.py::win_on_overlap",
+    "passed": true
+   }
+  },
+  {
+   "id": "win_self",
+   "statement": "X IS YOU plus X IS WIN wins as soon as a turn is processed",
+   "section": "mechanics.win",
+   "status": "confirmed",
+   "source": {
+    "file": "Sources/baba-is-auto/Games/Game.cpp",
+    "line": 2177,
+    "text": "if (HasPropertyAt(x, y, ObjectType::WIN))",
+    "anchor": "if \\(HasPropertyAt\\(x, y, ObjectType::WIN\\)\\)"
+   },
+   "evidence": {
+    "probe": "tests/probes.py::win_self",
+    "passed": true
+   }
+  },
+  {
+   "id": "load_state_not_evaluated",
+   "statement": "Win/lose is evaluated only when a turn is processed, not at load",
+   "section": "mechanics.win",
+   "status": "confirmed",
+   "source": {
+    "file": "Sources/baba-is-auto/Games/Game.cpp",
+    "line": 442,
+    "text": "Game::Game(std::string_view filename)",
+    "anchor": "^Game::Game\\(std::string_view filename\\)"
+   },
+   "evidence": {
+    "probe": "tests/probes.py::load_state_not_evaluated",
+    "passed": true
+   }
+  },
+  {
+   "id": "no_you_is_lost",
+   "statement": "With no YOU instance left the play state becomes LOST",
+   "section": "mechanics.lose",
+   "status": "confirmed",
+   "source": {
+    "file": "Sources/baba-is-auto/Games/Game.cpp",
+    "line": 2188,
+    "text": "m_playState = PlayState::LOST;",
+    "anchor": "m_playState = PlayState::LOST;"
+   },
+   "evidence": {
+    "probe": "tests/probes.py::no_you_is_lost",
+    "passed": true
+   }
+  },
+  {
+   "id": "rule_same_turn",
+   "statement": "A rule completed by a push is active at the end of that same turn",
+   "section": "mechanics.rules",
+   "status": "confirmed",
+   "source": {
+    "file": "Sources/baba-is-auto/Games/Game.cpp",
+    "line": 495,
+    "text": "void Game::MovePlayer(Direction dir)",
+    "anchor": "^void Game::MovePlayer\\(Direction dir\\)"
+   },
+   "evidence": {
+    "probe": "tests/probes.py::rule_same_turn",
+    "passed": true
+   }
+  },
+  {
+   "id": "rule_reading_order",
+   "statement": "Rules are read left-to-right and top-to-bottom only",
+   "section": "mechanics.rules",
+   "status": "confirmed",
+   "source": {
+    "file": "Sources/baba-is-auto/Games/Game.cpp",
+    "line": 631,
+    "text": "ParseRule(x, y, RuleDirection::VERTICAL);",
+    "anchor": "ParseRule\\(x, y, RuleDirection::VERTICAL\\);"
+   },
+   "evidence": {
+    "probe": "tests/probes.py::rule_reading_order",
+    "passed": true
+   }
+  },
+  {
+   "id": "sink_destroys_both",
+   "statement": "SINK removes every instance in an occupied sink cell, including the sinker",
+   "section": "mechanics.sink",
+   "status": "confirmed",
+   "source": {
+    "file": "Sources/baba-is-auto/Games/Game.cpp",
+    "line": 2030,
+    "text": "void Game::ProcessSink()",
+    "anchor": "^void Game::ProcessSink\\(\\)"
+   },
+   "evidence": {
+    "probe": "tests/probes.py::sink_destroys_both",
+    "passed": true
+   }
+  },
+  {
+   "id": "sink_text",
+   "statement": "Text pushed onto a SINK object is destroyed with it",
+   "section": "mechanics.sink",
+   "status": "confirmed",
+   "source": {
+    "file": "Sources/baba-is-auto/Games/Game.cpp",
+    "line": 2040,
+    "text": "if (instances.size() < 2 || !HasPropertyAt(x, y, ObjectType::SINK))",
+    "anchor": "instances\\.size\\(\\) < 2 \\|\\| !HasPropertyAt\\(x, y, ObjectType::SINK\\)"
+   },
+   "evidence": {
+    "probe": "tests/probes.py::sink_text",
+    "passed": true
+   }
+  },
+  {
+   "id": "sink_player",
+   "statement": "A YOU instance entering a SINK cell is destroyed (LOST if it was the last)",
+   "section": "mechanics.sink",
+   "status": "confirmed",
+   "source": {
+    "file": "Sources/baba-is-auto/Games/Game.cpp",
+    "line": 2030,
+    "text": "void Game::ProcessSink()",
+    "anchor": "^void Game::ProcessSink\\(\\)"
+   },
+   "evidence": {
+    "probe": "tests/probes.py::sink_player",
+    "passed": true
+   }
+  },
+  {
+   "id": "defeat_removes_you",
+   "statement": "DEFEAT removes overlapping YOU instances; the DEFEAT object stays",
+   "section": "mechanics.defeat",
+   "status": "confirmed",
+   "source": {
+    "file": "Sources/baba-is-auto/Games/Game.cpp",
+    "line": 2131,
+    "text": "void Game::ProcessDefeat()",
+    "anchor": "^void Game::ProcessDefeat\\(\\)"
+   },
+   "evidence": {
+    "probe": "tests/probes.py::defeat_removes_you",
+    "passed": true
+   }
+  },
+  {
+   "id": "hot_melt",
+   "statement": "A HOT instance removes MELT instances in its cell",
+   "section": "mechanics.hot_melt",
+   "status": "confirmed",
+   "source": {
+    "file": "Sources/baba-is-auto/Games/Game.cpp",
+    "line": 2092,
+    "text": "void Game::ProcessHotMelt()",
+    "anchor": "^void Game::ProcessHotMelt\\(\\)"
+   },
+   "evidence": {
+    "probe": "tests/probes.py::hot_melt",
+    "passed": true
+   }
+  },
+  {
+   "id": "transform",
+   "statement": "X IS Y turns every X into Y when a turn is processed",
+   "section": "mechanics.transform",
+   "status": "confirmed",
+   "source": {
+    "file": "Sources/baba-is-auto/Games/Game.cpp",
+    "line": 1289,
+    "text": "void Game::ProcessTransformations()",
+    "anchor": "^void Game::ProcessTransformations\\(\\)"
+   },
+   "evidence": {
+    "probe": "tests/probes.py::transform",
+    "passed": true
+   }
+  },
+  {
+   "id": "you_swap",
+   "statement": "Replacing the subject of 'X IS YOU' hands control to the new noun the same turn",
+   "section": "mechanics.you",
+   "status": "confirmed",
+   "source": {
+    "file": "Sources/baba-is-auto/Games/Game.cpp",
+    "line": 551,
+    "text": "std::vector<ObjectID> Game::GetPlayerIDsAt(const Position& position) const",
+    "anchor": "^std::vector<ObjectID> Game::GetPlayerIDsAt"
+   },
+   "evidence": {
+    "probe": "tests/probes.py::you_swap",
+    "passed": true
+   }
+  },
+  {
+   "id": "multi_you",
+   "statement": "Every YOU instance moves on each input",
+   "section": "mechanics.you",
+   "status": "confirmed",
+   "source": {
+    "file": "Sources/baba-is-auto/Games/Game.cpp",
+    "line": 522,
+    "text": "void Game::ProcessPlayerMove(Direction dir)",
+    "anchor": "^void Game::ProcessPlayerMove\\(Direction dir\\)"
+   },
+   "evidence": {
+    "probe": "tests/probes.py::multi_you",
+    "passed": true
+   }
+  },
+  {
+   "id": "rail_immovable",
+   "statement": "A vertical rule stacked from row 0 in column 0 cannot be moved or broken",
+   "section": "patterns.rule_rail",
+   "status": "confirmed",
+   "source": {
+    "file": "Sources/baba-is-auto/Games/Game.cpp",
+    "line": 1768,
+    "text": "// Check boundary",
+    "anchor": "// Check boundary"
+   },
+   "evidence": {
+    "probe": "tests/probes.py::rail_immovable",
+    "passed": true
+   }
+  },
+  {
+   "id": "unsupported_inert",
+   "statement": "Property words with no runtime hook (e.g. PULL, TELE) form rules but do nothing",
+   "section": "game_spec.support",
+   "status": "confirmed",
+   "source": {
+    "file": "Includes/baba-is-auto/Enums/PropertyType.def",
+    "line": 4,
+    "text": "X(PULL)",
+    "anchor": "X\\(PULL\\)"
+   },
+   "evidence": {
+    "probe": "tests/probes.py::unsupported_inert",
+    "passed": true
+   }
+  },
+  {
+   "id": "and_chain",
+   "statement": "AND chains expand to independent rules",
+   "section": "mechanics.rules",
+   "status": "confirmed",
+   "source": {
+    "file": "Sources/baba-is-auto/Games/Game.cpp",
+    "line": 187,
+    "text": "void AddRuleCombinations(RuleManager& rules,",
+    "anchor": "^void AddRuleCombinations\\("
+   },
+   "evidence": {
+    "probe": "tests/probes.py::and_chain",
+    "passed": true
+   }
+  },
+  {
+   "id": "stacked_layers",
+   "statement": "Extra layers of a level file stack objects in the same cell",
+   "section": "level_schema.layers",
+   "status": "confirmed",
+   "source": {
+    "file": "Sources/baba-is-auto/Games/Map.cpp",
+    "line": 21,
+    "text": "constexpr std::size_t MAX_MAP_LAYERS = 3;",
+    "anchor": "constexpr std::size_t MAX_MAP_LAYERS = 3;"
+   },
+   "evidence": {
+    "probe": "tests/probes.py::stacked_layers",
+    "passed": true
+   }
+  },
+  {
+   "id": "loader_rejects_bad_dims",
+   "statement": "The loader rejects a missing or zero-sized header",
+   "section": "level_schema.header",
+   "status": "confirmed",
+   "source": {
+    "file": "Sources/baba-is-auto/Games/Map.cpp",
+    "line": 214,
+    "text": "throw std::runtime_error(\"Invalid map dimensions\");",
+    "anchor": "throw std::runtime_error\\(\"Invalid map dimensions\"\\)"
+   },
+   "evidence": {
+    "probe": "tests/probes.py::loader_rejects_bad_dims",
+    "passed": true
+   }
+  },
+  {
+   "id": "loader_rejects_sentinels",
+   "statement": "Category sentinel IDs (0, 66, 76, 110) and out-of-range IDs are rejected",
+   "section": "level_schema.tile_ids",
+   "status": "confirmed",
+   "source": {
+    "file": "Sources/baba-is-auto/Games/Map.cpp",
+    "line": 25,
+    "text": "bool IsValidMapTile(int value)",
+    "anchor": "^bool IsValidMapTile\\(int value\\)"
+   },
+   "evidence": {
+    "probe": "tests/probes.py::loader_rejects_sentinels",
+    "passed": true
+   }
+  },
+  {
+   "id": "loader_rejects_count",
+   "statement": "Tile count must be a whole number of WxH layers, at most 3",
+   "section": "level_schema.layers",
+   "status": "confirmed",
+   "source": {
+    "file": "Sources/baba-is-auto/Games/Map.cpp",
+    "line": 225,
+    "text": "values.size() / tileCount > MAX_MAP_LAYERS ||",
+    "anchor": "values\\.size\\(\\) / tileCount > MAX_MAP_LAYERS"
+   },
+   "evidence": {
+    "probe": "tests/probes.py::loader_rejects_count",
+    "passed": true
+   }
+  },
+  {
+   "id": "loader_rejects_nonint",
+   "statement": "Non-integer tile tokens are rejected",
+   "section": "level_schema.tokens",
+   "status": "confirmed",
+   "source": {
+    "file": "Sources/baba-is-auto/Games/Map.cpp",
+    "line": 34,
+    "text": "std::optional<int> ParseInt(std::string_view token)",
+    "anchor": "^std::optional<int> ParseInt\\("
+   },
+   "evidence": {
+    "probe": "tests/probes.py::loader_rejects_nonint",
+    "passed": true
+   }
+  },
+  {
+   "id": "state_abstraction_ignores_ids",
+   "status": "inferred",
+   "statement": "The solver identifies states by the multiset of (type[, facing]) per cell; object IDs and in-cell stacking order are ignored.",
+   "basis": "IDs only order simultaneous updates (PlayerStackComesFirst, MOVE rounds); no rule in the generation vocabulary can observe them.  No counter-example found, not proven.",
+   "consequence": "A witness solution is still certified by replay in the real engine. Only 'unsolvable' and dead-state counts rest on this abstraction."
+  },
+  {
+   "id": "empty_move_random",
+   "status": "confirmed-by-source",
+   "statement": "A directionless EMPTY under 'EMPTY IS MOVE' picks a random direction (std::mt19937 seeded from std::random_device).",
+   "source": {
+    "file": "Includes/baba-is-auto/Games/Game.hpp",
+    "anchor": "std::mt19937 m_randomEngine",
+    "line": 426,
+    "text": "std::mt19937 m_randomEngine{ std::random_device{}() };"
+   },
+   "consequence": "EMPTY is excluded from the generation vocabulary so every generated level is deterministic."
+  },
+  {
+   "id": "wait_input",
+   "status": "unresolved",
+   "statement": "Whether a 'wait' input is available to the player.",
+   "basis": "Game::MovePlayer(Direction::NONE) processes a turn, but the shipped pygame GUI was not confirmed to bind a wait key.",
+   "consequence": "The solver searches the four directional inputs only (pass --wait to include waiting). 'Unsolvable' therefore means 'unsolvable with U/D/L/R'."
+  },
+  {
+   "id": "facing_in_state",
+   "status": "inferred",
+   "statement": "Facing direction is left out of the state key unless MOVE, FACING, a direction property or a LOCKED_* tile is present in the level.",
+   "basis": "Those are the only places Game.cpp reads ObjectInstance::direction.",
+   "consequence": "Same as state_abstraction_ignores_ids."
+  },
+  {
+   "id": "float_safe_weak_open_shut_move",
+   "status": "out-of-scope",
+   "statement": "MOVE, OPEN/SHUT, WEAK, FLOAT, SAFE, HAS, conditions (ON/NEAR/FACING/LONELY), NOT and the special nouns are implemented by the engine (and the solver handles them, since it runs the engine) but have no probe in this blueprint yet.",
+   "consequence": "They are accepted in hand-written levels and verified by the solver, but the generator will not emit them."
+  }
+ ]
+}

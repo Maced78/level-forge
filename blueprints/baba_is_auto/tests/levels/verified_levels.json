@@ -1,0 +1,52 @@
+[
+ {
+  "name": "teach_is_you",
+  "request": "Create a level that teaches the player how to manipulate the IS YOU rule.",
+  "seed": 7,
+  "status": "FULLY_VALIDATED",
+  "dsl": "WALL IS   STOP FLAG IS   WIN\n.    .    .    .    .    .\n.    KEKE BABA .    baba .\n.    .    IS   .    .    .\n.    .    YOU  .    .    .\nwall wall wall wall wall wall\n.    .    keke .    .    .\n.    .    .    .    .    .\n.    .    flag .    .    .",
+  "solution": "ULLLLDRDD",
+  "length": 9,
+  "engine_parity": true
+ },
+ {
+  "name": "easy_push_rock_water",
+  "request": "Make an easy level about pushing rocks into water.",
+  "seed": 7,
+  "status": "FULLY_VALIDATED",
+  "dsl": "BABA  .     .     .     water .     .     .     WATER\nIS    .     baba  .     water .     .     .     IS\nYOU   .     .     rock  water flag  .     .     SINK\nROCK  .     .     .     water .     .     .     FLAG\nIS    .     .     .     water .     .     .     IS\nPUSH  .     .     .     water .     .     .     WIN",
+  "solution": "DRRR",
+  "length": 4,
+  "engine_parity": true
+ },
+ {
+  "name": "easy_break_stop",
+  "request": "Create an easy level that tests rule manipulation with a wall.",
+  "seed": 3,
+  "status": "FULLY_VALIDATED",
+  "dsl": "BABA IS   YOU  WALL .    .\nFLAG IS   WIN  IS   .    .\n.    .    .    STOP .    .\n.    baba .    .    .    .\n.    .    .    .    .    .\nwall wall wall wall wall wall\n.    .    .    .    .    .\n.    .    .    .    .    .\n.    .    .    .    .    flag",
+  "solution": "URRDDDDDDRR",
+  "length": 11,
+  "engine_parity": true
+ },
+ {
+  "name": "medium_skulls_win_change",
+  "request": "A medium level with skulls where the win condition changes, no object pushing.",
+  "seed": 7,
+  "status": "FULLY_VALIDATED",
+  "dsl": "BABA   FLAG   .      .      baba   skull  .      .      .      FLAG\nIS     IS     .      .      .      skull  .      .      .      IS\nYOU    FLAG   .      .      .      skull  .      .      .      .\nSKULL  IS     DEFEAT .      .      skull  .      WIN    .      .\n.      .      .      .      .      skull  flag   .      .      .\n.      .      .      .      .      skull  .      .      .      .",
+  "solution": "DDLLDRRRRRRDRUDLLL",
+  "length": 18,
+  "engine_parity": false
+ },
+ {
+  "name": "hard_rules_push_win",
+  "request": "Create a difficult level that tests the player's ability to manipulate rules, use object pushing strategically, and reason about changing win conditions. Make it solvable, use only mechanics supported by the game, and export it as a new native level file.",
+  "seed": 1,
+  "status": "FULLY_VALIDATED",
+  "dsl": "BABA  IS    YOU   WALL  .     .\nROCK  IS    PUSH  IS    .     .\n.     .     .     STOP  .     .\n.     .     .     .     .     .\nbaba  .     .     .     .     .\n.     .     .     .     .     hedge\nwall  wall  wall  wall  wall  wall\n.     rock  .     .     .     .\n.     .     .     .     .     .\nlava  lava  lava  lava  lava  lava\nlava  lava  lava  lava  lava  lava\n.     WIN   .     star  hedge hedge\n.     .     .     .     .     .\nHEDGE IS    STOP  .     .     .\nLAVA  IS    SINK  STAR  IS    .",
+  "solution": "UURRRDRRUULDDDDDDRDLUULLLLDRRURDDDDDDLLLURRDRUUUUUUUUUDDD",
+  "length": 57,
+  "engine_parity": false
+ }
+]

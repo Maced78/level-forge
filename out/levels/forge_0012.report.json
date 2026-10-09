@@ -1,0 +1,392 @@
+{
+ "request": "Create a level with exactly 10 moves.",
+ "game": "baba_is_auto",
+ "seed": 296951,
+ "spec": {
+  "raw": "Create a level with exactly 10 moves.",
+  "difficulty": "medium",
+  "skills_required": [],
+  "skills_forbidden": [],
+  "unsupported_requested": [],
+  "foreign_requested": [],
+  "outside_vocabulary": [],
+  "dependencies": [],
+  "defaults_applied": [
+   "difficulty defaulted to medium"
+  ],
+  "constraints": {
+   "max_moves": 10,
+   "min_moves": 10
+  },
+  "summary": "Create a puzzle level that requires a solution of exactly 10 moves."
+ },
+ "attempts": [
+  {
+   "attempt": 1,
+   "proposer": "constraint-based planner",
+   "plan": "3 zone(s), gate0:stop(WALL, key in zone 0), gate1:sink(WATER, key in zone 1), goal=reach",
+   "status": "PROVEN_SOLVABLE",
+   "reasons": [
+    "shortest solution 20 > max_moves 10"
+   ],
+   "size": "6x15",
+   "difficulty_score": 8.2,
+   "verify_seconds": 4.36
+  },
+  {
+   "attempt": 2,
+   "proposer": "constraint-based planner",
+   "plan": "2 zone(s), gate0:stop(HEDGE, key in zone 0), goal=form_win",
+   "status": "PROVEN_SOLVABLE",
+   "reasons": [
+    "difficulty score 5.5 outside medium band 6-15",
+    "shortest solution 17 > max_moves 10"
+   ],
+   "size": "6x10",
+   "difficulty_score": 5.5,
+   "verify_seconds": 0.43
+  },
+  {
+   "attempt": 3,
+   "proposer": "constraint-based planner",
+   "plan": "2 zone(s), gate0:sink(LAVA, key in zone 0), goal=form_win",
+   "status": "PROVEN_SOLVABLE",
+   "reasons": [
+    "shortest solution 18 > max_moves 10"
+   ],
+   "size": "9x6",
+   "difficulty_score": 8.6,
+   "verify_seconds": 0.03
+  },
+  {
+   "attempt": 4,
+   "proposer": "constraint-based planner",
+   "plan": "3 zone(s), gate0:sink(LAVA, key in zone 0), gate1:defeat(CRAB, key in zone 0), goal=reach",
+   "status": "PROVEN_SOLVABLE",
+   "reasons": [
+    "shortest solution 28 > max_moves 10"
+   ],
+   "size": "16x6",
+   "difficulty_score": 10.6,
+   "verify_seconds": 0.27
+  },
+  {
+   "attempt": 5,
+   "proposer": "constraint-based planner",
+   "plan": "2 zone(s), gate0:sink(LAVA, key in zone 0), goal=form_win",
+   "status": "PROVEN_SOLVABLE",
+   "reasons": [
+    "shortest solution 21 > max_moves 10"
+   ],
+   "size": "10x6",
+   "difficulty_score": 7.3,
+   "verify_seconds": 0.08
+  },
+  {
+   "attempt": 6,
+   "proposer": "constraint-based planner",
+   "plan": "2 zone(s), gate0:sink(WATER, key in zone 0), goal=form_win",
+   "status": "PROVEN_SOLVABLE",
+   "reasons": [
+    "shortest solution 18 > max_moves 10"
+   ],
+   "size": "10x6",
+   "difficulty_score": 7.8,
+   "verify_seconds": 0.06
+  },
+  {
+   "attempt": 7,
+   "proposer": "constraint-based planner",
+   "plan": "3 zone(s), gate0:stop(WALL, key in zone 0), gate1:sink(LAVA, key in zone 1), goal=reach",
+   "status": "PROVEN_SOLVABLE",
+   "reasons": [
+    "shortest solution 25 > max_moves 10"
+   ],
+   "size": "6x19",
+   "difficulty_score": 9.9,
+   "verify_seconds": 0.81
+  },
+  {
+   "attempt": 8,
+   "proposer": "constraint-based planner",
+   "plan": "2 zone(s), gate0:sink(LAVA, key in zone 0), goal=form_win",
+   "status": "PROVEN_SOLVABLE",
+   "reasons": [
+    "shortest solution 18 > max_moves 10"
+   ],
+   "size": "12x6",
+   "difficulty_score": 8.9,
+   "verify_seconds": 0.09
+  },
+  {
+   "attempt": 9,
+   "proposer": "constraint-based planner",
+   "plan": "2 zone(s), gate0:sink(WATER, key in zone 0), goal=form_win",
+   "status": "PROVEN_SOLVABLE",
+   "reasons": [
+    "shortest solution 16 > max_moves 10"
+   ],
+   "size": "12x6",
+   "difficulty_score": 7.7,
+   "verify_seconds": 0.07
+  },
+  {
+   "attempt": 10,
+   "proposer": "constraint-based planner",
+   "plan": "2 zone(s), gate0:stop(HEDGE, key in zone 0), goal=form_win",
+   "status": "PROVEN_SOLVABLE",
+   "reasons": [
+    "difficulty score 5.4 outside medium band 6-15",
+    "shortest solution 16 > max_moves 10"
+   ],
+   "size": "6x12",
+   "difficulty_score": 5.4,
+   "verify_seconds": 0.68
+  }
+ ],
+ "ai": {
+  "mode": "live",
+  "intent_source": "LLM (gemini-3.8-flash)",
+  "errors": [
+   "proposals: LLM call failed (propose): HTTP 503: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
+  ],
+  "proposals": [],
+  "keyword_parser_would_have_said": {
+   "difficulty": "medium",
+   "skills_required": [],
+   "skills_forbidden": []
+  },
+  "proposals_fully_validated": 0,
+  "usage": {
+   "calls": 2,
+   "live_calls": 2,
+   "models": [
+    "gemini-3.8-flash"
+   ],
+   "seconds": 17.45,
+   "prompt_tokens": 1373,
+   "output_tokens": 227,
+   "total_tokens": 2411,
+   "replayed_from_cache": false,
+   "by_step": [
+    {
+     "tag": "intent",
+     "model": "gemini-3.8-flash",
+     "seconds": 9.76,
+     "total_tokens": 1291,
+     "cached": false
+    },
+    {
+     "tag": "describe",
+     "model": "gemini-3.8-flash",
+     "seconds": 7.69,
+     "total_tokens": 1120,
+     "cached": false
+    }
+   ]
+  }
+ },
+ "blueprint_version": "0.1.0",
+ "game_commit": "24cefb48d47ae6a6f5c0d936310d8bceb9c4279d",
+ "status": "PROVEN_SOLVABLE",
+ "width": 16,
+ "height": 6,
+ "dsl": "BABA   ROCK   .      .      .      lava   lava   .      .      .      crab   .      .      .      WALL   LAVA\nIS     IS     .      wall   rock   lava   lava   .      .      .      crab   .      .      .      IS     IS\nYOU    PUSH   .      .      rock   lava   lava   .      .      .      crab   .      .      flag   STOP   SINK\nCRAB   IS     DEFEAT .      baba   lava   lava   .      .      .      crab   .      .      .      .      FLAG\n.      .      .      .      .      lava   lava   .      .      .      crab   .      .      .      .      IS\n.      .      .      .      .      lava   lava   .      wall   .      crab   .      .      .      .      WIN",
+ "native": "16 6\n4    51   132  132  132  150  150  132  132  132  128  132  132  132  64   40\n67   67   132  174  161  150  150  132  132  132  128  132  132  132  67   67\n77   79   132  132  161  150  150  132  132  132  128  132  132  135  78   88\n18   67   87   132  114  150  150  132  132  132  128  132  132  132  132  25\n132  132  132  132  132  150  150  132  132  132  128  132  132  132  132  67\n132  132  132  132  132  150  150  132  174  132  128  132  132  132  132  86\n",
+ "design_notes": {
+  "plan": "3 zone(s), gate0:sink(LAVA, key in zone 0), gate1:defeat(CRAB, key in zone 0), goal=reach",
+  "protected_rules": [
+   "BABA IS YOU",
+   "ROCK IS PUSH",
+   "LAVA IS SINK",
+   "FLAG IS WIN",
+   "WALL IS STOP"
+  ],
+  "breakable_rules": [
+   "CRAB IS DEFEAT"
+  ],
+  "notes": []
+ },
+ "verification": {
+  "status": "PROVEN_SOLVABLE",
+  "levels": {
+   "structural": {
+    "passed": true,
+    "checks": [
+     {
+      "check": "syntax.tokens",
+      "passed": true,
+      "detail": "96 integer tile tokens"
+     },
+     {
+      "check": "schema.dimensions",
+      "passed": true,
+      "detail": "16x6"
+     },
+     {
+      "check": "schema.layers",
+      "passed": true,
+      "detail": "96 tiles = 1 layer(s) of 96; allowed 1..3"
+     },
+     {
+      "check": "schema.tile_ids",
+      "passed": true,
+      "detail": "all IDs name an engine ObjectType"
+     },
+     {
+      "check": "schema.directions",
+      "passed": true,
+      "detail": "no DIRECTIONS block"
+     },
+     {
+      "check": "entities.no_unsupported_words",
+      "passed": true,
+      "detail": "every word has runtime behaviour in this engine"
+     },
+     {
+      "check": "policy.size",
+      "passed": true,
+      "detail": "16x6 = 96 cells; limit 20x20, 250 cells"
+     },
+     {
+      "check": "loader.engine_accepts",
+      "passed": true,
+      "detail": "Game(filename) constructed by the original engine"
+     },
+     {
+      "check": "loader.python_binding_accepts",
+      "passed": true,
+      "detail": "pyBaba.Game(filename)"
+     },
+     {
+      "check": "playable.you_instance",
+      "passed": true,
+      "detail": "controlled: ICON_BABA via ['BABA IS YOU']"
+     },
+     {
+      "check": "playable.not_won_immediately",
+      "passed": true,
+      "detail": "not won by an idle first turn"
+     }
+    ],
+    "warnings": []
+   },
+   "solvable": {
+    "passed": true,
+    "established": true,
+    "detail": "28-move witness found by the model search and replayed to WON in the original engine; pyBaba binding independently reports WON",
+    "witness": "LULDRDDLLURDRUULURRRRRRRRRRR",
+    "engine_replay_won": true,
+    "python_binding_final_state": "WON"
+   },
+   "solution_quality": {
+    "passed": false,
+    "shortest_length": 28,
+    "optimal": true,
+    "shortest_solution_count": 4,
+    "shortest_count_exact": true,
+    "difficulty_score": 10.6,
+    "difficulty_established": true,
+    "difficulty_components": {
+     "trap_bits": 2.42,
+     "trap_states": 3,
+     "decision_points": 28,
+     "dead_ratio": 0.192,
+     "rule_changes": 1,
+     "sacrifices": 1
+    },
+    "difficulty_band": [
+     6,
+     15
+    ],
+    "in_band": true,
+    "max_moves_ok": false,
+    "min_moves_ok": true
+   },
+   "robustness": {
+    "passed": true,
+    "analysis_complete": true,
+    "reachable_states": 65989,
+    "dead_states": 12695,
+    "lost_states": 8847,
+    "dead_state_ratio": 0.1924,
+    "detail": "all 65989 reachable states enumerated; 12695 are dead (no winning continuation)"
+   },
+   "mechanic_coverage": {
+    "passed": true,
+    "covered": 0,
+    "requested": 0
+   }
+  },
+  "reasons": [
+   "shortest solution 28 > max_moves 10"
+  ],
+  "skills": {},
+  "initial_rules": [
+   "CRAB IS DEFEAT",
+   "FLAG IS WIN",
+   "BABA IS YOU",
+   "LAVA IS SINK",
+   "ROCK IS PUSH",
+   "WALL IS STOP"
+  ],
+  "search": {
+   "status": "solved",
+   "proof": "witness",
+   "backend": "model",
+   "length": 28,
+   "states_explored": 65989,
+   "elapsed_ms": 230.941,
+   "wait_allowed": false
+  },
+  "solution": "LULDRDDLLURDRUULURRRRRRRRRRR",
+  "trace_events": {
+   "rule_changes": 1,
+   "win_rule_changes": 0,
+   "you_changes": 0,
+   "object_pushes": 3,
+   "text_pushes": 7,
+   "destroyed": 4,
+   "transformed": 0
+  },
+  "rule_timeline": [
+   {
+    "step": 4,
+    "added": [],
+    "removed": [
+     "CRAB IS DEFEAT"
+    ]
+   }
+  ],
+  "difficulty": {
+   "established": true,
+   "score": 10.6,
+   "components": {
+    "trap_bits": 2.42,
+    "trap_states": 3,
+    "decision_points": 28,
+    "dead_ratio": 0.192,
+    "rule_changes": 1,
+    "sacrifices": 1
+   },
+   "weights": {
+    "trap_bits": 2.0,
+    "dead_ratio": 4.0,
+    "rule_changes": 2.0,
+    "sacrifices": 3.0
+   }
+  },
+  "verify_seconds": 0.27
+ },
+ "solution": "LULDRDDLLURDRUULURRRRRRRRRRR",
+ "unmet_requirements": [
+  "shortest solution 28 > max_moves 10"
+ ],
+ "elapsed_seconds": 264.75,
+ "delivered_from": "constraint-based planner",
+ "presentation": {
+  "title": "Disarming the Crab",
+  "designer_note": "This 16x6 level tests navigating around hazards to dismantle the CRAB IS DEFEAT rule across 28 decision points. The puzzle's difficulty stems from a 28-move solution path that demands one deliberate sacrifice while avoiding three distinct trap states.",
+  "player_hint": "Think about how to safely neutralize the dangerous crab, and remember that reaching your goal may require sacrificing an object."
+ }
+}

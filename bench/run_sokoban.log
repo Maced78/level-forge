@@ -1,0 +1,49 @@
+[  43s] 15/60
+[  85s] 30/60
+[ 130s] 45/60
+[ 170s] 60/60
+{
+ "game": {
+  "name": "sokoban-solver-generator",
+  "upstream": "https://github.com/xbandrade/sokoban-solver-generator",
+  "commit": "69c7b5c8f8a8190a7e9c8bdaaa1771d13dfa9274",
+  "license": "MIT",
+  "description": "Open-source pygame Sokoban with text level files (levels/*.dat)"
+ },
+ "trials": 60,
+ "solvable_pct": 96.7,
+ "fully_validated_pct": 96.7,
+ "labelled_solvable": 58,
+ "false_acceptances": 0,
+ "by_difficulty": {
+  "easy": {
+   "n": 20,
+   "fully_validated_pct": 100.0,
+   "solvable_pct": 100.0,
+   "median_score": 4.35,
+   "median_solution_length": 6.5,
+   "median_seconds": 0.9199999999999999
+  },
+  "medium": {
+   "n": 20,
+   "fully_validated_pct": 90.0,
+   "solvable_pct": 90.0,
+   "median_score": 7.1,
+   "median_solution_length": 13.5,
+   "median_seconds": 1.04
+  },
+  "hard": {
+   "n": 20,
+   "fully_validated_pct": 100.0,
+   "solvable_pct": 100.0,
+   "median_score": 13.649999999999999,
+   "median_solution_length": 29.0,
+   "median_seconds": 6.135
+  }
+ },
+ "contradictory_rejected": "5/5",
+ "valid_controls_wrongly_rejected": "0/4",
+ "median_seconds": 1.29,
+ "wall_clock_seconds": 169.6,
+ "pipeline_lines_changed_for_this_game": 0
+}

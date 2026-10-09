@@ -1,0 +1,8 @@
+.env
+engine_build/
+__pycache__/
+*.pyc
+out/levels/_launch.txt
+bench/run.log
+blueprints/baba_is_auto/tests/last_run.json
+node_modules/

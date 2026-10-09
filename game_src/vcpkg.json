@@ -1,0 +1,25 @@
+{
+  "name": "baba-is-auto",
+  "version-string": "0.1.0",
+  "builtin-baseline": "9e593bb18ea69cc5095e012465dcd675a822ed0d",
+  "dependencies": [
+    "doctest",
+    "pybind11"
+  ],
+  "features": {
+    "editor": {
+      "description": "Build the C++ ImGui level editor.",
+      "dependencies": [
+        "glfw3",
+        {
+          "name": "imgui",
+          "features": [
+            "glfw-binding",
+            "opengl3-binding"
+          ]
+        },
+        "stb"
+      ]
+    }
+  }
+}

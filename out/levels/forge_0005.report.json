@@ -1,0 +1,248 @@
+{
+ "request": "Make an easy level about pushing rocks into water.",
+ "game": "baba_is_auto",
+ "seed": 7,
+ "spec": {
+  "raw": "Make an easy level about pushing rocks into water.",
+  "difficulty": "easy",
+  "skills_required": [
+   "object_pushing",
+   "hazard_sink"
+  ],
+  "skills_forbidden": [],
+  "unsupported_requested": [],
+  "foreign_requested": [],
+  "outside_vocabulary": [],
+  "dependencies": [],
+  "defaults_applied": [],
+  "constraints": {}
+ },
+ "attempts": [
+  {
+   "attempt": 1,
+   "proposer": "constraint-based planner",
+   "plan": "2 zone(s), gate0:sink(WATER, key in zone 0), goal=reach",
+   "status": "FULLY_VALIDATED",
+   "reasons": [],
+   "size": "9x6",
+   "difficulty_score": 2.5,
+   "verify_seconds": 0.04
+  }
+ ],
+ "ai": {
+  "mode": "off",
+  "intent_source": "keyword parser",
+  "errors": [],
+  "proposals": [],
+  "usage": {
+   "calls": 0,
+   "live_calls": 0,
+   "models": [],
+   "seconds": 0,
+   "prompt_tokens": 0,
+   "output_tokens": 0,
+   "total_tokens": 0,
+   "replayed_from_cache": false,
+   "by_step": []
+  }
+ },
+ "blueprint_version": "0.1.0",
+ "game_commit": "24cefb48d47ae6a6f5c0d936310d8bceb9c4279d",
+ "status": "FULLY_VALIDATED",
+ "width": 9,
+ "height": 6,
+ "dsl": "BABA  .     .     .     water .     .     .     WATER\nIS    .     baba  .     water .     .     .     IS\nYOU   .     .     rock  water flag  .     .     SINK\nROCK  .     .     .     water .     .     .     FLAG\nIS    .     .     .     water .     .     .     IS\nPUSH  .     .     .     water .     .     .     WIN",
+ "native": "9 6\n4    132  132  132  175  132  132  132  65\n67   132  114  132  175  132  132  132  67\n77   132  132  161  175  135  132  132  88\n51   132  132  132  175  132  132  132  25\n67   132  132  132  175  132  132  132  67\n79   132  132  132  175  132  132  132  86\n",
+ "design_notes": {
+  "plan": "2 zone(s), gate0:sink(WATER, key in zone 0), goal=reach",
+  "protected_rules": [
+   "BABA IS YOU",
+   "ROCK IS PUSH",
+   "WATER IS SINK",
+   "FLAG IS WIN"
+  ],
+  "breakable_rules": [],
+  "notes": []
+ },
+ "verification": {
+  "status": "FULLY_VALIDATED",
+  "levels": {
+   "structural": {
+    "passed": true,
+    "checks": [
+     {
+      "check": "syntax.tokens",
+      "passed": true,
+      "detail": "54 integer tile tokens"
+     },
+     {
+      "check": "schema.dimensions",
+      "passed": true,
+      "detail": "9x6"
+     },
+     {
+      "check": "schema.layers",
+      "passed": true,
+      "detail": "54 tiles = 1 layer(s) of 54; allowed 1..3"
+     },
+     {
+      "check": "schema.tile_ids",
+      "passed": true,
+      "detail": "all IDs name an engine ObjectType"
+     },
+     {
+      "check": "schema.directions",
+      "passed": true,
+      "detail": "no DIRECTIONS block"
+     },
+     {
+      "check": "entities.no_unsupported_words",
+      "passed": true,
+      "detail": "every word has runtime behaviour in this engine"
+     },
+     {
+      "check": "policy.size",
+      "passed": true,
+      "detail": "9x6 = 54 cells; limit 20x20, 250 cells"
+     },
+     {
+      "check": "loader.engine_accepts",
+      "passed": true,
+      "detail": "Game(filename) constructed by the original engine"
+     },
+     {
+      "check": "loader.python_binding_accepts",
+      "passed": true,
+      "detail": "pyBaba.Game(filename)"
+     },
+     {
+      "check": "playable.you_instance",
+      "passed": true,
+      "detail": "controlled: ICON_BABA via ['BABA IS YOU']"
+     },
+     {
+      "check": "playable.not_won_immediately",
+      "passed": true,
+      "detail": "not won by an idle first turn"
+     }
+    ],
+    "warnings": []
+   },
+   "solvable": {
+    "passed": true,
+    "established": true,
+    "detail": "4-move witness found by the model search and replayed to WON in the original engine; pyBaba binding independently reports WON",
+    "witness": "DRRR",
+    "engine_replay_won": true,
+    "python_binding_final_state": "WON"
+   },
+   "solution_quality": {
+    "passed": true,
+    "shortest_length": 4,
+    "optimal": true,
+    "shortest_solution_count": 1,
+    "shortest_count_exact": true,
+    "difficulty_score": 2.5,
+    "difficulty_established": true,
+    "difficulty_components": {
+     "trap_bits": 1,
+     "trap_states": 1,
+     "decision_points": 4,
+     "dead_ratio": 0.128,
+     "rule_changes": 0,
+     "sacrifices": 0
+    },
+    "difficulty_band": [
+     0,
+     8
+    ],
+    "in_band": true
+   },
+   "robustness": {
+    "passed": true,
+    "analysis_complete": true,
+    "reachable_states": 352,
+    "dead_states": 45,
+    "lost_states": 45,
+    "dead_state_ratio": 0.1278,
+    "detail": "all 352 reachable states enumerated; 45 are dead (no winning continuation)"
+   },
+   "mechanic_coverage": {
+    "passed": true,
+    "covered": 2,
+    "requested": 2
+   }
+  },
+  "reasons": [],
+  "skills": {
+   "object_pushing": {
+    "required": true,
+    "exercised_in_witness": true,
+    "proof": "ablation",
+    "ablation": {
+     "forbid": "push",
+     "result": "unsolvable",
+     "states": 22
+    },
+    "necessity": "proven",
+    "detail": "with 'push' moves forbidden the level is unsolvable (exhaustive, 22 states): every solution uses this skill",
+    "passed": true
+   },
+   "hazard_sink": {
+    "required": true,
+    "exercised_in_witness": true,
+    "necessity": "n/a",
+    "passed": true
+   }
+  },
+  "initial_rules": [
+   "FLAG IS WIN",
+   "BABA IS YOU",
+   "ROCK IS PUSH",
+   "WATER IS SINK"
+  ],
+  "search": {
+   "status": "solved",
+   "proof": "witness",
+   "backend": "model",
+   "length": 4,
+   "states_explored": 352,
+   "elapsed_ms": 1.14973,
+   "wait_allowed": false
+  },
+  "solution": "DRRR",
+  "trace_events": {
+   "rule_changes": 0,
+   "win_rule_changes": 0,
+   "you_changes": 0,
+   "object_pushes": 2,
+   "text_pushes": 0,
+   "destroyed": 2,
+   "transformed": 0
+  },
+  "rule_timeline": [],
+  "difficulty": {
+   "established": true,
+   "score": 2.5,
+   "components": {
+    "trap_bits": 1,
+    "trap_states": 1,
+    "decision_points": 4,
+    "dead_ratio": 0.128,
+    "rule_changes": 0,
+    "sacrifices": 0
+   },
+   "weights": {
+    "trap_bits": 2.0,
+    "dead_ratio": 4.0,
+    "rule_changes": 2.0,
+    "sacrifices": 3.0
+   }
+  },
+  "verify_seconds": 0.04
+ },
+ "solution": "DRRR",
+ "unmet_requirements": [],
+ "elapsed_seconds": 0.06,
+ "delivered_from": "constraint-based planner"
+}

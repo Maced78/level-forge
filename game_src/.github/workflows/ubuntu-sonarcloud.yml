@@ -1,0 +1,75 @@
+name: Static Analysis
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  CMAKE_TOOLCHAIN_FILE: ${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake
+
+jobs:
+  build-ubuntu:
+    runs-on: ${{ matrix.os }}
+    name: 🌞 Static Analysis - SonarCloud
+    strategy:
+      matrix:
+        include:
+          # Ubuntu 24.04 + gcc-14
+          - name: "Ubuntu 24.04 + gcc-14"
+            os: ubuntu-24.04
+            compiler: gcc
+            version: "14"
+    steps:
+    - uses: actions/checkout@v7
+      with:
+        fetch-depth: 0
+    - name: Setup vcpkg
+      uses: lukka/run-vcpkg@v11
+    - name: Prepare Sonar scanner
+      run: |
+        wget -nv https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-8.0.1.6346-linux-x64.zip
+        unzip -q sonar-scanner-cli-8.0.1.6346-linux-x64.zip
+        SONAR_SCANNER_DIR="$(echo sonar-scanner-*-linux-x64)"
+        echo "${PWD}/${SONAR_SCANNER_DIR}/bin" >> $GITHUB_PATH
+        wget -nv https://sonarcloud.io/static/cpp/build-wrapper-linux-x86.zip
+        unzip -q build-wrapper-linux-x86.zip
+        echo "${PWD}/build-wrapper-linux-x86" >> $GITHUB_PATH
+    - name: Install packages
+      run: |
+        sudo apt-get update
+        sudo apt-get install -yq autoconf autoconf-archive automake libtool lcov curl
+    - name: Configure Compiler
+      run: |
+        if [ "${{ matrix.compiler }}" = "gcc" ]; then
+          echo "CC=gcc-${{ matrix.version }}" >> $GITHUB_ENV
+          echo "CXX=g++-${{ matrix.version }}" >> $GITHUB_ENV
+        else
+          echo "CC=clang-${{ matrix.version }}" >> $GITHUB_ENV
+          echo "CXX=clang++-${{ matrix.version }}" >> $GITHUB_ENV
+        fi
+    - name: Configure Build
+      run: mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE=Debug -DBUILD_COVERAGE=ON -DBUILD_SONARCLOUD=ON ..
+    - name: Build
+      run: cd build && build-wrapper-linux-x86-64 --out-dir ../bw-output make all
+    - name: Run Unit Test
+      run: |
+        cd build
+        GCOV_TOOL="$(command -v gcov-${{ matrix.version }})"
+        lcov --gcov-tool "${GCOV_TOOL}" -c -i -d Tests/UnitTests -o base.info
+        bin/UnitTests
+        lcov --gcov-tool "${GCOV_TOOL}" -c -d Tests/UnitTests -o test.info
+        lcov --gcov-tool "${GCOV_TOOL}" -a base.info -a test.info -o coverage.info
+        lcov --ignore-errors unused --gcov-tool "${GCOV_TOOL}" -r coverage.info '*/Includes/*' -o coverage.info
+        lcov --ignore-errors unused --gcov-tool "${GCOV_TOOL}" -r coverage.info '*/Libraries/*' -o coverage.info
+        lcov --gcov-tool "${GCOV_TOOL}" -l coverage.info
+        mkdir sonar-gcov
+        find . -name '*.gcda' -exec "${GCOV_TOOL}" --preserve-paths {} + > /dev/null
+        find . -maxdepth 1 -name '*.gcov' -exec mv -t sonar-gcov {} +
+    - name: SonarCloud Scan
+      if: ${{ github.actor != 'dependabot[bot]' }}
+      run: sonar-scanner -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=utilforever-github -Dsonar.login=$SONAR_TOKEN
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

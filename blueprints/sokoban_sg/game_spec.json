@@ -1,0 +1,15 @@
+{"blueprint_version": "0.1.0",
+ "game": {"name": "sokoban-solver-generator", "upstream": "https://github.com/xbandrade/sokoban-solver-generator",
+          "commit": "69c7b5c8f8a8190a7e9c8bdaaa1771d13dfa9274", "license": "MIT",
+          "description": "Open-source pygame Sokoban with text level files (levels/*.dat)"},
+ "inputs": ["U", "D", "L", "R"],
+ "level_format": {"tokens": {"+": "wall", "-": "floor", "@": "box", "X": "goal", "*": "player", "$": "box on goal", "%": "player on goal"},
+                  "layout": "one row per line, tokens separated by spaces, all rows the same length"},
+ "generation_vocabulary": {"text": [], "nouns": ["wall", "floor", "box", "goal", "player"]},
+ "skills": [
+  {"id": "box_pushing", "label": "Box pushing", "definition": "A box is pushed during the solution.",
+   "keywords": ["push", "pushing", "box", "crate", "sokoban", "boulder"], "exercised_if": "trace event box_pushes", "necessity_ablation": null},
+  {"id": "multi_box", "label": "Planning with several boxes", "definition": "Two or more boxes that start off a goal must be delivered.",
+   "keywords": ["two boxes", "three boxes", "several boxes", "multiple boxes", "many boxes", "more than one box", "ordering", "order of"],
+   "exercised_if": "two deliveries in the trace", "necessity_ablation": null}],
+ "entities": []}

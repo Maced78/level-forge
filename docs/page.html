@@ -1,0 +1,246 @@
+<title>Level-Forge</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=Pixelify+Sans:wght@500;700&display=swap">
+<style>
+/* Layout: a level designer's drafting sheet. Blueprint grid paper, game screens set into it like monitors, pixel type only for names and numbers. */
+:root{
+  --paper:#eef2f8; --sheet:#ffffff; --sheet2:#f5f8fc; --line:#cdd6e4; --grid:rgba(47,91,234,.07);
+  --ink:#12244a; --dim:#56678a; --accent:#2f5bea; --accent-ink:#ffffff; --you:#d6337f;
+  --ok:#157a4a; --ok-bg:#dcf3e6; --bad:#b3261e; --bad-bg:#fbe1df; --warn:#8a5a00; --warn-bg:#fcefc9; --info:#1d4fa8; --info-bg:#dfe9fb; --mute-bg:#e6ebf3;
+  --screen:#090a0f; --shadow:0 1px 0 rgba(18,36,74,.06),0 10px 28px -14px rgba(18,36,74,.35);
+  --pixel:"Pixelify Sans","IBM Plex Mono",ui-monospace,monospace; --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  --panel:var(--sheet); --panel2:var(--sheet2);
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --paper:#0a1124; --sheet:#111b36; --sheet2:#16224380; --line:#27365e; --grid:rgba(120,160,255,.06);
+  --ink:#e8eefc; --dim:#9aa9cc; --accent:#7fa2ff; --accent-ink:#071027; --you:#ff7ab8;
+  --ok:#6fdca4; --ok-bg:#12382a; --bad:#ff9a92; --bad-bg:#47201f; --warn:#ffd98a; --warn-bg:#43360f; --info:#9cc0ff; --info-bg:#182c55; --mute-bg:#1c2848;
+  --shadow:0 1px 0 rgba(0,0,0,.3),0 14px 30px -16px rgba(0,0,0,.8); color-scheme:dark } }
+:root[data-theme="dark"]{
+  --paper:#0a1124; --sheet:#111b36; --sheet2:#16224380; --line:#27365e; --grid:rgba(120,160,255,.06);
+  --ink:#e8eefc; --dim:#9aa9cc; --accent:#7fa2ff; --accent-ink:#071027; --you:#ff7ab8;
+  --ok:#6fdca4; --ok-bg:#12382a; --bad:#ff9a92; --bad-bg:#47201f; --warn:#ffd98a; --warn-bg:#43360f; --info:#9cc0ff; --info-bg:#182c55; --mute-bg:#1c2848;
+  --shadow:0 1px 0 rgba(0,0,0,.3),0 14px 30px -16px rgba(0,0,0,.8); color-scheme:dark }
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:28px 28px;color:var(--ink);font:16px/1.6 var(--body)}
+a{color:var(--accent)}
+.wrap{max-width:1160px;margin:0 auto;padding-inline:20px}
+.testbar{background:var(--warn-bg);color:var(--warn);border-bottom:1px solid var(--line);font-size:14px;padding-block:9px}
+.testbar b{font-family:var(--mono);text-transform:uppercase;letter-spacing:.06em;font-size:12px;margin-right:8px}
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;align-items:center;gap:18px;min-height:56px}
+.logo{font:700 22px var(--pixel);letter-spacing:.01em}.logo b{color:var(--you)}
+header.top nav{margin-left:auto;display:flex;gap:18px;flex-wrap:wrap}
+header.top nav a{color:var(--dim);text-decoration:none;font-size:14px;font-weight:600}header.top nav a:hover{color:var(--ink)}
+.hero{padding-block:48px 34px}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:40px;align-items:center}
+@media(max-width:900px){.hero .wrap{grid-template-columns:1fr}header.top nav{display:none}}
+.eyebrow{font:600 12.5px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+h1{font:700 clamp(36px,5.4vw,62px)/1.02 var(--pixel);margin:14px 0 18px;text-wrap:balance}
+h1 em{font-style:normal;color:var(--you)}
+.lede{font-size:19px;color:var(--dim);max-width:52ch}
+.cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.btn{display:inline-block;background:var(--accent);color:var(--accent-ink);font:600 15px var(--body);padding:11px 20px;border-radius:6px;text-decoration:none;border:0;cursor:pointer;box-shadow:0 3px 0 color-mix(in srgb,var(--accent) 60%,#000)}
+.btn:active{transform:translateY(2px);box-shadow:0 1px 0 color-mix(in srgb,var(--accent) 60%,#000)}
+.btn:focus-visible,.chip:focus-visible,a:focus-visible{outline:3px solid var(--you);outline-offset:2px}
+.btn.sec{background:var(--sheet);color:var(--ink);border:1px solid var(--line);box-shadow:0 3px 0 var(--line)}
+.btn.sm{padding:7px 12px;font-size:13px}
+.monitor{background:var(--screen);border-radius:14px;padding:14px;box-shadow:var(--shadow);border:1px solid #1d2233}
+.monitor h3{font:600 12px var(--mono);text-transform:uppercase;letter-spacing:.08em;color:#9aa3b8;margin:0 0 10px}
+.monitor .rule{background:#151821;border-color:#2a2f40;color:#eceef4}
+section{padding-block:52px}
+h2{font:700 clamp(26px,3.4vw,36px)/1.1 var(--pixel);margin:0 0 8px;text-wrap:balance}
+.sub{color:var(--dim);max-width:70ch;margin:0 0 24px;font-size:17px}
+.card{background:var(--sheet);border:1px solid var(--line);border-radius:10px;padding:18px;min-width:0;box-shadow:var(--shadow)}
+.card h3{font:600 12px var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--dim);margin:0 0 10px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0;margin-top:34px;border:1px solid var(--line);border-radius:10px;background:var(--sheet);box-shadow:var(--shadow);overflow:hidden}
+.kpi{padding:16px 18px;border-right:1px solid var(--line)}
+.kpi b{display:block;font:700 34px/1.1 var(--pixel);color:var(--accent);font-variant-numeric:tabular-nums}.kpi span{color:var(--dim);font-size:14px;line-height:1.4;display:block;margin-top:4px}
+canvas{width:100%;height:auto;display:block;border-radius:8px;background:var(--screen)}
+.grid2{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:18px}@media(max-width:900px){.grid2{grid-template-columns:1fr}}
+.demo-grid{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:18px}@media(max-width:900px){.demo-grid{grid-template-columns:1fr}}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+.chips{display:flex;flex-direction:column;gap:7px}
+.chip{background:var(--sheet);border:1px solid var(--line);color:var(--dim);font:14px/1.35 var(--body);padding:9px 12px;border-radius:8px;cursor:pointer;text-align:left}
+.chip:hover{color:var(--ink);border-color:var(--accent)}.chip.on{color:var(--ink);border-color:var(--accent);box-shadow:inset 4px 0 0 var(--accent)}
+.chip small{display:block;font:600 10.5px var(--mono);letter-spacing:.05em;margin-bottom:2px}
+.tag{font:600 11px var(--mono);padding:2px 7px;border-radius:5px;white-space:nowrap;display:inline-block}
+.t-ok{background:var(--ok-bg);color:var(--ok)}.t-bad{background:var(--bad-bg);color:var(--bad)}.t-warn{background:var(--warn-bg);color:var(--warn)}.t-dim{background:var(--mute-bg);color:var(--dim)}.t-info{background:var(--info-bg);color:var(--info)}
+.badge{display:inline-block;font:600 13px var(--mono);padding:6px 12px;border-radius:7px}
+.b-FULLY_VALIDATED{background:var(--ok-bg);color:var(--ok)}.b-PROVEN_SOLVABLE{background:var(--info-bg);color:var(--info)}.b-STRUCTURALLY_VALID{background:var(--warn-bg);color:var(--warn)}.b-REJECTED_CONTRADICTION{background:var(--bad-bg);color:var(--bad)}.b-UNVERIFIED,.b-FAILED{background:var(--mute-bg);color:var(--dim)}
+.play{display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap}.play input[type=range]{flex:1;min-width:110px;accent-color:var(--accent)}
+.mono{font-family:var(--mono);font-size:.92em}.hint{color:var(--dim);font-size:14px}
+.rules{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;min-height:26px}.rule{font:600 11.5px var(--mono);padding:3px 8px;border-radius:6px;background:var(--mute-bg);border:1px solid var(--line)}.rule.new{border-color:var(--ok);color:var(--ok)}
+.lvl{display:flex;gap:10px;padding:8px 0;border-top:1px solid var(--line)}.lvl:first-child{border-top:0}
+.dot{flex:none;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font:700 12px var(--mono);margin-top:2px}.dot.p{background:var(--ok-bg);color:var(--ok)}.dot.f{background:var(--bad-bg);color:var(--bad)}.dot.u{background:var(--mute-bg);color:var(--dim)}
+.lvl b{display:block;font-size:15px}.lvl small{color:var(--dim);font-size:13.5px;display:block}.lvl small b{display:inline;font-size:inherit}
+table{width:100%;border-collapse:collapse;font-size:14.5px}th{text-align:left;font:600 11px var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--dim);padding:8px;border-bottom:1px solid var(--line)}td{padding:8px;border-bottom:1px solid var(--line);vertical-align:top}td.num,th.num{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums}
+.tw{overflow-x:auto}
+details{margin-top:10px}summary{cursor:pointer;color:var(--dim);font-size:14px}
+pre{background:var(--screen);color:#eceef4;border-radius:8px;padding:12px;overflow:auto;font:13px/1.5 var(--mono);max-height:320px;margin:8px 0 0}
+textarea{width:100%;background:var(--screen);color:#eceef4;border:1px solid var(--line);border-radius:8px;padding:10px 12px;font:13px/1.45 var(--mono);resize:vertical}
+.contra{border-left:3px solid var(--bad);padding:2px 0 2px 12px;margin:10px 0}.contra h4{margin:0 0 4px;font:600 13px var(--mono);color:var(--bad)}
+.chain{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:8px 0;font:12px var(--mono)}.chain span{background:var(--mute-bg);border:1px solid var(--line);padding:3px 7px;border-radius:5px}.chain i{color:var(--bad);font-style:normal}
+ul.tight{margin:6px 0 0;padding-left:18px}ul.tight li{margin:4px 0}
+.note{background:var(--info-bg);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:12px 16px;font-size:15px}
+footer{padding-block:30px 50px;color:var(--dim);font-size:14px;border-top:1px solid var(--line)}
+kbd{font:600 11px var(--mono);background:var(--mute-bg);border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;padding:1px 5px}
+/* problem */
+.steps3{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.steps3 .card b{display:block;font:700 22px var(--pixel);margin-bottom:6px}
+/* games */
+.games{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+.games figure{margin:0}.games .shot{background:var(--screen);border-radius:10px;padding:14px;display:grid;place-items:center;height:250px}
+.games img{image-rendering:pixelated;max-height:222px;width:auto;max-width:100%}
+.games figcaption b{font:700 24px var(--pixel);display:block;margin-top:12px}.games figcaption span{color:var(--dim);display:block}
+.games figcaption em{font-style:normal;display:block;margin-top:6px}.games figcaption em strong{font:700 24px var(--pixel);color:var(--accent);margin-right:6px}
+.rulex{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0}.rulex span{font:600 13px var(--mono);border:1.5px solid var(--you);color:var(--you);border-radius:6px;padding:3px 9px}
+/* flow */
+.flow1{display:grid;grid-template-columns:minmax(0,.8fr) auto minmax(0,1.7fr) auto minmax(0,.9fr);gap:12px;align-items:stretch}
+.flow1 i,.flow2 i{align-self:center;font-style:normal;color:var(--dim);font-size:22px;text-align:center}
+.fb{background:var(--sheet);border:1.5px solid var(--line);border-radius:10px;padding:14px 16px;box-shadow:var(--shadow)}
+.fb small{font:600 11px var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--accent);display:block}
+.fb b{font:700 21px var(--pixel);display:block}.fb span{color:var(--dim);font-size:14.5px;display:block;line-height:1.45}
+.fb.acc{border-color:var(--accent)}.fb.book{border-color:var(--you)}.fb.book small{color:var(--you)}
+.uses{text-align:center;font:600 12.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--you);margin:12px 0}
+.flow2{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.flow2 .fb b{font-size:19px}.flow2 .fb small{display:inline;margin-right:6px}
+@media(max-width:900px){.flow1{grid-template-columns:1fr}.flow1 i{transform:rotate(90deg)}.flow2{grid-template-columns:1fr 1fr}}
+.io{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font:600 12px var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--dim);margin-top:10px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+</style>
+
+<div class="testbar"><div class="wrap"><b>Test version</b>No API key is set up, so the language model is switched off. Requests are read by a built-in keyword reader and levels are built by the planner. Every level on this page was still built and checked by the real program.</div></div>
+
+<header class="top"><div class="wrap">
+  <div class="logo"><b>Level</b>-Forge</div>
+  <nav><a href="#demo">Demo</a><a href="#verify">Try your own</a><a href="#games">Games</a><a href="#how">How it works</a><a href="#evidence">Test results</a><a href="#run">Run it</a></nav>
+</div></header>
+
+<div class="hero"><div class="wrap">
+  <div>
+    <div class="eyebrow">NeuroBridge.SI Baku · AI Gaming track</div>
+    <h1>Type a sentence. Get a puzzle level that <em>can be won</em>.</h1>
+    <p class="lede">A tool for puzzle-game level designers. It learns a game's real rules from its code, builds the level you ask for, and wins it in the real game before handing it over.</p>
+    <div class="cta"><a class="btn" href="#demo">Watch it work</a><a class="btn sec" href="#verify">Check your own level</a><a class="btn sec" id="repo-link" href="#run">Source code</a></div>
+  </div>
+  <div class="monitor"><h3 id="hero-cap">A hard level, won by the computer</h3><canvas id="hero"></canvas><div class="rules" id="hero-rules"></div></div>
+</div>
+<div class="wrap"><div class="kpis" id="kpis"></div></div></div>
+
+<section id="problem"><div class="wrap">
+  <h2>The problem</h2>
+  <p class="sub">Nobody knows if a new puzzle level can be won until someone sits down and plays it.</p>
+  <div class="steps3">
+    <div class="card"><b>Who</b>Level designers at small puzzle-game studios and solo developers, who ship 50 to 200 hand-made levels per game.</div>
+    <div class="card"><b>Today</b>Every level is drawn by hand and then played by hand to check that it works. Shortcuts and dead ends that slip through reach the players.</div>
+    <div class="card"><b>With Level-Forge</b>Ask in plain words. Get a level in the game's own file format, with its solution, proof that it needs the skills you asked for, and a measured difficulty.</div>
+  </div>
+</div></section>
+
+<section id="demo"><div class="wrap">
+  <h2>Watch it work</h2>
+  <p class="sub">Pick a request on the left. Each one was run through the real program and recorded. Press <b>Play solution</b> to watch the computer win, or <b>Play it yourself</b> and use the arrow keys.</p>
+  <div class="demo-grid">
+    <div><div class="chips" id="chips"></div></div>
+    <div id="run-view"></div>
+  </div>
+</div></section>
+
+<section id="verify"><div class="wrap">
+  <h2>Check your own level</h2>
+  <p class="sub">Change the level and press Verify. The solver runs live in this browser tab and returns the shortest solution, or shows that there is none.</p>
+  <div class="grid2">
+    <div class="card"><h3>Level</h3>
+      <textarea id="dsl" rows="8" spellcheck="false" aria-label="Level text"></textarea>
+      <p class="hint">UPPERCASE = a word tile · lowercase = an object · <span class="mono">.</span> = empty. Words: <span class="mono">IS YOU WIN STOP PUSH SINK DEFEAT</span>. Things: <span class="mono">BABA KEKE ROCK BOX WALL HEDGE FLAG STAR KEY WATER LAVA SKULL</span>.</p>
+      <div class="play"><button class="btn sm" id="v-go">Verify</button><button class="btn sec sm" id="v-break">Load an impossible version</button><button class="btn sec sm" id="v-reset">Reset</button><span class="hint" id="v-msg"></span></div>
+    </div>
+    <div class="card"><h3>Result</h3><canvas id="v-board"></canvas><div class="play"><button class="btn sec sm" id="v-play">▶ Play solution</button><span class="mono hint" id="v-moves"></span></div></div>
+  </div>
+</div></section>
+
+<section id="games"><div class="wrap">
+  <h2>Two games so far</h2>
+  <p class="sub">Baba Is You is only our example. The same steps apply to other 2D puzzle games, and we tested a second one. 3D puzzle games would need extra work and are not tested yet.</p>
+  <div class="games">
+    <figure class="card"><div class="shot"><img src="img/baba_1_start.png" alt="A generated Baba Is You level drawn with the game's own graphics"></div>
+      <figcaption><b>Baba Is You</b><span>The rules are words lying on the board. Push the words and the rules change.</span>
+      <div class="rulex"><span>BABA IS YOU</span><span>FLAG IS WIN</span><span>WALL IS STOP</span></div>
+      <em><strong id="g1-pct">100%</strong>of 200 requests gave a winnable level</em></figcaption></figure>
+    <figure class="card"><div class="shot"><img src="img/sokoban_start.png" alt="A generated Sokoban level drawn with the game's own graphics"></div>
+      <figcaption><b>Sokoban</b><span>Push every box onto a target. Added in about an hour, with no change to the main program.</span>
+      <em><strong id="g2-pct">96.7%</strong>of 60 requests gave a winnable level</em></figcaption></figure>
+  </div>
+  <p class="hint" style="margin-top:14px">Both pictures are levels our program made, drawn with each game's own graphics. Baba Is You was made by Arvi Teikari (Hempuli). We used baba-is-auto, a free open-source copy of its rules by utilForever, and sokoban-solver-generator by xbandrade.</p>
+  <div class="card" style="margin-top:16px"><h3>Side by side</h3><div id="second"></div></div>
+</div></section>
+
+<section id="how"><div class="wrap">
+  <h2>How it works</h2>
+  <p class="sub">Part 1 happens once per game and produces a rule book. Part 2 runs for every request and uses that rule book at every step.</p>
+  <div class="flow1">
+    <div class="fb"><small>Input</small><b>The game's code</b><span>and the levels that ship with it</span></div><i>→</i>
+    <div class="fb acc"><small>Part 1 · once per game</small><b>Learn the rules</b><span>An AI coding assistant reads the code, writes down each rule with the line it came from, and tests each rule in the real game. Words the game ignores are marked.</span></div><i>→</i>
+    <div class="fb book"><small>Output</small><b>Rule book</b><span>rules · file format · level checker · solver</span></div>
+  </div>
+  <div class="uses">▼ every step below uses the rule book ▼</div>
+  <div class="flow2">
+    <div class="fb"><small>1</small><b>Understand</b><span>Which skills? How hard?</span></div>
+    <div class="fb"><small>2</small><b>Possible?</b><span>If not, refuse and say why.</span></div>
+    <div class="fb"><small>3</small><b>Build</b><span>Several levels in the game's file format.</span></div>
+    <div class="fb"><small>4</small><b>Play</b><span>Search finds the shortest solution. The real game replays it.</span></div>
+    <div class="fb"><small>5</small><b>Fix or label</b><span>Repair what failed. Say what was proven.</span></div>
+  </div>
+  <div class="io"><span>In: your sentence</span><span>Part 2 · runs for every request</span><span>Out: level file, solution, proof</span></div>
+</div></section>
+
+<section id="ai"><div class="wrap">
+  <h2>Where the AI is</h2>
+  <div class="grid3">
+    <div class="card"><h3>Coding assistant (Claude)</h3>Read the 4,000-line game engine and wrote the rule book: 30 rules, each with the line of code it came from and a test in the real game.</div>
+    <div class="card"><h3>Search program</h3>Tries every possible move to decide whether a level can be won, what the shortest solution is, whether a skill is really needed, and how many traps there are.</div>
+    <div class="card"><h3>Language model (Google Gemini)</h3>Written to read free-form requests in step 1. <b>It is not running in this test version</b> because no working API key is set up. A keyword reader does step 1 in every result on this page.</div>
+  </div>
+  <div id="llm-evidence" style="margin-top:16px"></div>
+</div></section>
+
+<section id="evidence"><div class="wrap">
+  <h2>Test results</h2>
+  <p class="sub">All numbers come from scripts in the repository. None were typed by hand.</p>
+  <div class="card"><h3>200 requests · three ways of making a level · one checker</h3><div class="tw" id="bench"></div></div>
+  <div class="grid2" style="margin-top:18px">
+    <div class="card"><h3>What went wrong, and what we did</h3><ul class="tight" id="failures"></ul></div>
+    <div class="card"><h3>Compared with today</h3><div class="tw"><table>
+      <tr><th></th><th>By hand</th><th>Ask a chatbot</th><th>Level-Forge</th></tr>
+      <tr><td>Opens in the game</td><td>yes</td><td id="cmp-raw-load">not checked</td><td>checked by the game's loader</td></tr>
+      <tr><td>Can be won</td><td>after play-testing</td><td id="cmp-raw-solv">no evidence</td><td>solution replayed in the game</td></tr>
+      <tr><td>Shortcuts</td><td>found by luck</td><td>no</td><td>searched for</td></tr>
+      <tr><td>Difficulty</td><td>a feeling</td><td>a guess</td><td>measured</td></tr>
+      <tr><td>Impossible request</td><td>found late</td><td>not checked</td><td>refused with the reason</td></tr>
+      <tr><td>Time per level</td><td>not measured by us</td><td>seconds</td><td id="cmp-time">seconds</td></tr></table></div>
+      <p class="hint" style="margin:8px 0 0">We did not time human designers, so we make no claim about hours saved.</p></div>
+  </div>
+  <div class="card" style="margin-top:18px"><h3>The rule book: each rule tied to a line of code and a test in the real game</h3>
+    <details><summary>Show all rules</summary><div class="tw" id="claims"></div></details>
+    <details><summary>Words that exist in the game's files but do nothing (requests for them are refused)</summary><div class="tw" id="unsup"></div></details></div>
+</div></section>
+
+<section id="run"><div class="wrap">
+  <h2>Run it yourself</h2>
+  <div class="grid3">
+    <div class="card"><h3>On Linux or macOS</h3><pre>git clone <span id="clone-url">REPO_URL</span>
+cd level-forge
+./build_engine.sh      # once, about 2 minutes
+./run_demo.sh          # http://localhost:8765</pre><p class="hint">Without an API key the program runs in this same test version and says so at the top of the page.</p></div>
+    <div class="card"><h3>What it costs</h3><ul class="tight"><li><b>Data:</b> none to collect. It only needs the game's own code.</li><li><b>Computer:</b> one ordinary computer, no graphics card. Most levels take under a second. Hard ones take about 15 seconds.</li><li id="cost-llm"><b>Language model:</b> optional.</li><li><b>New game:</b> one rule book. The second game took about an hour.</li></ul></div>
+    <div class="card"><h3>Next</h3><ul class="tight"><li>Get the language model running and measure it.</li><li>Add a third game with no human help.</li><li>A plug-in for level editors.</li><li>A trial with a real puzzle studio.</li></ul></div>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <b>Disclosure.</b> Games: <a href="https://github.com/utilForever/baba-is-auto">utilForever/baba-is-auto</a> and <a href="https://github.com/xbandrade/sokoban-solver-generator">xbandrade/sokoban-solver-generator</a> (both MIT licence), unmodified. Models: Anthropic Claude as a coding assistant, which wrote the rule books and this prototype with us during the hackathon. Google Gemini code is included but was never run successfully, so no result here comes from it. Components: Python, C++, pybind11, pygame, numpy, Playwright. No external datasets. Built on 9 October 2026 at NeuroBridge.SI Baku. <span id="team"></span>
+</div></footer>
+
+<script src="data.js"></script>
+<script src="model.js"></script>
+<script src="app.js"></script>

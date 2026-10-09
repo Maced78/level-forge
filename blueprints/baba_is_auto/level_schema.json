@@ -1,0 +1,74 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "title": "baba-is-auto native level file (text)",
+ "description": "Whitespace-separated integers. Header 'W H', then 1-3 layers of W*H tile IDs in row-major order (y outer, x inner). Layer k holds the k-th object of each cell; ICON_EMPTY (132) pads. Optional trailing 'DIRECTIONS' block with one 0-3 value per tile.",
+ "type": "object",
+ "required": [
+  "width",
+  "height",
+  "layers"
+ ],
+ "properties": {
+  "width": {
+   "type": "integer",
+   "minimum": 1,
+   "x-source": "Sources/baba-is-auto/Games/Map.cpp:214"
+  },
+  "height": {
+   "type": "integer",
+   "minimum": 1,
+   "x-source": "Sources/baba-is-auto/Games/Map.cpp:214"
+  },
+  "layers": {
+   "type": "array",
+   "minItems": 1,
+   "maxItems": 3,
+   "x-source": "Sources/baba-is-auto/Games/Map.cpp:21",
+   "items": {
+    "type": "array",
+    "description": "W*H tile IDs",
+    "items": {
+     "type": "integer",
+     "minimum": 1,
+     "maximum": 179,
+     "not": {
+      "enum": [
+       66,
+       76,
+       110
+      ]
+     },
+     "x-source": "Sources/baba-is-auto/Games/Map.cpp:25"
+    }
+   }
+  },
+  "directions": {
+   "type": "array",
+   "items": {
+    "enum": [
+     0,
+     1,
+     2,
+     3
+    ]
+   },
+   "description": "0=RIGHT 1=UP 2=LEFT 3=DOWN; if present, exactly one per tile value",
+   "x-source": "Sources/baba-is-auto/Games/Map.cpp:48"
+  }
+ },
+ "x-conventions": {
+  "coordinates": "zero-based (x, y), origin top-left, y grows downward",
+  "empty_cell": 132,
+  "default_facing": "RIGHT",
+  "icon_id": "noun text id + 110  (ConvertTextToIcon)",
+  "object_ids": "assigned column-major at load (AssignObjectIDs); not stored in the file"
+ },
+ "x-forge-policy": {
+  "comment": "Stricter limits applied by this blueprint so the exhaustive solver stays tractable",
+  "max_width": 20,
+  "max_height": 20,
+  "max_cells": 250,
+  "must_have_you_instance": true,
+  "must_not_be_won_by_first_wait": true
+ }
+}

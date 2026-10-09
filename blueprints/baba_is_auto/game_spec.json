@@ -1,0 +1,1621 @@
+{
+ "blueprint_version": "0.1.0",
+ "game": {
+  "name": "baba-is-auto",
+  "upstream": "https://github.com/utilForever/baba-is-auto",
+  "commit": "24cefb48d47ae6a6f5c0d936310d8bceb9c4279d",
+  "license": "MIT",
+  "description": "Open-source C++17 Baba Is You simulator with pybind11 binding and pygame GUI"
+ },
+ "generated_at": "2026-10-09T11:04:49Z",
+ "source_fingerprint": {
+  "Includes/baba-is-auto/Enums/NounType.def": "a42feb650742b5f6de7c1191bbb39ddfa729bbb09c13d8163b5cea002c901e94",
+  "Includes/baba-is-auto/Enums/OpType.def": "1d093676b69b98d2e73616c24f3f7a789656fa816dbc1415d36b5f7e9d23e941",
+  "Includes/baba-is-auto/Enums/PropertyType.def": "e52b7770af21b63fbdafd125228ab59507f85eefe36f3074d9a3e834032e1b0d",
+  "Includes/baba-is-auto/Enums/IconType.def": "62b91453abc6aeab792eab9b7f9bd6d65b4da93876582292ff84882a4b4e2abe",
+  "Includes/baba-is-auto/Enums/GameEnums.hpp": "3bbe52322f4c6568d572690e8886d23e6e0341b358f51142dc74e4954cfa5d11",
+  "Sources/baba-is-auto/Games/Game.cpp": "17eff7ba7f6dc5b4039cda432405d9806ee5fae2ba810f19fc498d0aeca23221",
+  "Sources/baba-is-auto/Games/Map.cpp": "9e68016a9941415a80232b0abfa6a6bef447539ab0f6ec5a425c63f4c4670ff0",
+  "Sources/baba-is-auto/Games/Object.cpp": "ceadd26148e1261f9b38753df567dc1fe3c20683e18705dd5629aa959c21da00",
+  "Sources/baba-is-auto/Rules/RuleManager.cpp": "fe829c49c7a7daba07b159b715de3b72b82ceab3d0961bff52c60dcef77344f4",
+  "Documents/rule-language.md": "a09d3feb0b0e905b2e65671b64ae7e3ff6d7ca2a3fc8e29dc1ee3fa40d681964"
+ },
+ "sentinels": {
+  "NOUN_TYPE": 0,
+  "OP_TYPE": 66,
+  "PROPERTY_TYPE": 76,
+  "ICON_TYPE": 110
+ },
+ "level_format": {
+  "max_layers": 3,
+  "empty_id": 132,
+  "icon_offset": 110,
+  "direction_codes": {
+   "0": "RIGHT",
+   "1": "UP",
+   "2": "LEFT",
+   "3": "DOWN"
+  }
+ },
+ "inputs": [
+  "U",
+  "D",
+  "L",
+  "R"
+ ],
+ "turn_pipeline": [
+  {
+   "phase": "ProcessPlayerMove",
+   "source": "Sources/baba-is-auto/Games/Game.cpp:502"
+  },
+  {
+   "phase": "ParseRules",
+   "source": "Sources/baba-is-auto/Games/Game.cpp:505"
+  },
+  {
+   "phase": "ProcessDirectionProperties",
+   "source": "Sources/baba-is-auto/Games/Game.cpp:506"
+  },
+  {
+   "phase": "ProcessMoveProperty",
+   "source": "Sources/baba-is-auto/Games/Game.cpp:507"
+  },
+  {
+   "phase": "ParseRules",
+   "source": "Sources/baba-is-auto/Games/Game.cpp:508"
+  },
+  {
+   "phase": "ProcessTransformations",
+   "source": "Sources/baba-is-auto/Games/Game.cpp:509"
+  },
+  {
+   "phase": "ParseRules",
+   "source": "Sources/baba-is-auto/Games/Game.cpp:510"
+  },
+  {
+   "phase": "ProcessSink",
+   "source": "Sources/baba-is-auto/Games/Game.cpp:512"
+  },
+  {
+   "phase": "ProcessWeak",
+   "source": "Sources/baba-is-auto/Games/Game.cpp:513"
+  },
+  {
+   "phase": "ProcessHotMelt",
+   "source": "Sources/baba-is-auto/Games/Game.cpp:514"
+  },
+  {
+   "phase": "ProcessDefeat",
+   "source": "Sources/baba-is-auto/Games/Game.cpp:515"
+  },
+  {
+   "phase": "ProcessOpenShut",
+   "source": "Sources/baba-is-auto/Games/Game.cpp:516"
+  },
+  {
+   "phase": "CheckPlayState",
+   "source": "Sources/baba-is-auto/Games/Game.cpp:518"
+  },
+  {
+   "phase": "ParseRules",
+   "source": "Sources/baba-is-auto/Games/Game.cpp:519"
+  }
+ ],
+ "generation_vocabulary": {
+  "text": [
+   "IS",
+   "YOU",
+   "WIN",
+   "STOP",
+   "PUSH",
+   "SINK",
+   "DEFEAT"
+  ],
+  "nouns": [
+   "BABA",
+   "KEKE",
+   "ROCK",
+   "WALL",
+   "FLAG",
+   "WATER",
+   "SKULL",
+   "KEY",
+   "DOOR",
+   "LAVA",
+   "TILE",
+   "GRASS",
+   "STAR",
+   "BOX",
+   "CRAB",
+   "HEDGE",
+   "LOVE"
+  ],
+  "note": "Only tokens whose behaviour has a passing probe. Everything else the engine implements is accepted by the validator but never emitted by the generator."
+ },
+ "skills": [
+  {
+   "id": "rule_manipulation",
+   "label": "Rule manipulation",
+   "definition": "The set of active rules changes during the solution.",
+   "keywords": [
+    "rule manipulation",
+    "manipulate rules",
+    "manipulating rules",
+    "break a rule",
+    "break rule",
+    "form a rule",
+    "rewrite rule",
+    "rule",
+    "rules"
+   ],
+   "exercised_if": "trace event rule_changes",
+   "necessity_ablation": "rules"
+  },
+  {
+   "id": "object_pushing",
+   "label": "Strategic object pushing",
+   "definition": "A non-text, non-player object is pushed during the solution.",
+   "keywords": [
+    "object pushing",
+    "push",
+    "pushing",
+    "sokoban",
+    "rock",
+    "crate",
+    "box"
+   ],
+   "exercised_if": "trace event object_pushes",
+   "necessity_ablation": "push"
+  },
+  {
+   "id": "win_condition_change",
+   "label": "Changing win condition",
+   "definition": "The set of 'X IS WIN' rules changes during the solution.",
+   "keywords": [
+    "win condition",
+    "win conditions",
+    "changing win",
+    "is win",
+    "goal changes",
+    "retarget"
+   ],
+   "exercised_if": "trace event win_rule_changes",
+   "necessity_ablation": "win"
+  },
+  {
+   "id": "you_change",
+   "label": "IS YOU manipulation",
+   "definition": "The set of 'X IS YOU' rules changes during the solution.",
+   "keywords": [
+    "is you",
+    "you rule",
+    "change who",
+    "control",
+    "become",
+    "identity",
+    "swap character"
+   ],
+   "exercised_if": "trace event you_changes",
+   "necessity_ablation": "you"
+  },
+  {
+   "id": "hazard_sink",
+   "label": "SINK hazard",
+   "definition": "A SINK object is present and something is destroyed on it during the solution.",
+   "keywords": [
+    "sink",
+    "water",
+    "drown"
+   ],
+   "exercised_if": "trace event destroyed",
+   "necessity_ablation": null
+  },
+  {
+   "id": "hazard_defeat",
+   "label": "DEFEAT hazard",
+   "definition": "A DEFEAT object is present on the map.",
+   "keywords": [
+    "defeat",
+    "skull",
+    "danger",
+    "enemy",
+    "hazard",
+    "deadly"
+   ],
+   "exercised_if": "DEFEAT rule active in some frame",
+   "necessity_ablation": null
+  }
+ ],
+ "support_conflicts": [],
+ "entities": [
+  {
+   "name": "ALGAE",
+   "id": 1,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "implemented",
+   "support_evidence": "0 reference(s) to ObjectType::ALGAE in Sources/baba-is-auto/Games/Game.cpp"
+  },
+  {
+   "name": "ALL",
+   "id": 2,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 4,
+   "support": "implemented",
+   "support_evidence": "4 reference(s) to ObjectType::ALL in Sources/baba-is-auto/Games/Game.cpp; capability matrix says implemented"
+  },
+  {
+   "name": "ANNI",
+   "id": 3,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "implemented",
+   "support_evidence": "0 reference(s) to ObjectType::ANNI in Sources/baba-is-auto/Games/Game.cpp"
+  },
+  {
+   "name": "BABA",
+   "id": 4,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "implemented",
+   "support_evidence": "0 reference(s) to ObjectType::BABA in Sources/baba-is-auto/Games/Game.cpp"
+  },
+  {
+   "name": "BAT",
+   "id": 5,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "implemented",
+   "support_evidence": "0 reference(s) to ObjectType::BAT in Sources/baba-is-auto/Games/Game.cpp"
+  },
+  {
+   "name": "BELT",
+   "id": 6,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "implemented",
+   "support_evidence": "0 reference(s) to ObjectType::BELT in Sources/baba-is-auto/Games/Game.cpp"
+  },
+  {
+   "name": "BIRD",
+   "id": 7,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "implemented",
+   "support_evidence": "0 reference(s) to ObjectType::BIRD in Sources/baba-is-auto/Games/Game.cpp"
+  },
+  {
+   "name": "BOG",
+   "id": 8,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "implemented",
+   "support_evidence": "0 reference(s) to ObjectType::BOG in Sources/baba-is-auto/Games/Game.cpp"
+  },
+  {
+   "name": "BOLT",
+   "id": 9,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "implemented",
+   "support_evidence": "0 reference(s) to ObjectType::BOLT in Sources/baba-is-auto/Games/Game.cpp"
+  },
+  {
+   "name": "BOX",
+   "id": 10,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "implemented",
+   "support_evidence": "0 reference(s) to ObjectType::BOX in Sources/baba-is-auto/Games/Game.cpp"
+  },
+  {
+   "name": "BRICK",
+   "id": 11,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "implemented",
+   "support_evidence": "0 reference(s) to ObjectType::BRICK in Sources/baba-is-auto/Games/Game.cpp"
+  },
+  {
+   "name": "BUBBLE",
+   "id": 12,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "implemented",
+   "support_evidence": "0 reference(s) to ObjectType::BUBBLE in Sources/baba-is-auto/Games/Game.cpp"
+  },
+  {
+   "name": "BUG",
+   "id": 13,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "implemented",
+   "support_evidence": "0 reference(s) to ObjectType::BUG in Sources/baba-is-auto/Games/Game.cpp"
+  },
+  {
+   "name": "CAKE",
+   "id": 14,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "implemented",
+   "support_evidence": "0 reference(s) to ObjectType::CAKE in Sources/baba-is-auto/Games/Game.cpp"
+  },
+  {
+   "name": "CLIFF",
+   "id": 15,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "implemented",
+   "support_evidence": "0 reference(s) to ObjectType::CLIFF in Sources/baba-is-auto/Games/Game.cpp"
+  },
+  {
+   "name": "CLOUD",
+   "id": 16,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "implemented",
+   "support_evidence": "0 reference(s) to ObjectType::CLOUD in Sources/baba-is-auto/Games/Game.cpp"
+  },
+  {
+   "name": "COG",
+   "id": 17,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "implemented",
+   "support_evidence": "0 reference(s) to ObjectType::COG in Sources/baba-is-auto/Games/Game.cpp"
+  },
+  {
+   "name": "CRAB",
+   "id": 18,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "implemented",
+   "support_evidence": "0 reference(s) to ObjectType::CRAB in Sources/baba-is-auto/Games/Game.cpp"
+  },
+  {
+   "name": "CURSOR",
+   "id": 19,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "unsupported",
+   "support_evidence": "0 reference(s) to ObjectType::CURSOR in Sources/baba-is-auto/Games/Game.cpp; capability matrix says unsupported"
+  },
+  {
+   "name": "DOOR",
+   "id": 20,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "implemented",
+   "support_evidence": "0 reference(s) to ObjectType::DOOR in Sources/baba-is-auto/Games/Game.cpp"
+  },
+  {
+   "name": "DUST",
+   "id": 21,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "implemented",
+   "support_evidence": "0 reference(s) to ObjectType::DUST in Sources/baba-is-auto/Games/Game.cpp"
+  },
+  {
+   "name": "EMPTY",
+   "id": 22,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 1,
+   "support": "implemented",
+   "support_evidence": "1 reference(s) to ObjectType::EMPTY in Sources/baba-is-auto/Games/Game.cpp; capability matrix says implemented"
+  },
+  {
+   "name": "FENCE",
+   "id": 23,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "implemented",
+   "support_evidence": "0 reference(s) to ObjectType::FENCE in Sources/baba-is-auto/Games/Game.cpp"
+  },
+  {
+   "name": "FIRE",
+   "id": 24,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "implemented",
+   "support_evidence": "0 reference(s) to ObjectType::FIRE in Sources/baba-is-auto/Games/Game.cpp"
+  },
+  {
+   "name": "FLAG",
+   "id": 25,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "implemented",
+   "support_evidence": "0 reference(s) to ObjectType::FLAG in Sources/baba-is-auto/Games/Game.cpp"
+  },
+  {
+   "name": "FLOWER",
+   "id": 26,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "implemented",
+   "support_evidence": "0 reference(s) to ObjectType::FLOWER in Sources/baba-is-auto/Games/Game.cpp"
+  },
+  {
+   "name": "FOLIAGE",
+   "id": 27,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "implemented",
+   "support_evidence": "0 reference(s) to ObjectType::FOLIAGE in Sources/baba-is-auto/Games/Game.cpp"
+  },
+  {
+   "name": "FRUIT",
+   "id": 28,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "implemented",
+   "support_evidence": "0 reference(s) to ObjectType::FRUIT in Sources/baba-is-auto/Games/Game.cpp"
+  },
+  {
+   "name": "FUNGUS",
+   "id": 29,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "implemented",
+   "support_evidence": "0 reference(s) to ObjectType::FUNGUS in Sources/baba-is-auto/Games/Game.cpp"
+  },
+  {
+   "name": "GHOST",
+   "id": 30,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "implemented",
+   "support_evidence": "0 reference(s) to ObjectType::GHOST in Sources/baba-is-auto/Games/Game.cpp"
+  },
+  {
+   "name": "GRASS",
+   "id": 31,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "implemented",
+   "support_evidence": "0 reference(s) to ObjectType::GRASS in Sources/baba-is-auto/Games/Game.cpp"
+  },
+  {
+   "name": "GROUP",
+   "id": 32,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 3,
+   "support": "unsupported",
+   "support_evidence": "3 reference(s) to ObjectType::GROUP in Sources/baba-is-auto/Games/Game.cpp; capability matrix says unsupported"
+  },
+  {
+   "name": "HAND",
+   "id": 33,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "implemented",
+   "support_evidence": "0 reference(s) to ObjectType::HAND in Sources/baba-is-auto/Games/Game.cpp"
+  },
+  {
+   "name": "HEDGE",
+   "id": 34,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "implemented",
+   "support_evidence": "0 reference(s) to ObjectType::HEDGE in Sources/baba-is-auto/Games/Game.cpp"
+  },
+  {
+   "name": "ICE",
+   "id": 35,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "implemented",
+   "support_evidence": "0 reference(s) to ObjectType::ICE in Sources/baba-is-auto/Games/Game.cpp"
+  },
+  {
+   "name": "IMAGE",
+   "id": 36,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "unsupported",
+   "support_evidence": "0 reference(s) to ObjectType::IMAGE in Sources/baba-is-auto/Games/Game.cpp; capability matrix says unsupported"
+  },
+  {
+   "name": "JELLY",
+   "id": 37,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "implemented",
+   "support_evidence": "0 reference(s) to ObjectType::JELLY in Sources/baba-is-auto/Games/Game.cpp"
+  },
+  {
+   "name": "KEKE",
+   "id": 38,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "implemented",
+   "support_evidence": "0 reference(s) to ObjectType::KEKE in Sources/baba-is-auto/Games/Game.cpp"
+  },
+  {
+   "name": "KEY",
+   "id": 39,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "implemented",
+   "support_evidence": "0 reference(s) to ObjectType::KEY in Sources/baba-is-auto/Games/Game.cpp"
+  },
+  {
+   "name": "LAVA",
+   "id": 40,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "implemented",
+   "support_evidence": "0 reference(s) to ObjectType::LAVA in Sources/baba-is-auto/Games/Game.cpp"
+  },
+  {
+   "name": "LEAF",
+   "id": 41,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "implemented",
+   "support_evidence": "0 reference(s) to ObjectType::LEAF in Sources/baba-is-auto/Games/Game.cpp"
+  },
+  {
+   "name": "LEVEL",
+   "id": 42,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 1,
+   "support": "unsupported",
+   "support_evidence": "1 reference(s) to ObjectType::LEVEL in Sources/baba-is-auto/Games/Game.cpp; capability matrix says unsupported"
+  },
+  {
+   "name": "LINE",
+   "id": 43,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "implemented",
+   "support_evidence": "0 reference(s) to ObjectType::LINE in Sources/baba-is-auto/Games/Game.cpp"
+  },
+  {
+   "name": "LOVE",
+   "id": 44,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "implemented",
+   "support_evidence": "0 reference(s) to ObjectType::LOVE in Sources/baba-is-auto/Games/Game.cpp"
+  },
+  {
+   "name": "ME",
+   "id": 45,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "implemented",
+   "support_evidence": "0 reference(s) to ObjectType::ME in Sources/baba-is-auto/Games/Game.cpp"
+  },
+  {
+   "name": "MOON",
+   "id": 46,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "implemented",
+   "support_evidence": "0 reference(s) to ObjectType::MOON in Sources/baba-is-auto/Games/Game.cpp"
+  },
+  {
+   "name": "ORB",
+   "id": 47,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "implemented",
+   "support_evidence": "0 reference(s) to ObjectType::ORB in Sources/baba-is-auto/Games/Game.cpp"
+  },
+  {
+   "name": "PILLAR",
+   "id": 48,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "implemented",
+   "support_evidence": "0 reference(s) to ObjectType::PILLAR in Sources/baba-is-auto/Games/Game.cpp"
+  },
+  {
+   "name": "PIPE",
+   "id": 49,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "implemented",
+   "support_evidence": "0 reference(s) to ObjectType::PIPE in Sources/baba-is-auto/Games/Game.cpp"
+  },
+  {
+   "name": "ROBOT",
+   "id": 50,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "implemented",
+   "support_evidence": "0 reference(s) to ObjectType::ROBOT in Sources/baba-is-auto/Games/Game.cpp"
+  },
+  {
+   "name": "ROCK",
+   "id": 51,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "implemented",
+   "support_evidence": "0 reference(s) to ObjectType::ROCK in Sources/baba-is-auto/Games/Game.cpp"
+  },
+  {
+   "name": "ROCKET",
+   "id": 52,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "implemented",
+   "support_evidence": "0 reference(s) to ObjectType::ROCKET in Sources/baba-is-auto/Games/Game.cpp"
+  },
+  {
+   "name": "ROSE",
+   "id": 53,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "implemented",
+   "support_evidence": "0 reference(s) to ObjectType::ROSE in Sources/baba-is-auto/Games/Game.cpp"
+  },
+  {
+   "name": "RUBBLE",
+   "id": 54,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "implemented",
+   "support_evidence": "0 reference(s) to ObjectType::RUBBLE in Sources/baba-is-auto/Games/Game.cpp"
+  },
+  {
+   "name": "SKULL",
+   "id": 55,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "implemented",
+   "support_evidence": "0 reference(s) to ObjectType::SKULL in Sources/baba-is-auto/Games/Game.cpp"
+  },
+  {
+   "name": "STAR",
+   "id": 56,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "implemented",
+   "support_evidence": "0 reference(s) to ObjectType::STAR in Sources/baba-is-auto/Games/Game.cpp"
+  },
+  {
+   "name": "STATUE",
+   "id": 57,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "implemented",
+   "support_evidence": "0 reference(s) to ObjectType::STATUE in Sources/baba-is-auto/Games/Game.cpp"
+  },
+  {
+   "name": "SUN",
+   "id": 58,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "implemented",
+   "support_evidence": "0 reference(s) to ObjectType::SUN in Sources/baba-is-auto/Games/Game.cpp"
+  },
+  {
+   "name": "TEXT",
+   "id": 59,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 3,
+   "support": "implemented",
+   "support_evidence": "3 reference(s) to ObjectType::TEXT in Sources/baba-is-auto/Games/Game.cpp; capability matrix says implemented"
+  },
+  {
+   "name": "TILE",
+   "id": 60,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "implemented",
+   "support_evidence": "0 reference(s) to ObjectType::TILE in Sources/baba-is-auto/Games/Game.cpp"
+  },
+  {
+   "name": "TREE",
+   "id": 61,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "implemented",
+   "support_evidence": "0 reference(s) to ObjectType::TREE in Sources/baba-is-auto/Games/Game.cpp"
+  },
+  {
+   "name": "UFO",
+   "id": 62,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "implemented",
+   "support_evidence": "0 reference(s) to ObjectType::UFO in Sources/baba-is-auto/Games/Game.cpp"
+  },
+  {
+   "name": "VIOLET",
+   "id": 63,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "implemented",
+   "support_evidence": "0 reference(s) to ObjectType::VIOLET in Sources/baba-is-auto/Games/Game.cpp"
+  },
+  {
+   "name": "WALL",
+   "id": 64,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "implemented",
+   "support_evidence": "0 reference(s) to ObjectType::WALL in Sources/baba-is-auto/Games/Game.cpp"
+  },
+  {
+   "name": "WATER",
+   "id": 65,
+   "kind": "noun",
+   "source": "Includes/baba-is-auto/Enums/NounType.def",
+   "runtime_refs": 0,
+   "support": "implemented",
+   "support_evidence": "0 reference(s) to ObjectType::WATER in Sources/baba-is-auto/Games/Game.cpp"
+  },
+  {
+   "name": "IS",
+   "id": 67,
+   "kind": "operator",
+   "source": "Includes/baba-is-auto/Enums/OpType.def",
+   "runtime_refs": 8,
+   "support": "implemented",
+   "support_evidence": "8 reference(s) to ObjectType::IS in Sources/baba-is-auto/Games/Game.cpp; capability matrix says implemented"
+  },
+  {
+   "name": "HAS",
+   "id": 68,
+   "kind": "operator",
+   "source": "Includes/baba-is-auto/Enums/OpType.def",
+   "runtime_refs": 2,
+   "support": "partial",
+   "support_evidence": "2 reference(s) to ObjectType::HAS in Sources/baba-is-auto/Games/Game.cpp; capability matrix says partial"
+  },
+  {
+   "name": "MAKE",
+   "id": 69,
+   "kind": "operator",
+   "source": "Includes/baba-is-auto/Enums/OpType.def",
+   "runtime_refs": 0,
+   "support": "unsupported",
+   "support_evidence": "0 reference(s) to ObjectType::MAKE in Sources/baba-is-auto/Games/Game.cpp; capability matrix says unsupported"
+  },
+  {
+   "name": "AND",
+   "id": 70,
+   "kind": "operator",
+   "source": "Includes/baba-is-auto/Enums/OpType.def",
+   "runtime_refs": 4,
+   "support": "implemented",
+   "support_evidence": "4 reference(s) to ObjectType::AND in Sources/baba-is-auto/Games/Game.cpp; capability matrix says implemented"
+  },
+  {
+   "name": "NOT",
+   "id": 71,
+   "kind": "operator",
+   "source": "Includes/baba-is-auto/Enums/OpType.def",
+   "runtime_refs": 4,
+   "support": "partial",
+   "support_evidence": "4 reference(s) to ObjectType::NOT in Sources/baba-is-auto/Games/Game.cpp; capability matrix says partial"
+  },
+  {
+   "name": "ON",
+   "id": 72,
+   "kind": "operator",
+   "source": "Includes/baba-is-auto/Enums/OpType.def",
+   "runtime_refs": 2,
+   "support": "implemented",
+   "support_evidence": "2 reference(s) to ObjectType::ON in Sources/baba-is-auto/Games/Game.cpp; capability matrix says implemented"
+  },
+  {
+   "name": "NEAR",
+   "id": 73,
+   "kind": "operator",
+   "source": "Includes/baba-is-auto/Enums/OpType.def",
+   "runtime_refs": 2,
+   "support": "implemented",
+   "support_evidence": "2 reference(s) to ObjectType::NEAR in Sources/baba-is-auto/Games/Game.cpp; capability matrix says implemented"
+  },
+  {
+   "name": "FACING",
+   "id": 74,
+   "kind": "operator",
+   "source": "Includes/baba-is-auto/Enums/OpType.def",
+   "runtime_refs": 3,
+   "support": "implemented",
+   "support_evidence": "3 reference(s) to ObjectType::FACING in Sources/baba-is-auto/Games/Game.cpp; capability matrix says implemented"
+  },
+  {
+   "name": "LONELY",
+   "id": 75,
+   "kind": "operator",
+   "source": "Includes/baba-is-auto/Enums/OpType.def",
+   "runtime_refs": 7,
+   "support": "implemented",
+   "support_evidence": "7 reference(s) to ObjectType::LONELY in Sources/baba-is-auto/Games/Game.cpp; capability matrix says implemented"
+  },
+  {
+   "name": "YOU",
+   "id": 77,
+   "kind": "property",
+   "source": "Includes/baba-is-auto/Enums/PropertyType.def",
+   "runtime_refs": 4,
+   "support": "implemented",
+   "support_evidence": "4 reference(s) to ObjectType::YOU in Sources/baba-is-auto/Games/Game.cpp; capability matrix says implemented"
+  },
+  {
+   "name": "STOP",
+   "id": 78,
+   "kind": "property",
+   "source": "Includes/baba-is-auto/Enums/PropertyType.def",
+   "runtime_refs": 1,
+   "support": "implemented",
+   "support_evidence": "1 reference(s) to ObjectType::STOP in Sources/baba-is-auto/Games/Game.cpp; capability matrix says implemented"
+  },
+  {
+   "name": "PUSH",
+   "id": 79,
+   "kind": "property",
+   "source": "Includes/baba-is-auto/Enums/PropertyType.def",
+   "runtime_refs": 6,
+   "support": "implemented",
+   "support_evidence": "6 reference(s) to ObjectType::PUSH in Sources/baba-is-auto/Games/Game.cpp; capability matrix says implemented"
+  },
+  {
+   "name": "PULL",
+   "id": 80,
+   "kind": "property",
+   "source": "Includes/baba-is-auto/Enums/PropertyType.def",
+   "runtime_refs": 0,
+   "support": "unsupported",
+   "support_evidence": "0 reference(s) to ObjectType::PULL in Sources/baba-is-auto/Games/Game.cpp; capability matrix says unsupported"
+  },
+  {
+   "name": "SWAP",
+   "id": 81,
+   "kind": "property",
+   "source": "Includes/baba-is-auto/Enums/PropertyType.def",
+   "runtime_refs": 0,
+   "support": "unsupported",
+   "support_evidence": "0 reference(s) to ObjectType::SWAP in Sources/baba-is-auto/Games/Game.cpp; capability matrix says unsupported"
+  },
+  {
+   "name": "TELE",
+   "id": 82,
+   "kind": "property",
+   "source": "Includes/baba-is-auto/Enums/PropertyType.def",
+   "runtime_refs": 0,
+   "support": "unsupported",
+   "support_evidence": "0 reference(s) to ObjectType::TELE in Sources/baba-is-auto/Games/Game.cpp; capability matrix says unsupported"
+  },
+  {
+   "name": "MOVE",
+   "id": 83,
+   "kind": "property",
+   "source": "Includes/baba-is-auto/Enums/PropertyType.def",
+   "runtime_refs": 2,
+   "support": "implemented",
+   "support_evidence": "2 reference(s) to ObjectType::MOVE in Sources/baba-is-auto/Games/Game.cpp; capability matrix says implemented"
+  },
+  {
+   "name": "FALL",
+   "id": 84,
+   "kind": "property",
+   "source": "Includes/baba-is-auto/Enums/PropertyType.def",
+   "runtime_refs": 0,
+   "support": "unsupported",
+   "support_evidence": "0 reference(s) to ObjectType::FALL in Sources/baba-is-auto/Games/Game.cpp; capability matrix says unsupported"
+  },
+  {
+   "name": "SHIFT",
+   "id": 85,
+   "kind": "property",
+   "source": "Includes/baba-is-auto/Enums/PropertyType.def",
+   "runtime_refs": 0,
+   "support": "unsupported",
+   "support_evidence": "0 reference(s) to ObjectType::SHIFT in Sources/baba-is-auto/Games/Game.cpp; capability matrix says unsupported"
+  },
+  {
+   "name": "WIN",
+   "id": 86,
+   "kind": "property",
+   "source": "Includes/baba-is-auto/Enums/PropertyType.def",
+   "runtime_refs": 1,
+   "support": "implemented",
+   "support_evidence": "1 reference(s) to ObjectType::WIN in Sources/baba-is-auto/Games/Game.cpp; capability matrix says implemented"
+  },
+  {
+   "name": "DEFEAT",
+   "id": 87,
+   "kind": "property",
+   "source": "Includes/baba-is-auto/Enums/PropertyType.def",
+   "runtime_refs": 1,
+   "support": "implemented",
+   "support_evidence": "1 reference(s) to ObjectType::DEFEAT in Sources/baba-is-auto/Games/Game.cpp; capability matrix says implemented"
+  },
+  {
+   "name": "SINK",
+   "id": 88,
+   "kind": "property",
+   "source": "Includes/baba-is-auto/Enums/PropertyType.def",
+   "runtime_refs": 1,
+   "support": "implemented",
+   "support_evidence": "1 reference(s) to ObjectType::SINK in Sources/baba-is-auto/Games/Game.cpp; capability matrix says implemented"
+  },
+  {
+   "name": "HOT",
+   "id": 89,
+   "kind": "property",
+   "source": "Includes/baba-is-auto/Enums/PropertyType.def",
+   "runtime_refs": 1,
+   "support": "implemented",
+   "support_evidence": "1 reference(s) to ObjectType::HOT in Sources/baba-is-auto/Games/Game.cpp; capability matrix says implemented"
+  },
+  {
+   "name": "MELT",
+   "id": 90,
+   "kind": "property",
+   "source": "Includes/baba-is-auto/Enums/PropertyType.def",
+   "runtime_refs": 1,
+   "support": "implemented",
+   "support_evidence": "1 reference(s) to ObjectType::MELT in Sources/baba-is-auto/Games/Game.cpp; capability matrix says implemented"
+  },
+  {
+   "name": "SHUT",
+   "id": 91,
+   "kind": "property",
+   "source": "Includes/baba-is-auto/Enums/PropertyType.def",
+   "runtime_refs": 3,
+   "support": "implemented",
+   "support_evidence": "3 reference(s) to ObjectType::SHUT in Sources/baba-is-auto/Games/Game.cpp; capability matrix says implemented"
+  },
+  {
+   "name": "OPEN",
+   "id": 92,
+   "kind": "property",
+   "source": "Includes/baba-is-auto/Enums/PropertyType.def",
+   "runtime_refs": 4,
+   "support": "implemented",
+   "support_evidence": "4 reference(s) to ObjectType::OPEN in Sources/baba-is-auto/Games/Game.cpp; capability matrix says implemented"
+  },
+  {
+   "name": "WEAK",
+   "id": 93,
+   "kind": "property",
+   "source": "Includes/baba-is-auto/Enums/PropertyType.def",
+   "runtime_refs": 7,
+   "support": "implemented",
+   "support_evidence": "7 reference(s) to ObjectType::WEAK in Sources/baba-is-auto/Games/Game.cpp; capability matrix says implemented"
+  },
+  {
+   "name": "FLOAT",
+   "id": 94,
+   "kind": "property",
+   "source": "Includes/baba-is-auto/Enums/PropertyType.def",
+   "runtime_refs": 4,
+   "support": "partial",
+   "support_evidence": "4 reference(s) to ObjectType::FLOAT in Sources/baba-is-auto/Games/Game.cpp; capability matrix says partial"
+  },
+  {
+   "name": "MORE",
+   "id": 95,
+   "kind": "property",
+   "source": "Includes/baba-is-auto/Enums/PropertyType.def",
+   "runtime_refs": 0,
+   "support": "unsupported",
+   "support_evidence": "0 reference(s) to ObjectType::MORE in Sources/baba-is-auto/Games/Game.cpp; capability matrix says unsupported"
+  },
+  {
+   "name": "UP",
+   "id": 96,
+   "kind": "property",
+   "source": "Includes/baba-is-auto/Enums/PropertyType.def",
+   "runtime_refs": 2,
+   "support": "partial",
+   "support_evidence": "2 reference(s) to ObjectType::UP in Sources/baba-is-auto/Games/Game.cpp; capability matrix says partial"
+  },
+  {
+   "name": "DOWN",
+   "id": 97,
+   "kind": "property",
+   "source": "Includes/baba-is-auto/Enums/PropertyType.def",
+   "runtime_refs": 2,
+   "support": "partial",
+   "support_evidence": "2 reference(s) to ObjectType::DOWN in Sources/baba-is-auto/Games/Game.cpp; capability matrix says partial"
+  },
+  {
+   "name": "LEFT",
+   "id": 98,
+   "kind": "property",
+   "source": "Includes/baba-is-auto/Enums/PropertyType.def",
+   "runtime_refs": 2,
+   "support": "partial",
+   "support_evidence": "2 reference(s) to ObjectType::LEFT in Sources/baba-is-auto/Games/Game.cpp; capability matrix says partial"
+  },
+  {
+   "name": "RIGHT",
+   "id": 99,
+   "kind": "property",
+   "source": "Includes/baba-is-auto/Enums/PropertyType.def",
+   "runtime_refs": 2,
+   "support": "partial",
+   "support_evidence": "2 reference(s) to ObjectType::RIGHT in Sources/baba-is-auto/Games/Game.cpp; capability matrix says partial"
+  },
+  {
+   "name": "WORD",
+   "id": 100,
+   "kind": "property",
+   "source": "Includes/baba-is-auto/Enums/PropertyType.def",
+   "runtime_refs": 0,
+   "support": "unsupported",
+   "support_evidence": "0 reference(s) to ObjectType::WORD in Sources/baba-is-auto/Games/Game.cpp; capability matrix says unsupported"
+  },
+  {
+   "name": "BEST",
+   "id": 101,
+   "kind": "property",
+   "source": "Includes/baba-is-auto/Enums/PropertyType.def",
+   "runtime_refs": 0,
+   "support": "unsupported",
+   "support_evidence": "0 reference(s) to ObjectType::BEST in Sources/baba-is-auto/Games/Game.cpp; capability matrix says unsupported"
+  },
+  {
+   "name": "SLEEP",
+   "id": 102,
+   "kind": "property",
+   "source": "Includes/baba-is-auto/Enums/PropertyType.def",
+   "runtime_refs": 0,
+   "support": "unsupported",
+   "support_evidence": "0 reference(s) to ObjectType::SLEEP in Sources/baba-is-auto/Games/Game.cpp; capability matrix says unsupported"
+  },
+  {
+   "name": "RED",
+   "id": 103,
+   "kind": "property",
+   "source": "Includes/baba-is-auto/Enums/PropertyType.def",
+   "runtime_refs": 0,
+   "support": "unsupported",
+   "support_evidence": "0 reference(s) to ObjectType::RED in Sources/baba-is-auto/Games/Game.cpp; capability matrix says unsupported"
+  },
+  {
+   "name": "BLUE",
+   "id": 104,
+   "kind": "property",
+   "source": "Includes/baba-is-auto/Enums/PropertyType.def",
+   "runtime_refs": 0,
+   "support": "unsupported",
+   "support_evidence": "0 reference(s) to ObjectType::BLUE in Sources/baba-is-auto/Games/Game.cpp; capability matrix says unsupported"
+  },
+  {
+   "name": "HIDE",
+   "id": 105,
+   "kind": "property",
+   "source": "Includes/baba-is-auto/Enums/PropertyType.def",
+   "runtime_refs": 0,
+   "support": "unsupported",
+   "support_evidence": "0 reference(s) to ObjectType::HIDE in Sources/baba-is-auto/Games/Game.cpp; capability matrix says unsupported"
+  },
+  {
+   "name": "BONUS",
+   "id": 106,
+   "kind": "property",
+   "source": "Includes/baba-is-auto/Enums/PropertyType.def",
+   "runtime_refs": 0,
+   "support": "unsupported",
+   "support_evidence": "0 reference(s) to ObjectType::BONUS in Sources/baba-is-auto/Games/Game.cpp; capability matrix says unsupported"
+  },
+  {
+   "name": "END",
+   "id": 107,
+   "kind": "property",
+   "source": "Includes/baba-is-auto/Enums/PropertyType.def",
+   "runtime_refs": 0,
+   "support": "unsupported",
+   "support_evidence": "0 reference(s) to ObjectType::END in Sources/baba-is-auto/Games/Game.cpp; capability matrix says unsupported"
+  },
+  {
+   "name": "DONE",
+   "id": 108,
+   "kind": "property",
+   "source": "Includes/baba-is-auto/Enums/PropertyType.def",
+   "runtime_refs": 0,
+   "support": "unsupported",
+   "support_evidence": "0 reference(s) to ObjectType::DONE in Sources/baba-is-auto/Games/Game.cpp; capability matrix says unsupported"
+  },
+  {
+   "name": "SAFE",
+   "id": 109,
+   "kind": "property",
+   "source": "Includes/baba-is-auto/Enums/PropertyType.def",
+   "runtime_refs": 4,
+   "support": "partial",
+   "support_evidence": "4 reference(s) to ObjectType::SAFE in Sources/baba-is-auto/Games/Game.cpp; capability matrix says partial"
+  },
+  {
+   "name": "ICON_ALGAE",
+   "id": 111,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_ALL",
+   "id": 112,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_ANNI",
+   "id": 113,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_BABA",
+   "id": 114,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_BAT",
+   "id": 115,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_BELT",
+   "id": 116,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_BIRD",
+   "id": 117,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_BOG",
+   "id": 118,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_BOLT",
+   "id": 119,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_BOX",
+   "id": 120,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_BRICK",
+   "id": 121,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_BUBBLE",
+   "id": 122,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_BUG",
+   "id": 123,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_CAKE",
+   "id": 124,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_CLIFF",
+   "id": 125,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_CLOUD",
+   "id": 126,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_COG",
+   "id": 127,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_CRAB",
+   "id": 128,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_CURSOR",
+   "id": 129,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_DOOR",
+   "id": 130,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_DUST",
+   "id": 131,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_EMPTY",
+   "id": 132,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_FENCE",
+   "id": 133,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_FIRE",
+   "id": 134,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_FLAG",
+   "id": 135,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_FLOWER",
+   "id": 136,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_FOLIAGE",
+   "id": 137,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_FRUIT",
+   "id": 138,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_FUNGUS",
+   "id": 139,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_GHOST",
+   "id": 140,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_GRASS",
+   "id": 141,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_GROUP",
+   "id": 142,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_HAND",
+   "id": 143,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_HEDGE",
+   "id": 144,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_ICE",
+   "id": 145,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_IMAGE",
+   "id": 146,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_JELLY",
+   "id": 147,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_KEKE",
+   "id": 148,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_KEY",
+   "id": 149,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_LAVA",
+   "id": 150,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_LEAF",
+   "id": 151,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_LEVEL",
+   "id": 152,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_LINE",
+   "id": 153,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_LOVE",
+   "id": 154,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_ME",
+   "id": 155,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_MOON",
+   "id": 156,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_ORB",
+   "id": 157,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_PILLAR",
+   "id": 158,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_PIPE",
+   "id": 159,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_ROBOT",
+   "id": 160,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_ROCK",
+   "id": 161,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_ROCKET",
+   "id": 162,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_ROSE",
+   "id": 163,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_RUBBLE",
+   "id": 164,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_SKULL",
+   "id": 165,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_STAR",
+   "id": 166,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_STATUE",
+   "id": 167,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_SUN",
+   "id": 168,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_TEXT",
+   "id": 169,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_TILE",
+   "id": 170,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_TREE",
+   "id": 171,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_UFO",
+   "id": 172,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_VIOLET",
+   "id": 173,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_WALL",
+   "id": 174,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "ICON_WATER",
+   "id": 175,
+   "kind": "icon",
+   "source": "Includes/baba-is-auto/Enums/IconType.def"
+  },
+  {
+   "name": "LOCKED_UP",
+   "id": 176,
+   "kind": "synthetic_property",
+   "source": "Includes/baba-is-auto/Enums/GameEnums.hpp",
+   "runtime_refs": 1,
+   "support": "partial",
+   "support_evidence": "1 reference(s) to ObjectType::LOCKED_UP in Sources/baba-is-auto/Games/Game.cpp; capability matrix says partial"
+  },
+  {
+   "name": "LOCKED_DOWN",
+   "id": 177,
+   "kind": "synthetic_property",
+   "source": "Includes/baba-is-auto/Enums/GameEnums.hpp",
+   "runtime_refs": 1,
+   "support": "partial",
+   "support_evidence": "1 reference(s) to ObjectType::LOCKED_DOWN in Sources/baba-is-auto/Games/Game.cpp; capability matrix says partial"
+  },
+  {
+   "name": "LOCKED_LEFT",
+   "id": 178,
+   "kind": "synthetic_property",
+   "source": "Includes/baba-is-auto/Enums/GameEnums.hpp",
+   "runtime_refs": 1,
+   "support": "partial",
+   "support_evidence": "1 reference(s) to ObjectType::LOCKED_LEFT in Sources/baba-is-auto/Games/Game.cpp; capability matrix says partial"
+  },
+  {
+   "name": "LOCKED_RIGHT",
+   "id": 179,
+   "kind": "synthetic_property",
+   "source": "Includes/baba-is-auto/Enums/GameEnums.hpp",
+   "runtime_refs": 1,
+   "support": "partial",
+   "support_evidence": "1 reference(s) to ObjectType::LOCKED_RIGHT in Sources/baba-is-auto/Games/Game.cpp; capability matrix says partial"
+  }
+ ]
+}

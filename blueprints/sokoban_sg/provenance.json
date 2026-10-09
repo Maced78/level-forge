@@ -1,0 +1,177 @@
+{
+ "blueprint_version": "0.1.0",
+ "game_commit": "69c7b5c8f8a8190a7e9c8bdaaa1771d13dfa9274",
+ "source_fingerprint": {
+  "src/game.py": "076465fc504edbcdc012fbc9add3e556ff3ecbc46e59ca9a402efb02238ecc3c",
+  "src/player.py": "bc98539456d9a4db404dd5fb69f0aa990d76fd753e92fbc234226a0b4f1ae901",
+  "src/box.py": "34f169509e4d1d6590036626f98e1e0f9c40ac09142c69ba7ef55c9f572ef71c",
+  "src/utils.py": "58ad5cc069867f641d9cee14b5ec5086f13517a0727cd7b4939fa254d9384bf5"
+ },
+ "summary": {
+  "confirmed": 9,
+  "confirmed-by-source": 2,
+  "inferred": 1
+ },
+ "difftest": {
+  "moves_compared": 3000,
+  "mismatching_walks": 0,
+  "walks": 12
+ },
+ "claims": [
+  {
+   "id": "walk",
+   "statement": "The player moves one cell onto floor",
+   "status": "confirmed",
+   "source": {
+    "file": "src/player.py",
+    "line": 28,
+    "text": "def update(self, key=None):"
+   },
+   "evidence": {
+    "probe": "tests/probes.py::walk",
+    "passed": true
+   }
+  },
+  {
+   "id": "wall_blocks",
+   "statement": "A wall blocks the player",
+   "status": "confirmed",
+   "source": {
+    "file": "src/player.py",
+    "line": 47,
+    "text": "if not (target_elem and target_elem.obj and isinstance(target_elem.obj, Obstacle)):"
+   },
+   "evidence": {
+    "probe": "tests/probes.py::wall_blocks",
+    "passed": true
+   }
+  },
+  {
+   "id": "push",
+   "statement": "Walking into a box pushes it one cell",
+   "status": "confirmed",
+   "source": {
+    "file": "src/box.py",
+    "line": 18,
+    "text": "def can_move(self, move):"
+   },
+   "evidence": {
+    "probe": "tests/probes.py::push",
+    "passed": true
+   }
+  },
+  {
+   "id": "box_blocked_by_wall",
+   "statement": "A box against a wall cannot be pushed into it (walls are a Box subclass)",
+   "status": "confirmed",
+   "source": {
+    "file": "src/box.py",
+    "line": 54,
+    "text": "class Obstacle(Box):"
+   },
+   "evidence": {
+    "probe": "tests/probes.py::box_blocked_by_wall",
+    "passed": true
+   }
+  },
+  {
+   "id": "box_blocked_by_box",
+   "statement": "Two boxes in a line cannot be pushed together",
+   "status": "confirmed",
+   "source": {
+    "file": "src/box.py",
+    "line": 23,
+    "text": "if not isinstance(target_elem.obj, Box):"
+   },
+   "evidence": {
+    "probe": "tests/probes.py::box_blocked_by_box",
+    "passed": true
+   }
+  },
+  {
+   "id": "goal_marks_box",
+   "statement": "A box pushed onto a goal becomes '$' and counts as delivered",
+   "status": "confirmed",
+   "source": {
+    "file": "src/box.py",
+    "line": 29,
+    "text": "target_elem.char = '@' if not target_elem.ground else '$'"
+   },
+   "evidence": {
+    "probe": "tests/probes.py::goal_marks_box",
+    "passed": true
+   }
+  },
+  {
+   "id": "win_when_no_box_off_goal",
+   "statement": "The level is complete exactly when no box is off a goal",
+   "status": "confirmed",
+   "source": {
+    "file": "src/game.py",
+    "line": 66,
+    "text": "def is_level_complete(self):"
+   },
+   "evidence": {
+    "probe": "tests/probes.py::win_when_no_box_off_goal",
+    "passed": true
+   }
+  },
+  {
+   "id": "box_leaves_goal",
+   "statement": "A delivered box can be pushed off its goal again, un-solving the level",
+   "status": "confirmed",
+   "source": {
+    "file": "src/box.py",
+    "line": 27,
+    "text": "curr_elem.char = '-' if not curr_elem.ground else 'X'"
+   },
+   "evidence": {
+    "probe": "tests/probes.py::box_leaves_goal",
+    "passed": true
+   }
+  },
+  {
+   "id": "bad_token_rejected",
+   "statement": "An unknown token makes the loader abandon the level",
+   "status": "confirmed",
+   "source": {
+    "file": "src/game.py",
+    "line": 121,
+    "text": "raise ValueError("
+   },
+   "evidence": {
+    "probe": "tests/probes.py::bad_token_rejected",
+    "passed": true
+   }
+  },
+  {
+   "id": "open_border_crash",
+   "status": "confirmed-by-source",
+   "statement": "A level without a closed wall border lets the player index outside the puzzle (target_elem is None).",
+   "source": {
+    "line": 46,
+    "text": "target_elem = self.game.puzzle[target]",
+    "file": "src/player.py"
+   },
+   "consequence": "The validator requires a closed border; the generator always builds one."
+  },
+  {
+   "id": "window_limit",
+   "status": "confirmed-by-source",
+   "statement": "The engine's fixed 1216x640 window holds at most a 17x10 puzzle.",
+   "source": {
+    "line": 21,
+    "text": "def __init__(self, window=None, width=1216, height=640, level=None, seed=None, path=None):",
+    "file": "src/game.py"
+   },
+   "consequence": "Size policy 12x9."
+  },
+  {
+   "id": "model_equivalence",
+   "status": "inferred",
+   "statement": "The search model (adapter.model_step) is equivalent to Player.update + Box.can_move.",
+   "basis": "differential-tested below; not proven",
+   "consequence": "'Unsolvable' and dead-state counts are model-level results; every solution is replayed in the engine."
+  }
+ ]
+}

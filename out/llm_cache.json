@@ -1,0 +1,55 @@
+{
+"7e875d2f45dc67360ac22d94": {
+"json": {
+"ok": true,
+"word": "forge"
+},
+"meta": {
+"model": "gemini-3.8-flash",
+"seconds": 6.68,
+"prompt_tokens": 38,
+"output_tokens": 11,
+"total_tokens": 96
+}
+},
+"000791d488d293bf7142565f": {
+"json": {
+"summary": "Create a puzzle level that requires a solution of exactly 10 moves.",
+"difficulty": "medium",
+"skills_required": [],
+"skills_forbidden": [],
+"unsupported_requested": [],
+"outside_vocabulary": [],
+"foreign_requested": [],
+"dependencies": [],
+"constraints": {
+"min_moves": 10,
+"max_moves": 10
+},
+"defaults_applied": [
+"difficulty defaulted to medium"
+]
+},
+"meta": {
+"model": "gemini-3.8-flash",
+"seconds": 9.76,
+"prompt_tokens": 1044,
+"output_tokens": 128,
+"total_tokens": 1291
+}
+},
+"d867a56cad54aaabc1aba444": {
+"json": {
+"title": "Disarming the Crab",
+"designer_note": "This 16x6 level tests navigating around hazards to dismantle the CRAB IS DEFEAT rule across 28 decision points. The puzzle's difficulty stems from a 28-move solution path that demands one deliberate sacrifice while avoiding three distinct trap states.",
+"player_hint": "Think about how to safely neutralize the dangerous crab, and remember that reaching your goal may require sacrificing an object."
+},
+"meta": {
+"model": "gemini-3.8-flash",
+"seconds": 7.69,
+"prompt_tokens": 329,
+"output_tokens": 99,
+"total_tokens": 1120
+}
+}
+}
